@@ -1,0 +1,2 @@
+#!/bin/bash
+echo $1 is $((wget downforeveryoneorjustme.com/$1 -qO - | grep 'looks down from here' >/dev/null) && echo down || echo up)

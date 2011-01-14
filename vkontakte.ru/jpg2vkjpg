@@ -1,0 +1,3 @@
+#!/bin/bash
+for a in $*; do convert "$a" -resize 600x480 "vk_$a"; done
+

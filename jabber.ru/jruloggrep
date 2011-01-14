@@ -1,0 +1,15 @@
+#!/bin/bash
+usage="$0 conference yearfrom yearto grep terms …"
+c=${1:?$usage}
+yf=$2
+yt=$3
+shift 3
+{ for year in `seq ${yf:-2006} ${yt:-2010}`; do
+	for month in `seq -w 12`; do
+		for day in `seq -w 31`; do
+			url="http://chatlogs.jabber.ru/$c@conference.jabber.ru/$year/$month/$day.html"
+			curl -s "$url" | grep "$@" && echo "↖ found in $url"
+		done
+	done
+done; } | perl -pe 's/<br\/>$//g;s/<br\/>/\n/g;s/<.*?>//g;s/&lt;/</g;s/&gt;/>/g;s/&nbsp;/ /g'
+

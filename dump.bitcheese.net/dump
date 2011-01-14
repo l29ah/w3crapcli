@@ -1,0 +1,2 @@
+#!/bin/sh
+curl -w %{redirect_url} -F "file=@$1" http://dump.bitcheese.net/upload-file?simple

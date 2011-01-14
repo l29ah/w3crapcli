@@ -1,0 +1,11 @@
+#!/bin/sh
+
+cookie='_rghost_session=BAh7CjoRdXBsb2FkZWRfaWRzWwZpA1gLAzoJbGFuZyIHZW46D3Nlc3Npb25faWQiJThmM2FjYmNmZWQ1OTY3ZTdiMDgyMGM0MmE5NGRiNmUwIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFzaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsAOhBfY3NyZl90b2tlbiIxVVA3Yno0ODg0YWlWVjFtdXhLNHlyYllLeEZqc013dlc4RlU0QmVvWjhzND0%3D--fd04884954e2ceb9f9f1d1dcedd33c57c7fc84ce'
+authenticity_token='UP7bz4884aiVV1muxK4yrbYKxFjsMwvW8FU4BeoZ8s4='
+ 
+url=`curl -b "$cookie" \
+          -F authenticity_token="$authenticity_token" \
+          -F file="@$1" \
+          -F commit="Upload" \
+          http://phonon.rghost.ru/files | grep 'rghost.ru/[0-9]*' -o`
+echo "http://$url"

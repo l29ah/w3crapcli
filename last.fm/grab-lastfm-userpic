@@ -1,0 +1,2 @@
+#!/bin/bash
+wget $(wget -qO- $1 | grep -Po '"original":.*$' | grep -Pom1 'http([^"]|\\")*' | sed -e 's#\\/#/#g')

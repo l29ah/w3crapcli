@@ -1,0 +1,4 @@
+#!/bin/sh
+# cli-interface to the bugmenot.com
+curl -s "http://www.bugmenot.com/view/$1?utm_source=extension&utm_medium=firefox" -A "Firefox" | 
+perl -ne 's/.*<tr><th>(Username|Password).*<td>(.*)<\/td>.*/\2/ and print'

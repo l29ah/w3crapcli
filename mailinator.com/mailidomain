@@ -1,0 +1,2 @@
+#!/bin/bash
+hget http://mailinator.com/randomdomain.jsp | tail -n 1

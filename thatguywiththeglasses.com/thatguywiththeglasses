@@ -1,0 +1,3 @@
+#!/bin/bash
+Xtract '//enclosure/@url' <(curl -s $(curl -s "`Xtract '//embed/@src' <(tidy -f /dev/null <(curl -s "$1"))`" | sed -ne 's,.*file=\([^&]*\)&.*,\1,p' | urldecode))
+

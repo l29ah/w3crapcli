@@ -1,0 +1,23 @@
+#!/bin/bash
+# Syntax: tutmp3 Author - Song
+stoopid=`echo -n $* | sed 's/\(.*\) - \(.*\)/\1 \2/'`
+what=`echo -n $stoopid | iconv -t cp1251 | urlencode | sed s/%20/+/g`
+id=`wget "http://tutmp3.net/search.html?search=$what&type=2" -qO - |
+iconv -f cp1251 | 
+grep \"/mp3 | 
+grep Скачать | 
+sed 's,.*<a href="/mp3-\([0-9]*\)-\([0-9]*\)/\(.*\).html.*,\2#\3,' | 
+uniq |
+urldecode |
+egrep -x ".*$*" |
+cut -f 1 -d '#'`
+if [ $id ]
+then
+  url="http://tutmp3.net/download.php?id=$id"
+  hash=`wget $url -qO - | grep hash | sed 's,.*value="\([0-9a-f]*\).*,\1,'`
+  surl=`wget $url'&hash='$hash'&ext=mp3&ok2=%D1%EA%E0%F7%E0%F2%FC' -qO - | grep 'Refresh' | sed 's,.*Content="2;URL=\(.*\)".*,\1,'`
+  wget $surl -O "$*.mp3"
+else
+  echo 'Song not found on tutmp3.net'
+fi
+

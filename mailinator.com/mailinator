@@ -1,0 +1,8 @@
+#!/bin/bash
+msgs="`mailibox ${1:?Usage: $0 <username>}`"
+if [ -z "$msgs" ]; then
+	echo "No mail for $1." 1>&2
+	exit 1
+else
+	echo "${msgs}" | xargs -n 1 mailiread $1
+fi

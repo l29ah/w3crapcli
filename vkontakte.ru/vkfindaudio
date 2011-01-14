@@ -1,0 +1,13 @@
+#!/bin/bash
+# vkontakte.ru audio database lookup by L29Ah
+# Licensed under GNU AGPLv3
+
+COOKIEF=$1
+shift 1
+FIND=$*
+
+FIND=`echo -n "$FIND" | urlencode`
+wget --load-cookies "$COOKIEF" "http://vkontakte.ru/gsearch.php?q=$FIND&section=audio" -qO- | 
+iconv -f cp1251 |
+sed -ne 's/.*onclick="return operate([0-9]*,\([0-9]*\),\([0-9]*\),'\''\([0-9a-f]*\)'\'',[0-9]*);".*/http:\/\/cs\1.vkontakte.ru\/u\2\/audio\/\3.mp3/p; 
+s/.*performer[0-9]*">\(.*\)<\/b> - <span id="title[0-9]*">\(.*\)<\/spa.*/\1 - \2/p;'

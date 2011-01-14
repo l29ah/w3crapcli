@@ -1,0 +1,2 @@
+#!/bin/bash
+curl -sF "encode_url=$1" http://hugeurl.com/ | sed -ne 's#^<A HREF='\''\(.*\)'\''>$#\1#p'

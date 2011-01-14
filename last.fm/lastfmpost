@@ -1,0 +1,42 @@
+#!/bin/sh
+# lastfmpost v.0.1.4 (c) Alexander Polakov <polachok@gmail.com>
+
+USERNAME=<USERNAME>
+PASSWORD=<PASSWORD>
+
+if [ "$1" == "" ]; then
+    echo "usage: $0 <artist> <track> <album> <length> <tracknumber> [time]"
+    exit 1
+fi
+
+TZ=UTC
+ARTIST=`echo $1|sed 's/&/%26/g;s/ /%20/g;'`
+TRACK=`echo $2|sed 's/&/%26/g;s/ /%20/g;'`
+ALBUM=`echo $3|sed 's/&/%26/g;s/ /%20/g;'`
+LENGTH=$4
+NUMBER=$5
+TIME=`date +%s`
+TIMES=$6
+if [ "$TIMES" == "" ]; then
+    NOW=1
+    TIMES=$((`date +%s`-$LENGTH))
+fi
+TEMP=`mktemp`
+AUTH=$(echo -n `echo -n $PASSWORD|md5sum|cut -d ' ' -f 1`$TIME|md5sum|cut -d ' ' -f 1)
+
+wget "http://post.audioscrobbler.com/?hs=true&p=1.2.1&c=lap&v=0.1&u=$USERNAME&t=$TIME&a=$AUTH" -qq -O $TEMP
+{ read CODE ; read SID ; read NURL ; read SURL ;   } < $TEMP
+rm $TEMP
+echo Logging in...
+echo $CODE
+echo Submitting...
+echo "s=$SID&a[0]=$ARTIST&t[0]=$TRACK&i[0]=$TIMES&o[0]=P&r[0]=&l[0]=$LENGTH&b[0]=$ALBUM&n[0]=$NUMBER&m[0]=''"
+wget "$SURL" --post-data "s=$SID&a[0]="$ARTIST"&t[0]=$TRACK&i[0]=$TIMES&o[0]=P&r[0]=&l[0]=$LENGTH&b[0]=$ALBUM&n[0]=$NUMBER&m[0]=''" -vvv -O - 
+if [ "$?" != "0" ]; then
+    if [ "$NOW" == "1" ]; then
+    echo Submit failed. Queueing.
+    echo \"$ARTIST\" \"$TRACK\" \"$ALBUM\" \"$LENGTH\" $NUMBER $TIME >> ~/.lastfmqueue
+    fi
+fi
+#echo Now Playing...
+#wget "$NURL" --post-data "s=$SID&a=$ARTIST&t=$TRACK&b=$ALBUM&l=$LENGTH&n=$NUMBER&m=''" -qq -O -

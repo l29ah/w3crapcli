@@ -1,0 +1,10 @@
+#!/bin/bash
+c="`tempfile`"
+trap "rm $c" EXIT
+ua='Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.12) Gecko/20101028 Firefox/3.6.12'
+u="`urlencode <<< "$1"`"
+curl -A "$ua" -c "$c" "http://savefrom.net/$1" -s > /dev/null
+z="$(curl -s -A "$ua" -b "$c" 'http://en.savefrom.net/savefrom.php' -d "sf_url=$u&sf_submit.x=0&sf_submit.y=0" | tr -d \\n | sed -e 's/.*>\(var[^<]*\)<.*/\1/;s/\;var s=document.*tex/\;/;s/eval(\([^;]*\))\;.*$/\1\;'\''\;print(eval(t));/' | js | sed -e 's/eval/print/' | js)"
+f='The download link not found.'
+grep -q "$f" <<< "$z" && echo "$f" >&2 && exit 1
+sed -e 's/>/&\n/g' <<< "$z" | sed -ne 's/.*href="\([^"]*\)".*/\1/p'

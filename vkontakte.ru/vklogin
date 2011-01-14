@@ -1,0 +1,10 @@
+#!/bin/bash
+# vkontakte.ru login by L29Ah
+# Licensed under GNU AGPLv3
+
+LOGIN=$1
+PASSWORD=$2
+COOKIEF=$3
+
+wget -S --save-cookies "$COOKIEF" --keep-session-cookies --post-data="success_url=&fail_url=&try_to_login=1&email=$LOGIN&pass=$PASSWORD" 'http://vkontakte.ru/login.php' -O /dev/null -q &> /dev/null
+

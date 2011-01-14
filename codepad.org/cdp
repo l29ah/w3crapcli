@@ -1,0 +1,27 @@
+#!/bin/sh
+
+if [ "x$1" = "x" ]; then
+    lang="Plain Text"
+else
+    case "$1" in
+        c)   lang="C";;
+        c*)  lang="C%2B%2B";;
+        d)   lang="D";;
+        h*)  lang="Haskell";;
+        lua) lang="Lua";;
+        py*) lang="Python";;
+        p*)  lang="Perl";;
+        r*)  lang="Ruby";;
+        l*)  lang="Scheme";;
+        t*)  lang="Tcl";;
+        *)   lang="Plain Text";;
+    esac
+fi
+
+code=`curl -d "lang=$lang&private=True&submit=Submit" \
+           --data-urlencode "code@-" \
+           --silent \
+      http://codepad.org | \
+      sed -n "s|.*found at <a.*>\(.*\)</a>.*|\1|p"`
+
+echo "http://codepad.org$code"

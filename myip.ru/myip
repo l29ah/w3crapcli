@@ -1,0 +1,3 @@
+#!/bin/bash
+wget -qO- 'http://www.myip.ru/get_ip.php?loc=' | sed -ne 's/.*valign=middle>\([0-9.]*\)<\/TD.*/\1/p'
+

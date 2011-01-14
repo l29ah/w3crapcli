@@ -1,0 +1,8 @@
+#!/bin/bash
+from="$1"
+to="$2"
+shift 2
+text="$*"
+wget -o /dev/null -O /dev/stdout "http://translate.google.com/translate_t?hl=en&oe=UTF-8&ie=UTF-8&sl=$from&tl=$to&q=`echo -n $text | urlencode`" --user-agent=Firefox|
+sed -n 's/.*this.style.backgroundColor='\''#fff'\''">\(.*\)<\/span><\/span><\/div>.*/\1/p'
+echo

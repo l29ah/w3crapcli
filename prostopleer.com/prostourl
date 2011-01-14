@@ -1,0 +1,3 @@
+#!/bin/bash
+url="${1:?Usage: $0 <url>; like \"$0 http://prostopleer.com/#/tracks/182407obYE\"}" || exit 1
+curl -s "${url/\#\//}" | tr " " "\n" | grep -Eo '/download/[^"]+' | sed 1q | cat <(echo -n http://prostopleer.com) /dev/stdin

@@ -1,0 +1,9 @@
+#!/bin/bash
+fn=`tempfile -p vkbashcookies`
+umask 0077
+read username password < ~/.config/vkbash
+vklogin "$username" "$password" "$fn"
+out=`vkfindaudio "$fn" "$*"`
+echo $out
+mplayer `egrep -o 'http[^ ]*\.mp3' <<< $out`
+rm "$fn"
