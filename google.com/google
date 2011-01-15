@@ -1,1 +1,23 @@
-/home/l29ah/bin/google
+#!/bin/bash
+google() {
+	echo "$1" | 
+	hexdump -C | 
+	cut -b10-60 | 
+	tr -d '[:space:]' | 
+	sed "s/\(..\)/%\1/g;" | 
+	xargs -i{} curl -sLA "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; en) Opera 10.00" "http://www.google.com/search?hl=en&safe=off&q={}&sourceid=opera&ie=utf-8&oe=utf-8&num=${2:-100}" | 
+	grep -Eo "<h3 class=[^=]+=\"http:[^\"]+" | 
+	cut -d\" -f4-  | 
+	egrep -v '(^$|googleusercontent)' |
+	htmldecode
+}
+
+nonshit() {
+	egrep -v '^http://[^/]*(limetorrents.com|heroturko.org|freshwap.net|therapidbay.com|picktorrent.com|rs4fun.com|terabitwarez.ws|shareonl.com|torrentreactor.net|evodl.com|fullrshare.com|downarchive.com|vertor.com|freshdl.com|rs-free-download.com|win7dl.com|free-download-ebooks.com|ebookcomputer.com|pdfebook.net|ebookpdf.net|torrentdownloads.net|filestube.com|rapidsharegfx.com|soft-catalog.net|pdf-freedownload.com|rs-code.com|bergfiles.com|fulldls.com|pdfcast.org/paid|ebook3k.com|217.23.9.210|xpter.info|worid-of-books.com|kindlebookdownload.us|ebookg.com|tower.com|experts-exchange.com|spirit-of-metal.com|mp3download.ws|megaupload-files.com|mediafire-files.com)/'
+}
+
+case "$1" in
+	dl) google "$2 -buy -price -review" "$3" | nonshit;;
+	shit) google "$2" "$3";;
+	*) google "$1" "$2" | nonshit;;
+esac
