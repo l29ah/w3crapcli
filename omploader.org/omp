@@ -1,4 +1,0 @@
-#!/bin/sh
-
-curl -F file1="@$1" http://omploader.org/upload |
-sed -n "s|.*<div class=\"left\">File:</div><div class=\"right\"><a[^>]*>\([^<]*\).*|\1/`basename \"$1\"`|p"
