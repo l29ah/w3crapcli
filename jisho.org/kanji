@@ -1,0 +1,10 @@
+#!/bin/bash
+wget -o /dev/null -O - http://jisho.org/kanji/details/$1 | 
+html2text -nobs | 
+perl -ne '
+if (s/\*+//g) { 
+	$p = /(Readings|English)/?1:0; 
+}; 
+$p = /(Chinese|Korean)/?0:$p; 
+$p = /^(Radical|Parts)/?1:$p; 
+print if ($p && !/^\n/)'
