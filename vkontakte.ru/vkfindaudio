@@ -1,7 +1,4 @@
 #!/bin/bash
-# vkontakte.ru audio database lookup by L29Ah
-# Licensed under GNU AGPLv3
-
 COOKIEF=$1
 shift 1
 FIND=$*

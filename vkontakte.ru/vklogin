@@ -1,7 +1,4 @@
 #!/bin/bash
-# vkontakte.ru login by L29Ah
-# Licensed under GNU AGPLv3
-
 LOGIN=$1
 PASSWORD=$2
 COOKIEF=$3
