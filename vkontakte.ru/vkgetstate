@@ -1,0 +1,11 @@
+#!/bin/bash
+
+COOKIEF=$1
+
+wget --load-cookies "$COOKIEF" -q -O - "http://vkontakte.ru/feed2.php" | 
+cut -d, -f 2-10 --output-delimiter='
+' |
+sed 's/.*": \([0-9]*\)}/\1/' | 
+cut -d'
+' -f 1-9 --output-delimiter=' '
+

@@ -1,0 +1,11 @@
+#!/bin/bash
+COOKIEF=$1
+SPAMTO=$2
+shift 2
+TEXT=$*
+
+TEXT=`echo -n "$TEXT" | iconv -t cp1251 | urlencode`
+uhp=`wget --load-cookies "$COOKIEF" "http://vkontakte.ru/id$SPAMTO" -q -O /tmp/$$`
+url=`cat /tmp/$$ | grep 'wall.php?act=get10&wall_hash' | sed 's/.*makeFRequest('\''\(.*\)'\''.*/,\1/' | cut -d, -f2`
+toid=`sed -n '/name="to_id"/p' /tmp/$$ | sed 's/.*value="\([0-9a-f]*\)".*/\1/'`
+wget -q --load-cookies "$COOKIEF" --post-data="seed=$TEXT&fpage=1&mid=$toid&n=3" -O/dev/null "http://vkontakte.ru/$url"
