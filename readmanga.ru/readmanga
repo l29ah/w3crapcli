@@ -1,0 +1,4 @@
+#!/bin/bash
+# Usage: readmanga <url>
+# where 'url' is like 'http://readmanga.ru/x_day/vol2/10?mature='
+curl -s "$1" | grep pics | sed 1q | perl -pe 's/.*?url:"(.*?)".*?}(];)?/\1\n/g'
