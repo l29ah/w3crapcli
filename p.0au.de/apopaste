@@ -1,0 +1,2 @@
+#!/bin/sh
+curl -H "Expect: " -F "content=@-" http://p.0au.de
