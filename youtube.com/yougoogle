@@ -1,0 +1,4 @@
+#!/bin/bash
+mplayer `google "site:youtube.com $1" 20 | grep watch | while read; do
+	savefrom "$REPLY" | sed 1q
+done`
