@@ -13,7 +13,7 @@ google() {
 }
 
 nonshit() {
-	egrep -v '^http://[^/]*(limetorrents.com|heroturko.org|freshwap.net|therapidbay.com|picktorrent.com|rs4fun.com|terabitwarez.ws|shareonl.com|torrentreactor.net|evodl.com|fullrshare.com|downarchive.com|vertor.com|freshdl.com|rs-free-download.com|win7dl.com|free-download-ebooks.com|ebookcomputer.com|pdfebook.net|ebookpdf.net|torrentdownloads.net|filestube.com|rapidsharegfx.com|soft-catalog.net|pdf-freedownload.com|rs-code.com|bergfiles.com|fulldls.com|pdfcast.org/paid|ebook3k.com|217.23.9.210|xpter.info|worid-of-books.com|kindlebookdownload.us|ebookg.com|tower.com|experts-exchange.com|spirit-of-metal.com|mp3download.ws|megaupload-files.com|mediafire-files.com)/'
+	egrep -v '^http://[^/]*(gosong.net|downv.com|torrentdeluxe.com|gigabitwarez.com|rapidmore.com|4megaupload.com|wareseeker.com|shreweb.com|truetorrent.com|btmon.com|torrentfall.com|torrenthound.com|intorrentz.com|torrentzap.com|torrent-link.com|limetorrents.com|heroturko.org|freshwap.net|therapidbay.com|picktorrent.com|rs4fun.com|terabitwarez.ws|shareonl.com|torrentreactor.net|evodl.com|fullrshare.com|downarchive.com|vertor.com|freshdl.com|rs-free-download.com|win7dl.com|free-download-ebooks.com|ebookcomputer.com|pdfebook.net|ebookpdf.net|torrentdownloads.net|filestube.com|rapidsharegfx.com|soft-catalog.net|pdf-freedownload.com|rs-code.com|bergfiles.com|fulldls.com|pdfcast.org/paid|ebook3k.com|217.23.9.210|xpter.info|worid-of-books.com|kindlebookdownload.us|ebookg.com|tower.com|experts-exchange.com|spirit-of-metal.com|mp3download.ws|megaupload-files.com|mediafire-files.com)/'
 }
 
 case "$1" in
