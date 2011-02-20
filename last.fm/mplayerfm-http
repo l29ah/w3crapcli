@@ -1,0 +1,25 @@
+#!/bin/bash
+scrobble() {
+	data=`mid3v2 "$1" | egrep -a "^(TIT2|TPE1|TALB)="`
+	title="`gettag TIT2 <<< "$data"`"
+	album="`gettag TALB <<< "$data"`"
+	artist="`gettag TPE1 <<< "$data"`"
+
+	lastfm.pl "$artist" "$title" "$album" 180
+}
+
+gettag() {
+	sed -n "s/^$1=//p;s/\//_/g"
+}
+
+m="`mktemp -d`"
+
+tee >({ 
+	sed -une 's/^Playing \(.*\)\.$/\1/p' | while read a; do
+		httpfs "$a" "$m"
+		scrobble "$m"/*
+		fusermount -u "$m"
+	done; 
+})
+
+rmdir "$m"
