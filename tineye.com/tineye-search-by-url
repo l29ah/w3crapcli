@@ -1,0 +1,4 @@
+#!/bin/bash
+
+S="<p><a href=\"\(.*\)\" onmousedown=\"return exit(this.href, '[0-9a-f]*', 'res_image', '0');\""
+wget "http://www.tineye.com/search?url=$(echo $1|./../utils/urlencode)&search_button=search" -q -O - | grep "$S" | sed "s/.*$S.*/\1/g" | uniq
