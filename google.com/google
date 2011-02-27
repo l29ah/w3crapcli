@@ -1,4 +1,5 @@
 #!/bin/bash
+# Usage: $0 [mode] <search term> ...
 google() {
 	echo "$1" | 
 	hexdump -C | 
@@ -13,11 +14,13 @@ google() {
 }
 
 nonshit() {
+	# Elaborate blacklist; now contains stuff you would block when googling torrents.
 	egrep -v '^http://[^/]*(gosong.net|downv.com|torrentdeluxe.com|gigabitwarez.com|rapidmore.com|4megaupload.com|wareseeker.com|shreweb.com|truetorrent.com|btmon.com|torrentfall.com|torrenthound.com|intorrentz.com|torrentzap.com|torrent-link.com|limetorrents.com|heroturko.org|freshwap.net|therapidbay.com|picktorrent.com|rs4fun.com|terabitwarez.ws|shareonl.com|torrentreactor.net|evodl.com|fullrshare.com|downarchive.com|vertor.com|freshdl.com|rs-free-download.com|win7dl.com|free-download-ebooks.com|ebookcomputer.com|pdfebook.net|ebookpdf.net|torrentdownloads.net|filestube.com|rapidsharegfx.com|soft-catalog.net|pdf-freedownload.com|rs-code.com|bergfiles.com|fulldls.com|pdfcast.org/paid|ebook3k.com|217.23.9.210|xpter.info|worid-of-books.com|kindlebookdownload.us|ebookg.com|tower.com|experts-exchange.com|spirit-of-metal.com|mp3download.ws|megaupload-files.com|mediafire-files.com)/'
 }
 
 case "$1" in
-	dl) google "$2 -buy -price -review" "$3" | nonshit;;
-	shit) google "$2" "$3";;
-	*) google "$1" "$2" | nonshit;;
+	dl) google "$2 -buy -price -review" "$3" | nonshit;;	# Keywords for downloads
+	shit) google "$2" "$3";;	# The way to avoid hitting the blacklist.
+					# I wonder if it would be used at all.
+	*) google "$1" "$2" | nonshit;;	# Fallback
 esac
