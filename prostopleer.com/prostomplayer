@@ -1,3 +1,0 @@
-#!/bin/bash
-urls="`prostosearch "$1"`"
-mplayer -cache 50 -prefer-ipv4 "${urls:?Can\'t find anything}"

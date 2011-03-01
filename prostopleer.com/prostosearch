@@ -1,9 +1,0 @@
-#!/bin/bash
-e="`echo -n "$1" | urlencode`"
-i=1
-p='rarr;</a>' 
-while grep -q 'rarr;</a>' <<< "$p"; do
-	p="`curl -s "http://prostopleer.com/search?q=$e&page=$i"`"
-	tr " " "\n" <<< "$p" | grep -Eo '/download/[^"]+' | sed '$d;s,^,http://prostopleer.com,'
-	i=$(($i+1))
-done
