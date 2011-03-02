@@ -32,6 +32,9 @@
 #  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 #  POSSIBILITY OF SUCH DAMAGE
 
+clBold="`echo '\033[1m'`"
+clReset="`echo '\033[m'`"
+
 fetchChapter() {
     title="$1"
     volume="$2"
@@ -92,8 +95,8 @@ fetchTitle() {
 
 if [ -z "$1"  -o  "$1" = "-h" ]
 then
-    echo "Usage: $0 title [volume [chapter]]"
-    echo "       $0 URL"
+    echo "Usage: $0 ${clBold}title${clReset} [${clBold}volume${clReset} [${clBold}chapter${clReset}]]"
+    echo "       $0 ${clBold}URL${clReset}"
 
     exit
 fi
