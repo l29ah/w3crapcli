@@ -80,7 +80,10 @@ fetchTitle() {
     do
         volume="`dirname $(echo \"$i\")`"
         chapter="`basename $(echo \"$i\")`"
+        mkdir "$volume"
+        cd "$volume"
         fetchChapter "$1" "$volume" "$chapter"
+        cd ..
     done
    
 
