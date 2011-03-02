@@ -1,0 +1,110 @@
+#!/bin/sh
+
+#  Copyright (c) 2011, Alexander Batischev
+#  All rights reserved.
+#  
+#  Redistribution and use in source and binary forms, with or without
+#  modification, are permitted provided that the following conditions
+#  are met:
+#  
+#   o  Redistributions of source code must retain the above copyright
+#      notice, this list of conditions and the following disclaimer.
+#
+#   o  Redistributions in binary form must reproduce the above copyright
+#      notice, this list of conditions and the following disclaimer in
+#      the documentation and/or other materials provided with the
+#      distribution.
+#
+#   o  Neither the name of the copyright holder nor the names of
+#      contributors may be used to endorse or promote products derived
+#      from this software without specific prior written permission.
+#
+#  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+#  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+#  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+#  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+#  HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+#  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+#  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS
+#  OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
+#  AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+#  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+#  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+#  POSSIBILITY OF SUCH DAMAGE
+
+fetchChapter() {
+    title="$1"
+    volume="$2"
+    chapter="$3"
+
+    mkdir "$3"
+    cd "$3"
+
+    echo ''>urls
+
+    page="`curl -s \"http://anymanga.com/$1/$2/$3\"`"
+    pages="`echo \"$page\" | grep pagelist | head -1 | sed 's#show_pagelist(\[##;  s#\],.*$##' | tr -d "'" | sed 's#,# #g'`"
+    for i in $pages
+    do
+        curPage="`curl -s \"http://anymanga.com/$1/$2/$3/$i\"`"
+        echo -n "http://anymanga.com"
+        echo "$curPage" | grep img | grep "$1" | sed -r 's#<img src="(.*)" title.*#\1#'
+    done >> urls
+
+    wget --continue --input=urls
+    rm -f urls
+
+    cd ..
+}
+
+fetchVolume() {
+    title="$1"
+    volume="$2"
+}
+
+fetchTitle() {
+    title="$1"
+}
+
+if [ -z "$1"  -o  "$1" = "-h" ]
+then
+    echo "Usage: $0 title [volume [chapter]]"
+    echo "       $0 URL"
+fi
+
+if [ -z "`echo \"$1\" | grep 'anymanga\.com'`" ]
+then
+    title="$1"
+    volume="$2"
+    chapter="$3"
+else
+    # we were given a URL; now let's parse it
+    url="`echo \"$1\" | sed 's#^http://##'`"
+
+    title="`echo \"$url\" | sed -r 's#[^/]+/([^/]+).*#\1#'`"
+
+    volume="`echo \"$url\" | sed -r 's#[^/]+/[^/]+/([^/]+).*#\1#'`"
+    if [ "$volume" = "$url" ]
+    then
+        volume=""
+    fi
+
+    chapter="`echo \"$url\" | sed -r 's#[^/]+/[^/]+/[^/]+/([^/]+).*#\1#'`"
+    if [ "$chapter" = "$url" ]
+    then
+        chapter=""
+    fi
+fi
+
+if [ -n "$chapter" ]
+then
+    fetchChapter "$title" "$volume" "$chapter"
+else
+    if [ -n "$volume" ]
+    then
+        fetchVolume "$title" "$volume"
+    else
+        fetchTitle "$title"
+    fi
+fi
+
