@@ -54,6 +54,18 @@ fetchChapter() {
 fetchVolume() {
     title="$1"
     volume="$2"
+
+    mkdir "$2"
+    cd "$2"
+
+    page="`curl -s \"http://anymanga.com/$1/\"`"
+    chapters="`echo \"$page\" | grep \"/$1/$2\" | grep '<li>' | sed -r 's#.*a href="(.*)" >.*#\1#;  s#/[^/]+/[^/]+/([^/]+)/#\1#'`"
+    for chapter in $chapters
+    do
+        fetchChapter "$1" "$2" "$chapter"
+    done
+
+    cd ..
 }
 
 fetchTitle() {
