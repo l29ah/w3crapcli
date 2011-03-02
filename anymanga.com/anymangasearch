@@ -1,0 +1,62 @@
+#!/bin/sh
+
+#  Copyright (c) 2011, Alexander Batischev
+#  All rights reserved.
+#  
+#  Redistribution and use in source and binary forms, with or without
+#  modification, are permitted provided that the following conditions
+#  are met:
+#  
+#   o  Redistributions of source code must retain the above copyright
+#      notice, this list of conditions and the following disclaimer.
+#
+#   o  Redistributions in binary form must reproduce the above copyright
+#      notice, this list of conditions and the following disclaimer in
+#      the documentation and/or other materials provided with the
+#      distribution.
+#
+#   o  Neither the name of the copyright holder nor the names of
+#      contributors may be used to endorse or promote products derived
+#      from this software without specific prior written permission.
+#
+#  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+#  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+#  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+#  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+#  HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+#  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+#  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS
+#  OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
+#  AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+#  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+#  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+#  POSSIBILITY OF SUCH DAMAGE
+
+clBold="`echo '\033[1m'`"
+clReset="`echo '\033[0m'`"
+
+if [ -z "$1"  -o  "$1" = "-h" ]
+then
+    echo "Usage: $0 title"
+    echo "       $0 -a author"
+    
+    exit
+fi
+
+if [ "$1" = "-a" ]
+then
+    author="`echo \"$2\" | urlencode`"
+    page="`curl -s \"http://anymanga.com/search/?query=${author}&type=author\"`"
+else
+    title="`echo \"$1\" | urlencode`"
+    page="`curl -s \"http://anymanga.com/search/?query=${title}&type=manga\"`"
+fi
+
+results=`echo "$page" | grep span | grep -v 'padding: 0' | grep -v 'font-weight: normal' | tr "\r" "\n" | tr -d "\n" | sed "s#</span>#\n#g" | sed -r "s#.*href=\"(.*)\" > (.*)</a> by (.*)#${clBold}\2${clReset} by ${clBold}\3${clReset}:\nhttp://anymanga.com\1\n#"`
+if [ -z "$results" ]
+then
+    echo "Nothing found."
+else
+    echo "$results"
+fi
+
