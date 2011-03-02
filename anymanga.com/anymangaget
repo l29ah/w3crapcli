@@ -70,6 +70,21 @@ fetchVolume() {
 
 fetchTitle() {
     title="$1"
+
+    mkdir "$1"
+    cd "$1"
+
+    page="`curl -s \"http://anymanga.com/$1/\"`"
+    volumesAndChapters="`echo \"$page\" | grep \"/$1\" | grep '<li>' | sed -r 's#.*a href="(.*)" >.*#\1#;  s#/[^/]+/(.*)/#\1#'`"
+    for i in $volumesAndChapters
+    do
+        volume="`dirname $(echo \"$i\")`"
+        chapter="`basename $(echo \"$i\")`"
+        fetchChapter "$1" "$volume" "$chapter"
+    done
+   
+
+    cd ..
 }
 
 if [ -z "$1"  -o  "$1" = "-h" ]
