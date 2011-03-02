@@ -40,16 +40,10 @@ fetchChapter() {
     mkdir "$3"
     cd "$3"
 
-    echo ''>urls
-
     page="`curl -s \"http://anymanga.com/$1/$2/$3\"`"
-    pages="`echo \"$page\" | grep pagelist | head -1 | sed 's#show_pagelist(\[##;  s#\],.*$##' | tr -d "'" | sed 's#,# #g'`"
-    for i in $pages
-    do
-        curPage="`curl -s \"http://anymanga.com/$1/$2/$3/$i\"`"
-        echo -n "http://anymanga.com"
-        echo "$curPage" | grep img | grep "$1" | sed -r 's#<img src="(.*)" title.*#\1#'
-    done >> urls
+    pageNames="`echo \"$page\" | grep pagelist | head -1 | sed 's#show_pagelist(\[##;  s#\],.*$##' | tr -d "' "`"
+    pages="`curl -s \"http://anymanga.com/$1/$2/$3/{${pageNames}}\"`"
+    echo "$pages" | grep img | grep "$1" | sed -r 's#<img src="(.*)" title.*#\1#;  s#^#http://anymanga.com#' > urls
 
     wget --continue --input=urls
     rm -f urls
