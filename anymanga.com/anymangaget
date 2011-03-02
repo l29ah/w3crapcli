@@ -94,6 +94,8 @@ if [ -z "$1"  -o  "$1" = "-h" ]
 then
     echo "Usage: $0 title [volume [chapter]]"
     echo "       $0 URL"
+
+    exit
 fi
 
 if [ -z "`echo \"$1\" | grep 'anymanga\.com'`" ]
