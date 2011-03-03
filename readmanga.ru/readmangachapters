@@ -60,7 +60,7 @@ fi
 # mature=1 means reader is 18 years old or above
 page="`curl -s \"$url?mature=1\"`"
 
-chapters="`echo \"$page\" | egrep ' {16}<a href="/berserk/vol' | sed -r 's#<a href="(.*)" title.*>(.*)</a>#\2\t\1#; s#\?.*$##; s#^ +##; s#(.*)\t(.*)#http://readmanga.ru\2\t\1#'`"
+chapters="`echo \"$page\" | egrep ' {16}<a href="/berserk/vol' | sed -r 's#<a href="(.*)" title.*>(.*)</a>#\2\t\1#; s#^ +##; s#(.*)\t(.*)#http://readmanga.ru\2\t\1#'`"
 
 echo "$chapters"
 
