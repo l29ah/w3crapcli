@@ -1,4 +1,16 @@
-#!/bin/bash
-# Usage: readmanga <url>
-# where 'url' is like 'http://readmanga.ru/x_day/vol2/10?mature='
-curl -s "$1" | grep pics | sed 1q | perl -pe 's/.*?url:"(.*?)".*?}(];)?/\1\n/g'
+#!/bin/sh
+
+clBold="`echo '\033[1m'`"
+clReset="`echo '\033[m'`"
+
+if [ -z "$1"  -o  "$1" = "-h" ]
+then
+    echo "Usage: $0 ${clBold}readmanga URL${clReset}"
+    echo "  Parameter should look like this: http://readmanga.ru/berserk/vol1/1?mature=1"
+    echo "  You may obtain one of those using readmangachapters script."
+
+    exit
+fi
+
+curl -s "$1" | grep pics | sed 1q | perl -pe 's/.*?url:"(.*?)".*?}(];)?/\1\n/g' | wget -ci-
+
