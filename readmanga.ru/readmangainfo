@@ -1,0 +1,84 @@
+#!/bin/sh
+
+#  Copyright (c) 2011, Alexander Batischev
+#  All rights reserved.
+#  
+#  Redistribution and use in source and binary forms, with or without
+#  modification, are permitted provided that the following conditions
+#  are met:
+#  
+#   o  Redistributions of source code must retain the above copyright
+#      notice, this list of conditions and the following disclaimer.
+#
+#   o  Redistributions in binary form must reproduce the above copyright
+#      notice, this list of conditions and the following disclaimer in
+#      the documentation and/or other materials provided with the
+#      distribution.
+#
+#   o  Neither the name of the copyright holder nor the names of
+#      contributors may be used to endorse or promote products derived
+#      from this software without specific prior written permission.
+#
+#  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+#  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+#  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+#  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+#  HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+#  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+#  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS
+#  OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
+#  AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+#  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+#  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+#  POSSIBILITY OF SUCH DAMAGE
+
+clBold="`echo '\033[1m'`"
+clReset="`echo '\033[m'`"
+
+if [ -z "$1"  -o  "$1" = "-h" ]
+then
+    echo "Usage: $0 ${clBold}title${clReset}"
+    echo "       $o ${clBold}readmanga URL${clReset}"
+
+    exit
+fi
+
+if [ -z "`echo \"$1\" | grep 'readmanga\.ru'`" ]
+then
+    urls="`readmangasearch \"$*\"`"
+    if [ "`echo \"$urls\" | wc -l`" -eq "1" ]
+    then
+        url="$urls"
+    else
+        echo "There are few mangas that satisfy your query:\n"
+        echo "$urls"
+        echo "\nPlease choose one and give a URL as a parameter to ${0}"
+        # TODO: enumerate found URLs and let user choose
+        exit
+    fi
+fi
+
+# mature=1 means reader is 18 years old or above
+page="`curl -s \"$url?mature=1\"`"
+
+mangaTitle="`echo \"$page\" | tr -d "\n\r" | sed -r 's#.*<div class="leftContent"> +<h1>Манга (.*)</h1> +.*#\1#; s# +# #g; s#\((.*)\)#/ \1#; s# $##'`"
+mangaJpTitle="`echo \"$page\" | tr -d "\n\r" | sed -r 's#.*<div id="mangaSettings" class="left"> +<p>([^<]+)</p>.*#\1#'`"
+rateInfo="`echo \"$page\" | tr -d "\n\r" | sed -r 's#.*<p class="smallText rate_info">.*Рейтинг: <b>([^<]+)</b>.*Всего голосов: <b>([0-9]+).*#\1 (\2 голосов)#'`"
+volumesInfo="`echo \"$page\" | tr -d "\n\r" | sed -r 's#.*<b>Томов:</b> +([0-9]+), ([^<]*) +.*#\1 (\2)#; s# +\)$#)#'`"
+translationStatus="`echo \"$page\" | tr -d "\n\r" | sed -r 's#.*<p><b>Перевод:</b> +(.*) + </p> +<p><b>Жанры:.*#\1#; s# +$##'`"
+genres="`echo \"$page\" | grep '/genre/' | tr -d "\n\r" | sed -r 's#<a href="[^"]+">([^<]*)</a>#\1#g; s# +# #g'`"
+author="`echo \"$page\" | grep '/author/' | sed -r 's#.*<a.*>(.*)</a>#\1#'`"
+translators="`echo \"$page\" | grep 'redirect' | sed -r 's#.*<a href="/redirect\?url=(.*)" target="_blank">(.*)</a>.*#  * \2 ( \1 )#' |urldecode`"
+description="`echo \"$page\" | tr -d "\n\r" | sed -r 's#.*<div class="mangaDescription">(.*)Редактировать описание</a>.*#\1#; s#<em>(.*)</em>#\n\n\1#; s#<[^>]*>##g; s# +# #g; s# $##'`"
+
+echo "${clBold}${mangaTitle} / ${mangaJpTitle}${clReset}"
+echo "${clBold}${author}${clReset}\n"
+
+echo "${clBold}Рейтинг:${clReset} $rateInfo"
+echo "${clBold}Жанры:${clReset}${genres}"
+echo "${clBold}Томов:${clReset} $volumesInfo"
+echo "${clBold}Перевод:${clReset} $translationStatus"
+echo "${clBold}Переводчики:${clReset}\n${translators}\n"
+
+echo "$description\n"
+
