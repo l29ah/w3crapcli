@@ -45,26 +45,24 @@ query="`echo \"$1\" | urlencode`"
 
 # getting cookies
 curl -s -c cookies "http://prostopleer.com" >/dev/null
-fileIDs=""
 
 # walk through first 12 pages - it's the limit for non-premium users
-for i in `seq 12`
-do
-    newIDs="`curl -s -b cookies -c cookies \"http://prostopleer.com/search?q=${query}&page=${i}\" | sed 's#<#\n<#g' | grep file_id | sed -r 's#.*file_id="(.*)" singer.*#\1#'`"
-    fileIDs="$fileIDs${newIDs}"
-done
+fileIDs="`curl -s -b cookies -c cookies \"http://prostopleer.com/search?q=${query}&page=[1-12]\" | sed 's#<#\n<#g' | grep file_id | sed -r 's#.*file_id="(.*)" singer.*#\1#'`"
 
-JScript="`curl -s http://prostopleer.com/js/nanoplayer.min.js | sed -e 's/^.*getFilePath:\(.*\),fixHash:.*$/var g=\1;/'`"
-
-for id in $fileIDs
-do
-    echo "$JScript ; print('http://prostopleer.com' + g('$id'))" | js
-done
-
-if [ -z "$fileIDs"]
+if [ -z "$fileIDs" ]
 then
     echo "Nothing found."
+    rm -f cookies
+    exit
 fi
+
+(
+    curl -s http://prostopleer.com/js/nanoplayer.min.js | sed -e 's/^.*getFilePath:\(.*\),fixHash:.*$/var g=\1;/'
+    for id in $fileIDs
+    do
+        echo "print('http://prostopleer.ru' + g(\"$id\"));"
+    done
+) | js
 
 rm -f cookies
 

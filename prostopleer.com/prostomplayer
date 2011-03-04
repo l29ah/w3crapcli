@@ -9,6 +9,13 @@ fi
 
 curl -s -c /tmp/cookies "http://prostopleer.com" >/dev/null
 urls="`prostosearch \"$*\"`"
+
+if [ "$urls" = "Nothing found" ]
+then
+    echo "Nothing found."
+    exit
+fi
+
 for url in $urls
 do
     mplayer -cache 50 -prefer-ipv4 -cookies -cookies-file /tmp/cookies "$url"
