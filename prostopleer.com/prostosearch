@@ -61,5 +61,10 @@ do
     echo "$JScript ; print('http://prostopleer.com' + g('$id'))" | js
 done
 
+if [ -z "$fileIDs"]
+then
+    echo "Nothing found."
+fi
+
 rm -f cookies
 
