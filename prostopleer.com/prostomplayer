@@ -14,3 +14,5 @@ do
     mplayer -cache 50 -prefer-ipv4 -cookies -cookies-file /tmp/cookies "$url"
 done
 
+rm -f /tmp/cookies
+
