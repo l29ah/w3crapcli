@@ -1,3 +1,16 @@
-#!/bin/bash
-urls="`prostosearch "$1"`"
-mplayer -cache 50 -prefer-ipv4 "${urls:?Can\'t find anything}"
+#!/bin/sh
+
+if [ -z "$1"  -o  "$1" = "-h" ]
+then
+    echo "Usage: $0 ${clBold}query${clReset}"
+    echo "       $0 ${clBold}prostopleer URL${clReset}"
+    exit
+fi
+
+curl -s -c /tmp/cookies "http://prostopleer.com" >/dev/null
+urls="`prostosearch \"$*\"`"
+for url in $urls
+do
+    mplayer -cache 50 -prefer-ipv4 -cookies -cookies-file /tmp/cookies "$url"
+done
+
