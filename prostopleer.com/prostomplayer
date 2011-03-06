@@ -10,9 +10,8 @@ fi
 curl -s -c /tmp/cookies "http://prostopleer.com" >/dev/null
 urls="`prostosearch \"$*\"`"
 
-if [ "$urls" = "Nothing found" ]
+if [ -z "$urls" ]
 then
-    echo "Nothing found."
     exit
 fi
 
