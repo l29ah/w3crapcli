@@ -51,7 +51,6 @@ fileIDs="`curl -s -b cookies -c cookies \"http://prostopleer.com/search?q=${quer
 
 if [ -z "$fileIDs" ]
 then
-    echo "Nothing found."
     rm -f cookies
     exit
 fi
