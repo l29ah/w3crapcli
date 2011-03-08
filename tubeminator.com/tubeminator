@@ -1,0 +1,21 @@
+#!/bin/bash
+o="url=`urlencode <<< "$1"`&category_id=0"
+c="`tempfile`"
+ajax() {
+	#echo "http://www.tubeminator.com/ajax.php?function=$1&$o" >&2
+	curl -c "$c" -b "$c" -s "http://www.tubeminator.com/ajax.php?function=$1&$o"
+}
+r="`ajax downloadvideo`"
+if [[ "$r" == ok ]]; then while :; do
+	sleep 1
+	r="`ajax checkprogress`"
+	echo -ne "\r$r%"
+	if [[ "$r" == 100 ]]; then
+		echo
+		break
+	fi
+done; else
+	echo Fuck you: $r
+	exit 1
+fi
+curl -s "http://www.tubeminator.com/convert-`ajax finished`.html?reset=true" | sed -ne 's/.*"file","\([^"]*\)");.*/\1/p'
