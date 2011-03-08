@@ -1,0 +1,2 @@
+#!/bin/bash
+curl -Ls "http://www.tineye.com/search?url=$(urlencode <<< "$1")&search_button=search" | sed -ne 's/.*<p><a href="\(.*\)" onmousedown="return exit(this.href,.*/\1/gp' | uniq
