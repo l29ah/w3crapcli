@@ -2,9 +2,9 @@
 
 if [ -z "$1"  -o  "$1" = "-h" ]
 then
-    exit
     echo "Usage: $0 query"
     echo "       $0 prostopleer URL"
+    exit 1
 fi
 
 curl -s -c /tmp/cookies "http://prostopleer.com" >/dev/null
@@ -18,7 +18,7 @@ fi
 
 if [ -z "$urls" ]
 then
-    exit
+    exit 2
 fi
 
 for url in $urls

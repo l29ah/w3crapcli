@@ -34,8 +34,8 @@
 
 if [ -z "$1"  -o  "$1" = "-h" ]
 then
-    exit
     echo "Usage: $0 query"
+    exit 1
 fi
 
 query="`echo \"$1\" | urlencode`"
@@ -49,7 +49,7 @@ fileIDs="`curl -s -b cookies -c cookies \"http://prostopleer.com/search?q=${quer
 if [ -z "$fileIDs" ]
 then
     rm -f cookies
-    exit
+    exit 2
 fi
 
 (
