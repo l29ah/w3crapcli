@@ -8,7 +8,13 @@ then
 fi
 
 curl -s -c /tmp/cookies "http://prostopleer.com" >/dev/null
-urls="`prostosearch \"$*\"`"
+if [ -n "`echo \"$*\" | grep 'prostopleer.ru'`" ]
+then
+    # we've got download link, simply play it!
+    urls="$*"
+else
+    urls="`prostosearch \"$*\"`"
+fi
 
 if [ -z "$urls" ]
 then
