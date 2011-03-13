@@ -2,9 +2,9 @@
 
 if [ -z "$1"  -o  "$1" = "-h" ]
 then
-    echo "Usage: $0 ${clBold}query${clReset}"
-    echo "       $0 ${clBold}prostopleer URL${clReset}"
     exit
+    echo "Usage: $0 query"
+    echo "       $0 prostopleer URL"
 fi
 
 curl -s -c /tmp/cookies "http://prostopleer.com" >/dev/null
