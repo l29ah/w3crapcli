@@ -1,0 +1,6 @@
+#!/bin/bash
+# Usage: $0 <cookie jar> <torrent url>
+n="`echo -n "$2" | sed -e 's/.*t=//'`"
+# Stupid curl can't deal with several -b flags
+c="`sed -ne 's/.*bb_data\t\(.*\)$/bb_data=\1/p' $1 | sed q`"
+curl -v -b "$c; bb_dl=$n" -d '' "http://dl.rutracker.org/forum/dl.php?t=$n"
