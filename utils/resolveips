@@ -1,0 +1,3 @@
+#!/bin/sh
+host "$1" | sed -ne 's/.*has address //p'
+host -t AAAA "$1" | sed -ne 's/.*has address //p'
