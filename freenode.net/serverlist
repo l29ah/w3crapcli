@@ -1,0 +1,2 @@
+#!/bin/sh
+curl -s http://freenode.net/irc_servers.shtml | sed -ne 's/.*[ ;]\([^ ;]*.freenode.net\)<br \/>.*/\1/p' | grep -v chat
