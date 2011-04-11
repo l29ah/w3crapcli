@@ -1,0 +1,8 @@
+#!/bin/sh
+for c in `seq 19 $(curl -s "http://www.mangarush.com/manga/$1" | sed -ne '/Ch\./{s/.*Ch\. \([0-9]*\).*/\1/p;q}')`; do
+	mkdir $c
+	for p in `seq 1 $(curl -s "http://www.mangarush.com/manga/$1/$c" | sed -ne '/Pages/{N;s/.*<td class="mangadetail">\([0-9]*\).*/\1/p}')`; do
+	echo $c $p
+	wget "http://www.mangarush.com/files/mangas/$1/$c/$p.jpg" -O "$c/$p.jpg"
+	done
+done
