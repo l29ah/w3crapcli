@@ -1,0 +1,3 @@
+#!/bin/bash
+nn=w3lambda-$RANDOM
+sed -ue 's/^/:m lambdabot /' | sic -h chat.freenode.net -n "$nn" | sed -une 's/.*lambdabot> \(.*\)/\1/p'
