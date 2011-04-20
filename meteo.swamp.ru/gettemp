@@ -1,0 +1,2 @@
+#!/bin/sh
+curl -s 'http://meteo.swamp.ru/' | iconv -f cp1251 | sed -ne 's#.*<big><big><b>\(.*\)&deg;C</b></big></big>.*#\1#p'
