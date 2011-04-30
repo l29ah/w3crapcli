@@ -80,7 +80,9 @@ echo "${clBold}${author}${clReset}\n"
 
 echo "${clBold}Рейтинг:${clReset} $rateInfo"
 echo "${clBold}Жанры:${clReset}${genres}"
-echo "${clBold}Томов:${clReset} $volumesInfo"
+if [ -n "$volumesInfo" ];
+then echo "${clBold}Томов:${clReset} $volumesInfo"
+fi
 echo "${clBold}Перевод:${clReset} $translationStatus"
 echo "${clBold}Переводчики:${clReset}\n${translators}\n"
 
