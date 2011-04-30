@@ -67,7 +67,6 @@ fi
 page="`curl -s \"$url?mature=1\"`"
 
 mangaTitle="`echo \"$page\" | tr -d "\n\r" | sed -r 's#.*<div class="leftContent"> +<h1>Манга (.*)</h1> +.*#\1#; s# +# #g; s#\((.*)\)#/ \1#; s# $##'`"
-mangaJpTitle="`echo \"$page\" | tr -d "\n\r" | sed -r 's#.*<div id="mangaSettings" class="left"> +<p>([^<]+)</p>.*#\1#'`"
 rateInfo="`echo \"$page\" | tr -d "\n\r" | sed -r 's#.*<p class="smallText rate_info">.*Рейтинг: <b>([^<]+)</b>.*Всего голосов: <b>([0-9]+).*#\1 (\2 голосов)#'`"
 volumesInfo="`echo \"$page\" | tr -d "\n\r" | sed -r 's#.*<b>Томов:</b> +([0-9]+), ([^<]*) +.*#\1 (\2)#; s# +\)$#)#'`"
 translationStatus="`echo \"$page\" | tr -d "\n\r" | sed -r 's#.*<p><b>Перевод:</b> +(.*) + </p> +<p><b>Жанры:.*#\1#; s# +$##'`"
@@ -76,7 +75,7 @@ author="`echo \"$page\" | grep '/author/' | sed -r 's#.*<a.*>(.*)</a>#\1#'`"
 translators="`echo \"$page\" | grep 'redirect' | sed -r 's#.*<a href="/redirect\?url=(.*)" target="_blank">(.*)</a>.*#  * \2 ( \1 )#' |urldecode`"
 description="`echo \"$page\" | tr -d "\n\r" | sed -r 's#.*<div class="mangaDescription">(.*)Редактировать описание</a>.*#\1#; s#<em>(.*)</em>#\n\n\1#; s#<[^>]*>##g; s# +# #g; s# $##'`"
 
-echo "${clBold}${mangaTitle} / ${mangaJpTitle}${clReset}"
+echo "${clBold}${mangaTitle}${clReset}"
 echo "${clBold}${author}${clReset}\n"
 
 echo "${clBold}Рейтинг:${clReset} $rateInfo"
