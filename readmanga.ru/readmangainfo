@@ -46,6 +46,10 @@ fi
 if [ -z "`echo \"$1\" | grep 'readmanga\.ru'`" ]
 then
     urls="`readmangasearch \"$*\"`"
+    if [ -z "$urls" ]
+    then
+        exit
+    else
     if [ "`echo \"$urls\" | wc -l`" -eq "1" ]
     then
         url="$urls"
