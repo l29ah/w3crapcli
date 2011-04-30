@@ -60,6 +60,7 @@ then
         # TODO: enumerate found URLs and let user choose
         exit
     fi
+    fi
 fi
 
 # mature=1 means reader is 18 years old or above
