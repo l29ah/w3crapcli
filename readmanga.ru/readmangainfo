@@ -50,10 +50,8 @@ then
     then
         exit
     else
-    if [ "`echo \"$urls\" | wc -l`" -eq "1" ]
+    if [ "`echo \"$urls\" | wc -l`" -ne "1" ]
     then
-        url="$urls"
-    else
         echo "There are few mangas that satisfy your query:\n"
         echo "$urls"
         echo "\nPlease choose one and give a URL as a parameter to ${0}"
@@ -61,7 +59,11 @@ then
         exit
     fi
     fi
+else
+    urls="$1"
 fi
+
+url="$urls"
 
 # mature=1 means reader is 18 years old or above
 page="`curl -s \"$url?mature=1\"`"
