@@ -1,3 +1,4 @@
+#!/usr/bin/env runhaskell
 module Main where
 
 import System.Environment
