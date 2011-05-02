@@ -53,10 +53,8 @@ else
 fi
 
 results=`echo "$page" | grep span | grep -v 'padding: 0' | grep -v 'font-weight: normal' | tr "\r" "\n" | tr -d "\n" | sed "s#</span>#\n#g" | sed -r "s#.*href=\"(.*)\" > (.*)</a> by (.*)#${clBold}\2${clReset} by ${clBold}\3${clReset}:\nhttp://anymanga.com\1\n#"`
-if [ -z "$results" ]
+if [ -n "$results" ]
 then
-    echo "Nothing found."
-else
     echo "$results"
 fi
 
