@@ -1,2 +1,2 @@
-#!/bin/bash
-builtin echo -e `curl -s http://fucking-great-advice.ru/api/random | cut -d\" -f8` | htmldecode
+#!/bin/sh
+/usr/bin/printf "$(curl -s http://fucking-great-advice.ru/api/random | cut -d\" -f8)\n" | htmldecode
