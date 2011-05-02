@@ -2,7 +2,6 @@
 o="url=`urlencode <<< "$1"`&category_id=0"
 c="`tempfile`"
 ajax() {
-	#echo "http://www.tubeminator.com/ajax.php?function=$1&$o" >&2
 	curl -c "$c" -b "$c" -s "http://www.tubeminator.com/ajax.php?function=$1&$o"
 }
 r="`ajax downloadvideo`"
