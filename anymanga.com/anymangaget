@@ -11,57 +11,68 @@ fetchChapter() {
     volume="$2"
     chapter="$3"
 
-    mkdir "$3"
-    cd "$3"
-
     page="`curl -s \"http://anymanga.com/$1/$2/$3\"`"
     pageNames="`echo \"$page\" | grep pagelist | head -1 | sed 's#show_pagelist(\[##;  s#\],.*$##' | tr -d "' "`"
     pages="`curl -s \"http://anymanga.com/$1/$2/$3/{${pageNames}}\"`"
-    echo "$pages" | grep img | grep "$1" | sed -r 's#<img src="(.*)" title.*#\1#;  s#^#http://anymanga.com#' > urls
 
-    wget --continue --input=urls
-    rm -f urls
+    if [ -n "$pages" ]
+    then
+        mkdir "$3"
+        cd "$3"
 
-    cd ..
+        echo "$pages" | grep img | grep "$1" | sed -r 's#<img src="(.*)" title.*#\1#;  s#^#http://anymanga.com#' > urls
+
+        wget --continue --input=urls
+        rm -f urls
+
+        cd ..
+    fi
 }
 
 fetchVolume() {
     title="$1"
     volume="$2"
 
-    mkdir "$2"
-    cd "$2"
-
     page="`curl -s \"http://anymanga.com/$1/\"`"
     chapters="`echo \"$page\" | grep \"/$1/$2\" | grep '<li>' | sed -r 's#.*a href="(.*)" >.*#\1#;  s#/[^/]+/[^/]+/([^/]+)/#\1#'`"
-    for chapter in $chapters
-    do
-        fetchChapter "$1" "$2" "$chapter"
-    done
+    if [ -n "$chapters" ]
+    then
+        mkdir "$2"
+        cd "$2"
 
-    cd ..
+        for chapter in $chapters
+        do
+            fetchChapter "$1" "$2" "$chapter"
+        done
+
+        cd ..
+    fi
 }
 
 fetchTitle() {
     title="$1"
 
-    mkdir "$1"
-    cd "$1"
-
     page="`curl -s \"http://anymanga.com/$1/\"`"
     volumesAndChapters="`echo \"$page\" | grep \"/$1\" | grep '<li>' | sed -r 's#.*a href="(.*)" >.*#\1#;  s#/[^/]+/(.*)/#\1#'`"
-    for i in $volumesAndChapters
-    do
-        volume="`dirname $(echo \"$i\")`"
-        chapter="`basename $(echo \"$i\")`"
-        mkdir "$volume"
-        cd "$volume"
-        fetchChapter "$1" "$volume" "$chapter"
-        cd ..
-    done
-   
 
-    cd ..
+    if [ -n "$volumesAndChapters" ]
+    then
+        mkdir "$1"
+        cd "$1"
+
+        for i in $volumesAndChapters
+        do
+            volume="`dirname $(echo \"$i\")`"
+            chapter="`basename $(echo \"$i\")`"
+            mkdir "$volume"
+            cd "$volume"
+            fetchChapter "$1" "$volume" "$chapter"
+            cd ..
+        done
+       
+
+        cd ..
+    fi
 }
 
 if [ -z "$1"  -o  "$1" = "-h" ]
