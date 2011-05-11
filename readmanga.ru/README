@@ -1,0 +1,69 @@
+This set of scripts is intended to help you fetch manga from readmanga.ru. It
+downloads specified chapters of a given manga title.
+
+Scripts are hosted by w3crapcli project [1]
+
+    1. http://w3crapcli.tk
+
+All the code is licensed under the 3-clause BSD license. See LICENSE for more
+details.
+
+
+How to Install
+==============
+
+All you need to do is place scripts in some directory mentioned in your PATH
+environment variable. You can either create separate directory for scripts like
+that and add it to your PATH, or you can copy scripts somewhere. Choose
+whichever way you like.
+
+
+Usage
+=====
+
+First you need to obtain URLs of chapters. To accomplish that, call
+readmangachapters with manga title as an argument.
+
+$ readmangachapters grenadier
+
+If title consist of few words separated with spaces, you don't need to escape
+them:
+
+$ readmangachapters air gear
+
+readmangachapters would dump a list of URLs with chapters' titles. Choose
+whichever you want to download and call readmangaget with each of them, one at
+at time. For example, to get few chapters of Grenadier you may call:
+
+$ readmangaget 'http://readmanga.ru/grenadier/vol1/1?mature=1'
+$ readmangaget 'http://readmanga.ru/grenadier/vol1/2?mature=1'
+
+Note that readmangaget won't create any directories and all the files would be
+stored in a current working directory, so that's you who is responsible for
+sorting and storing it in a structured way.
+
+
+There's two additional scripts called readmangasearch and readmangainfo. Former
+allows you to simply search site for a manga of your desire - just specify the
+title and you'll get URLs of possible candidates:
+
+$ readmangasearch naruto
+
+Second script allows you to view some information (like author, number of
+volumes, translation status and description) about specified title:
+
+$ readmangainfo grenadier
+
+
+Dependencies
+============
+
+POSIX compatible shell (BASH, dash etc). /bin/sh should be it or symlink to it
+coreutils
+curl
+wget
+perl
+urlencode, htmldecode (both can be found at w3crapcli under the utils directory)
+
+All the scripts depends on readmangasearch so they can search for title if user
+didn't specify URL.
