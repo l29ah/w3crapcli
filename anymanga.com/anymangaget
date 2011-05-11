@@ -11,16 +11,16 @@ fetchChapter() {
     volume="$2"
     chapter="$3"
 
-    page="`curl -s \"http://anymanga.com/$1/$2/$3\"`"
+    page="`curl -s \"http://anymanga.com/$title/$volume/$chapter\"`"
     pageNames="`echo \"$page\" | grep pagelist | head -1 | sed 's#show_pagelist(\[##;  s#\],.*$##' | tr -d "' "`"
-    pages="`curl -s \"http://anymanga.com/$1/$2/$3/{${pageNames}}\"`"
+    pages="`curl -s \"http://anymanga.com/$title/$volume/$chapter/{${pageNames}}\"`"
 
     if [ -n "$pages" ]
     then
-        mkdir "$3"
-        cd "$3"
+        mkdir "$chapter"
+        cd "$chapter"
 
-        echo "$pages" | grep img | grep "$1" | sed -r 's#<img src="(.*)" title.*#\1#;  s#^#http://anymanga.com#' > urls
+        echo "$pages" | grep img | grep "$title" | sed -r 's#<img src="(.*)" title.*#\1#;  s#^#http://anymanga.com#' > urls
 
         wget --continue --input=urls
         rm -f urls
@@ -33,16 +33,17 @@ fetchVolume() {
     title="$1"
     volume="$2"
 
-    page="`curl -s \"http://anymanga.com/$1/\"`"
-    chapters="`echo \"$page\" | grep \"/$1/$2\" | grep '<li>' | sed -r 's#.*a href="(.*)" >.*#\1#;  s#/[^/]+/[^/]+/([^/]+)/#\1#'`"
+    page="`curl -s \"http://anymanga.com/$title/\"`"
+    chapters="`echo \"$page\" | grep \"/$title/$volume\" | grep '<li>' |
+        sed -r 's#.*a href="(.*)" >.*#\1#;  s#/[^/]+/[^/]+/([^/]+)/#\1#'`"
     if [ -n "$chapters" ]
     then
-        mkdir "$2"
-        cd "$2"
+        mkdir "$volume"
+        cd "$volume"
 
         for chapter in $chapters
         do
-            fetchChapter "$1" "$2" "$chapter"
+            fetchChapter "$title" "$volume" "$chapter"
         done
 
         cd ..
@@ -52,13 +53,13 @@ fetchVolume() {
 fetchTitle() {
     title="$1"
 
-    page="`curl -s \"http://anymanga.com/$1/\"`"
-    volumesAndChapters="`echo \"$page\" | grep \"/$1\" | grep '<li>' | sed -r 's#.*a href="(.*)" >.*#\1#;  s#/[^/]+/(.*)/#\1#'`"
+    page="`curl -s \"http://anymanga.com/$title/\"`"
+    volumesAndChapters="`echo \"$page\" | grep \"/$title\" | grep '<li>' | sed -r 's#.*a href="(.*)" >.*#\1#;  s#/[^/]+/(.*)/#\1#'`"
 
     if [ -n "$volumesAndChapters" ]
     then
-        mkdir "$1"
-        cd "$1"
+        mkdir "$title"
+        cd "$title"
 
         for i in $volumesAndChapters
         do
@@ -66,7 +67,7 @@ fetchTitle() {
             chapter="`basename $(echo \"$i\")`"
             mkdir "$volume"
             cd "$volume"
-            fetchChapter "$1" "$volume" "$chapter"
+            fetchChapter "$volume" "$volume" "$chapter"
             cd ..
         done
        
