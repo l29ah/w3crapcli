@@ -23,7 +23,7 @@ else
     page="`curl -s \"http://anymanga.com/search/?query=${title}&type=manga\"`"
 fi
 
-results=`echo "$page" | grep span | grep -v 'padding: 0' | grep -v 'font-weight: normal' | tr "\r" "\n" | tr -d "\n" | sed "s#</span>#\n#g" | sed -r "s#.*href=\"(.*)\" > (.*)</a> by (.*)#${clBold}\2${clReset} by ${clBold}\3${clReset}:\nhttp://anymanga.com\1\n#"`
+results=`echo "$page" | grep span | grep -v '<td colspan=3 style="padding: 5px 0 0 5px;">' | grep -v 'padding: 0' | grep -v 'font-weight: normal' | tr "\r" "\n" | tr -d "\n" | sed "s#</span>#\n#g" | sed -r "s#.*href=\"(.*)\" > (.*)</a> by (.*)#${clBold}\2${clReset} by ${clBold}\3${clReset}:\nhttp://anymanga.com\1\n#"`
 if [ -n "$results" ]
 then
     echo "$results"
