@@ -3,10 +3,13 @@
 #  Copyright (c) 2011, Alexander Batischev
 #  All rights reserved.
 
+clBold="`echo '\033[1m'`"
+clReset="`echo '\033[m'`"
+
 if [ -z "$1"  -o  "$1" = "-h" ]
 then
     echo "Usage: $0 ${clBold}title${clReset}"
-    echo "       $o ${clBold}readmanga URL${clReset}"
+    echo "       $0 ${clBold}readmanga URL${clReset}"
 
     exit
 fi

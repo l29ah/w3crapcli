@@ -9,7 +9,7 @@ clReset="`echo '\033[m'`"
 if [ -z "$1"  -o  "$1" = "-h" ]
 then
     echo "Usage: $0 ${clBold}title${clReset}"
-    echo "       $o ${clBold}readmanga URL${clReset}"
+    echo "       $0 ${clBold}readmanga URL${clReset}"
 
     exit
 fi
