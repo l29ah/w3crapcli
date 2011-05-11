@@ -13,7 +13,7 @@ details.
 How to Install
 ==============
 
-All you need to do is place scripts in some diretory mentioned in your PATH
+All you need to do is place scripts in some directory mentioned in your PATH
 environment variable. You can either create separate directory for scripts like
 that and add it to your PATH, or you can copy scripts somewhere. Choose
 whichever way you like.
