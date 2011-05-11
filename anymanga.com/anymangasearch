@@ -16,10 +16,11 @@ fi
 
 if [ "$1" = "-a" ]
 then
-    author="`echo \"$2\" | urlencode`"
+    shift
+    author="`echo \"$*\" | urlencode`"
     page="`curl -s \"http://anymanga.com/search/?query=${author}&type=author\"`"
 else
-    title="`echo \"$1\" | urlencode`"
+    title="`echo \"$*\" | urlencode`"
     page="`curl -s \"http://anymanga.com/search/?query=${title}&type=manga\"`"
 fi
 

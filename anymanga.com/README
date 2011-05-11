@@ -75,6 +75,10 @@ $ anymangasearch -a shirow
 That command would list all the mangas by the authors whose names contains
 "shirow".
 
+If tilte consists of few words, you don't need to escape anything:
+
+$ anymangasearch air gear
+
 Parameters for anymangasearch and anymangaget scripts are case insensitive, so
 search by "naruto" and "NaRuTo" would give you exactly the same results.
 
