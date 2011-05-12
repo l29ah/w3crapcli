@@ -21,6 +21,7 @@ then
     then
         url="$urls"
     else
+        # readmangaget relies upon exact match with that line
         echo "There are few mangas that satisfy your query:\n"
         echo "$urls"
         echo "\nPlease choose one and give a URL as a parameter to ${0}"

@@ -1,5 +1,6 @@
 This set of scripts is intended to help you fetch manga from readmanga.ru. It
-downloads specified chapters of a given manga title.
+downloads specified chapters of a given manga title and stores it in a
+fine-structured way.
 
 Scripts are hosted by w3crapcli project [1]
 
@@ -21,26 +22,28 @@ whichever way you like.
 Usage
 =====
 
-First you need to obtain URLs of chapters. To accomplish that, call
-readmangachapters with manga title as an argument.
+You can either download whole manga or a single chapter.
 
-$ readmangachapters grenadier
+To fetch whole title, simply call readmangaget:
 
-If title consist of few words separated with spaces, you don't need to escape
-them:
+$ readmangaget berserk
 
-$ readmangachapters air gear
+To fetch specific chapter, use readmangachapters script first, e.g. for
+"Berserk" it would be:
 
-readmangachapters would dump a list of URLs with chapters' titles. Choose
-whichever you want to download and call readmangaget with each of them, one at
-at time. For example, to get few chapters of Grenadier you may call:
+$ readmangachapters berserk
 
-$ readmangaget 'http://readmanga.ru/grenadier/vol1/1?mature=1'
-$ readmangaget 'http://readmanga.ru/grenadier/vol1/2?mature=1'
+That would list all avaliable chapters with respective URLs. Choose one and
+specify as a parameter to readmangaget, e.g. for first chapter of first volume
+of "Berserk":
 
-Note that readmangaget won't create any directories and all the files would be
-stored in a current working directory, so that's you who is responsible for
-sorting and storing it in a structured way.
+$ readmangaget 'http://readmanga.ru/berserk/vol1/1?mature=1'
+
+By the way, if title consist of few words, there's no need to escape them when
+calling scripts - you can use them like that:
+
+$ readmangaget air gear
+$ readmangachapters death note
 
 
 There's two additional scripts called readmangasearch and readmangainfo. Former
@@ -67,3 +70,10 @@ urlencode, htmldecode (both can be found at w3crapcli under the utils directory)
 
 All the scripts depends on readmangasearch so they can search for title if user
 didn't specify URL.
+
+
+Author
+======
+
+This scripts are written by Alexander Batischev. You may contact me via email:
+eual.jp at gmail dot com.

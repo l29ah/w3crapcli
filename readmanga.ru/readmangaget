@@ -1,16 +1,59 @@
 #!/bin/sh
 
+#  Copyright (c) 2011  Sergey Alirzaev
+#  Copyright (c) 2011  Alexander Batischev
+#  All rights reserved.
+
+fetchChapter() {
+    # $1 is chapter URL
+    # it looks like that: http://readmanga.ru/berserk/vol36/320?mature=1
+
+    url="$1"
+
+    # let's split it into tokens
+    title="`echo \"$url\" | cut -d'/' -f4`"
+    volume="Volume `echo \"$url\" | cut -d'/' -f5 | sed 's/^vol//'`"
+    chapter="Chapter `echo \"$url\" | cut -d'/' -f6 | cut -d'?' -f1`"
+
+    # go down by a file structure, creating dirs if they don't exist
+    mkdir -p "$title/$volume/$chapter"
+    cd "$title/$volume/$chapter"
+
+    curl -s "$url" | grep pics | sed 1q | perl -pe 's/.*?url:"(.*?)".*?}(];)?/\1\n/g' | wget -ci-
+
+    cd "../../../"
+}
+
 clBold="`echo '\033[1m'`"
 clReset="`echo '\033[m'`"
 
 if [ -z "$1"  -o  "$1" = "-h" ]
 then
-    echo "Usage: $0 ${clBold}readmanga URL${clReset}"
-    echo "  Parameter should look like this: http://readmanga.ru/berserk/vol1/1?mature=1"
+    echo "Usage: $0 ${clBold}title${clReset}"
+    echo "       $0 ${clBold}readmanga URL${clReset}"
+    echo "       $0 ${clBold}chapter URL${clReset}"
+    echo "  Chapter URL is something like this: http://readmanga.ru/berserk/vol1/1?mature=1"
     echo "  You may obtain one of those using readmangachapters script."
 
     exit
 fi
 
-curl -s "$1" | grep pics | sed 1q | perl -pe 's/.*?url:"(.*?)".*?}(];)?/\1\n/g' | wget -ci-
+if [ -n "`echo \"$1\" | egrep '/vol[[:digit:]]+/'`" ]
+then
+    # $1 is chapter URL
+    fetchChapter "$1"
+else
+    # $1 is readmanga URL or title
+    urls="`readmangachapters \"$1\" | cut -f1`"
+    if [ -z "`echo \"$urls\" | grep 'There are few mangas that satisfy your query'`" ]
+    then
+        for url in $urls
+        do
+            fetchChapter "$url"
+        done
+    else
+        echo "There are few mangas that satisfy your query. Please use readmangasearch to choose one."
+        exit
+    fi
+fi
 
