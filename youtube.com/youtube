@@ -1,0 +1,119 @@
+#!/bin/bash
+
+ID="[0-9a-zA-Z_-]{11}"
+XCLIP=$( xclip -o )
+
+# get options
+while getopts rf: OPTION
+do
+	case $OPTION in
+		r)
+			RELATED=1
+			;;
+		f)
+			FMT=$OPTARG
+			;;
+		?)
+			return -1
+			;;
+	esac
+done
+shift $((OPTIND-1))
+
+# heuristics to differ search query from youtube video ids
+process_args()
+{
+	ARGS=$@
+
+	for ARG in $ARGS; do
+		TRY=$( echo $ARG | grep -P "$ID" -o )
+		if [[ -n $TRY ]]; then
+			URLS+="http://www.youtube.com/watch?v=$TRY"
+			if [[ -n $FMT ]]; then
+				URLS+="&fmt=$FMT"
+			fi
+			URLS+=" "
+		else
+			QUERY+="$ARG "
+		fi
+	done
+}
+
+# get related links
+related()
+{
+	if [[ $RELATED -ne "1" ]]; then
+		return 0
+	fi
+
+	URLS=$@
+
+	for URL in $URLS; do
+		CONTENT=$( curl -s $URL |\
+				grep -A 1 -P "<a href=\"/watch\?v=$ID" ) 
+		LINKS=$( echo "$CONTENT" |\
+				grep -P "<a href=\"/watch\?v=$ID" -o |\
+				sed -e 's/<a href=\"\/watch?v=//' )
+
+		TITLES=$( echo "$CONTENT" |\
+				grep -P "class=\"title\" title=\".*\">" -o |\
+				sed -e 's/class=\"title\" title="//' -e 's/">.*//' )
+		
+		i=1
+		LINES=$( echo "$LINKS" | wc -l )
+		echo "related to $URL"
+		while [[ i -le $LINES ]]; do
+			echo $( echo "$LINKS" | head -n $i | tail -n 1 && echo "$TITLES" | head -n $i | tail -n 1 )
+			let i+=1
+		done
+		echo
+	done
+}
+
+# launch videos
+watch()
+{
+	URLS=$@
+	
+	for URL in $URLS; do
+		vlc -q $URL 2> /dev/null
+	done
+}
+
+# do search query
+search()
+{
+	QUERY=$@
+
+	if [[ -z $QUERY ]]; then
+		return 0;
+	fi
+
+	QUERY_HTTP=$( echo $1 | sed -e 's/ / /g' )
+	CONTENT=$( curl -s http://www.youtube.com/results?search_query=$QUERY_HTTP |\
+			grep -P "<a href=\"/watch\?v=$ID\" dir" )
+
+	LINKS=$( echo "$CONTENT" |\
+			grep -P "<a href=\"/watch\?v=$ID" -o |\
+			sed -e 's/<a href=\"\/watch?v=//' )
+	TITLES=$( echo "$CONTENT" |\
+			grep -P "title=\".*\" >" -o |\
+			sed -e 's/title="//' -e 's/" >//' )
+
+	i=1
+	LINES=$( echo "$LINKS" | wc -l )
+	echo search $QUERY
+	while [[ i -le $LINES ]]; do
+		echo $( echo "$LINKS" | head -n $i | tail -n 1 && echo "$TITLES" | head -n $i | tail -n 1 )
+		let i+=1
+	done
+	echo
+}
+
+URLS=""
+QUERY=""
+
+# construct URLS array and QUERY
+process_args $XCLIP $@
+
+watch $URLS & related $URLS && search $QUERY
