@@ -51,6 +51,8 @@ description="`echo \"$page\" | tr -d "\n\r" | sed -r 's#.*<div class="mangaDescr
 echo "${clBold}${mangaTitle}${clReset}"
 echo "${clBold}${author}${clReset}\n"
 
+echo "$url?mature=1\n"
+
 echo "${clBold}Рейтинг:${clReset} $rateInfo"
 echo "${clBold}Жанры:${clReset}${genres}"
 if [ -n "$volumesInfo" ];
