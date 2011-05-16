@@ -1,0 +1,2 @@
+#!/bin/sh
+curl -s 'http://www.efnet.org/?module=servers' | sed -ne 's#.*<b><a.*>\(.*\)</a>.*#\1#p'
