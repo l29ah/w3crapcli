@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+require 'rubygems'
+require 'open-uri'
+require 'hpricot'
+
+puts Hpricot.parse(open("http://lyrics.wikia.com/#{URI.escape(ARGV[0])}:#{URI.escape(ARGV[1])}")).at('div.lyricbox').children.select {|a| a.name != "div"}.map {|s| s.to_plain_text}.join("") #.to_plain_text

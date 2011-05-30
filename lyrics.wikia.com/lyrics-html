@@ -1,0 +1,3 @@
+#!/usr/bin/env ruby
+require 'open-uri'
+puts open("http://lyrics.wikia.com/#{URI.escape(ARGV[0])}:#{URI.escape(ARGV[1])}").read.scan(%r|<div class='lyricbox'><div class='rtMatcher'>.*?</div>(.*?)<!--|m)[0][0]
