@@ -1,0 +1,3 @@
+#!/bin/sh
+# Usage: $0 260229
+curl -s "http://moscow-maps.ru/$1.html" | sed -e 's/>/\n/g' | sed -ne 's/.*src="'$1'_SMALL_\(.*\)\.jpg".*/\1/p' | gparallel --eta -j 10 wget "http://moscow-maps.ru/$1_BIG_{}.jpg"
