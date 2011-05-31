@@ -1,0 +1,2 @@
+#!/bin/sh
+curl -s 'http://s-10mitino.narod.ru/prais.htm' | iconv -f cp1251 | sed -ne 's!.*S-10\.xls">	*\(.*\)	*</a.*!\1!p'
