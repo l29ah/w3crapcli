@@ -1,0 +1,3 @@
+#!/bin/sh
+# Uses info from http://bitcoincharts.com/about/markets-api/
+curl http://bitcoincharts.com/t/markets.json | python -mjson.tool
