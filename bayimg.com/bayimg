@@ -1,0 +1,2 @@
+#!/bin/sh
+curl -s -A Firefox 'http://upload.bayimg.com/upload' -F "file=@$1;type=image/jpeg" -F "code=$2" -F "tags=$3" -F "resize=on" -F "resizeto=8" | sed -ne 's#^.*URL:<br><input type="text" value="\([^"]*\)" size="50".*$#\1fas#p'
