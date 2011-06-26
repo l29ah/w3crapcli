@@ -1,0 +1,3 @@
+#!/bin/sh
+# TODO: beautify
+curl -s "http://gramota.ru/slovari/dic/?all=x&word=`echo -n $1 | iconv -t cp1251 | urlencode`" | iconv -f cp1251 | sed -e 's#</\?noindex>##' | sed -ne '/http:\/\/www.gramota.ru\/slovari\/info\/lop\//,/<div class="clear"></p' | sed -e '/^ *$/d' | w3m -T text/html -dump
