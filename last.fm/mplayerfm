@@ -15,7 +15,7 @@ gettag() {
 m="`mktemp -d`"
 
 tee >({ 
-	sed -une 's/^Playing \(.*\)\.$/\1/p' | while read a; do
+	sed -rune 's/^(Playing|Воспроизведение) (.*)\.$/\2/p' | while read a; do
 		grep -q 'http://' <<< "$a" && {
 			httpfs "$a" "$m"
 			scrobble "$m"/*
