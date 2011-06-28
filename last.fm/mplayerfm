@@ -16,9 +16,13 @@ m="`mktemp -d`"
 
 tee >({ 
 	sed -une 's/^Playing \(.*\)\.$/\1/p' | while read a; do
-		httpfs "$a" "$m"
-		scrobble "$m"/*
-		fusermount -u "$m"
+		grep -q 'http://' <<< "$a" && {
+			httpfs "$a" "$m"
+			scrobble "$m"/*
+			fusermount -u "$m"
+		} || {
+			scrobble "$a"
+		}
 	done; 
 })
 
