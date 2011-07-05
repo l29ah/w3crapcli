@@ -1,0 +1,5 @@
+#!/bin/bash
+ua='Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.12) Gecko/20101028 Firefox/3.6.12'
+res="$(curl -s -A "$ua" -b "$c" 'http://www.peeep.us/upload.php' -d "r_url=$1" | sed -e 's/Redirecting to  \///' )"
+echo 'http://www.peeep.us/'$res
+
