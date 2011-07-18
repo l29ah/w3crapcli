@@ -16,7 +16,35 @@ How to Install
 All you need to do is place scripts in some directory mentioned in your PATH
 environment variable. You can either create separate directory for scripts like
 that and add it to your PATH, or you can copy scripts somewhere. Choose
-whichever way you like.
+whichever way you like. Make sure all dependencies are avaliable.
+
+Also, if you obtained scripts from the w3crapcli git repo, you can easily
+install them using make:
+
+  # make install
+
+Scripts can be uninstalled in the same way (that works no mater where did you
+get scripts, you only need to have Makefile):
+
+  # make uninstall
+
+You can also install and remove separate scripts - see what targets are
+available in the Makefile.
+
+
+Dependencies
+============
+
+POSIX compatible shell (BASH, dash etc). /bin/sh should be it or symlink to it
+coreutils
+curl
+wget
+urlencode (can be found at w3crapcli under the utils directory; only
+    anymangasearch depends on it)
+
+Note that anymangaget depends on anymangasearch, but you can ignore that and
+use anymangaget separately if you would always specify anymanga URLs instead of
+titles.
 
 
 Usage
@@ -81,20 +109,6 @@ $ anymangasearch air gear
 
 Parameters for anymangasearch and anymangaget scripts are case insensitive, so
 search by "naruto" and "NaRuTo" would give you exactly the same results.
-
-
-Dependencies
-============
-
-POSIX compatible shell (BASH, dash etc). /bin/sh should be it or symlink to it
-coreutils
-curl
-wget
-urlencode (can be found at w3crapcli under the utils directory)
-
-Note that anymangaget depends on anymangasearch, but you can ignore that and
-use anymangaget separately if you would always specify anymanga URLs instead of
-titles.
 
 
 Author
