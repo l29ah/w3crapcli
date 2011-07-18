@@ -1,0 +1,23 @@
+How to install scripts from w3crapcli
+=====================================
+
+There're plenty of options:
+
+1) some scripts got Makefiles and/or INSTALL files - check them out
+
+2) use the power of Unix called "union mount". Check out manpage for mount(8),
+   then issue following command for any directory in the project's root dir:
+
+     # mount --bind DIRNAME /bin
+
+   Of course, DIRNAME should be substituted by real dirname, like "utils",
+   "savefrom" or else.
+
+   Note that some scripts may depend on others, so you may need to "bind" more
+   directories to make it all work. Most reused tools are collected in "utils"
+   directory.
+
+3) you can always move scripts to some directory mentioned in your PATH
+   environment variable. Note, though, that this way it's harder to mantain
+   scripts up-to-date (you would need to move new versions, too).
+

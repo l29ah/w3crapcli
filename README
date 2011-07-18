@@ -1,0 +1,29 @@
+About
+=====
+
+This is an attempt to facilitate the unbearable PAIN while using modern
+web2.0ish wonders by providing command line interfaces for them.
+
+
+How do I install scripts I like?
+================================
+
+See INSTALL file.
+
+
+How do I contribute?
+====================
+
+git clone http://w3crapcli.tk/git w3crapcli
+cd w3crapcli
+[hack-hack]
+git commit
+git send-email --to=zl29ah@gmail.com origin
+
+
+Contacts
+========
+
+Project is hosted at http://w3crapcli.tk/
+There's also a Jabber conference at w3crapcli@conference.jabber.ru
+
