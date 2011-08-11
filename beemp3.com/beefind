@@ -1,0 +1,10 @@
+#!/bin/sh
+# Usage: $0 "search terms"
+p=1
+a="`echo "gsom\ngsom"`"	# beautify me
+while [ `printf %s "$a" | wc -l` -gt 0 ]; do
+	a="$(curl -s "http://beemp3.com/index.php?q=`printf %s "$1" | urlencode`&p=$p" |
+	sed -ne 's#.*File: <.*href="\([^"]*\)".*#http://beemp3.com/\1#p')"
+	echo "$a"
+	p=$((p+1))
+done
