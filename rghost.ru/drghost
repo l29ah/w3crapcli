@@ -1,2 +1,0 @@
-#!/bin/bash
-curl "$1" 2>/dev/null | sed 's#.*href=\"\(http:\/\/rghost.\(ru\|net\)\/download[^ ]*\)" .*#\1#p; d' | sed 1q
