@@ -8,6 +8,6 @@ curl -s -A "$ua" -b "$c" 'http://en.savefrom.net/savefrom.php' -d "sf_url=$u&sf_
 # Wasted half an hour on this crazy shit
 sed -e 's/.*eval(unescape(\([^)]*\)).*/print(unescape(\1));/' | js | 
 	sed -e 's/.*>\(var[^<]*\)<.*/\1/;s/\;var s=document.*tex/\;/;s/eval(\([^;]*\))\;.*$/\1\;'\''\;print(t);/' | js | 
-		sed -e 's#window\['\''\\x65\\x76\\x61\\x6c'\''\](f)#print(f)#' | js | 
+		sed -e 's#window\['\''\\x65\\x76\\x61\\x6c'\''\](f)#print(f)#' | cat <(echo 'u62=function(a,b,c){return a.replace(c,b);};') - | js | 
 			sed -e 's/eval/print/' | js | 
 				perl -ne 's#.*?{"url":"([^"]*)".*#\1#g and print' | sed -e 's#\\\/#/#g'
