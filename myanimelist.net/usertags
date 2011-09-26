@@ -1,0 +1,8 @@
+#!/bin/bash
+# Usage: ./usertags skvitek
+USERNAME="$1"
+PROGDIR=$(dirname $(readlink -f $0))
+$PROGDIR/animelinks "$1" | while read link; do
+	$PROGDIR/animetags "$link"
+done | awk '{n=$2; $2=""; $1=""; a[$0]=n+a[$0]} END { for (k in a) printf "%10f %s\n",a[k],k} '|sort -n -k1
+

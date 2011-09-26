@@ -1,0 +1,5 @@
+#!/bin/bash
+# Usage: ./animetags "http://myanimelist.net/anime/713/Air_(Movie)"
+LINK="$1"
+curl --compressed "$LINK" | grep -Eo '[0-9]+ people tagged with [^"]+' | sed 's/ people tagged with / /gi' | awk '{n=$1; $1=""; t+=n; a[$0]=n+a[$0]} END { for (k in a) print a[k]"\t"(a[k]/t)"\t"k} '|sort -n -k1
+

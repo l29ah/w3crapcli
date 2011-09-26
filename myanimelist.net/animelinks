@@ -1,0 +1,5 @@
+#!/bin/bash
+# Usage: ./animelinks skvitek
+USERNAME="$1"
+
+curl "http://myanimelist.net/animelist/${USERNAME}&status=2&order=0" | grep -Eo 'http://myanimelist.net/anime/[0-9]+/[^"]+'
