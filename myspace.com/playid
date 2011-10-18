@@ -1,0 +1,2 @@
+#!/bin/bash
+rtmpdump -r "`Xtract '//rtmp/-' <(curl -sL "http://myspace.com/music/services/player?action=getSong&ptype=300&songId=$1")`" --swfVfy 'http://lads.myspacecdn.com/music/sdkwrapper/SDKWrapper.2.0.82.swf?aytatt=-1&sip=172.16.0.2&fadd=-1&logerr=0&yad=-1&on=1&ratt=-1&hash=MIGmBgkrBgEEAYI3WAOggZgwgZUGCisGAQQBgjdYAwGggYYwgYMCAwIAAQICZgMCAgDABAgnplwM4Ag1ngQQdgWYpGiAcoQguXuaItYqvgRY97w7Qi29'
