@@ -1,2 +1,4 @@
 #!/bin/sh
-curl -s "$1" | sed -ne 's/.*data-songId="\([0-9]*\)".*/\1/p' | uniq
+# FIXME: proper parsing or anything else to allow any myspace page to be parsed, not only music/songs one
+# the html is very fucked up; Xtract and tidy can't deal with this shit
+curl -s "$1" | sed -ne '/chartsModule/q;/data-songId/{N;N;N;N;s/.*data-songId="\([0-9]*\)".*me">\([^<]*\)<.*/\1 \2/p;}'

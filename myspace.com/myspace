@@ -1,0 +1,11 @@
+#!/bin/bash
+# Usage: $0 http://www.myspace.com/OHSHIT
+# Will create a directory and put all the found files there
+crap="$(dirname "$(readlink -f "$0")")"	# Thanks to Stiletto
+artist="`curl -s "$1" | Xtract-html '//title/-' | htmldecode | sed -e 's/\r\([^|]*\) | .*/\1/;q'`"
+mkdir "$artist"
+cd "$artist"
+"$crap/getids" "$1/music/songs" | while read track; do
+	read id name <<< "$track"
+	"$crap/playid" "$id" > "${name}.flv"
+done
