@@ -7,5 +7,5 @@ mkdir "$artist"
 cd "$artist"
 "$crap/getids" "$1/music/songs" | while read track; do
 	read id name <<< "$track"
-	"$crap/playid" "$id" > "${name}.flv"
+	"$crap/playid" "$id" > "${name}.mp3"
 done
