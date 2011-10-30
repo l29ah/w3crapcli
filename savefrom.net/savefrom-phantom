@@ -1,0 +1,28 @@
+#!/usr/bin/env phantomjs
+page = new WebPage()
+page.settings.loadImages = false;
+page.onConsoleMessage = function(msg) {
+	console.log(msg);
+};
+loaded = new Boolean(false);
+page.open('http://savefrom.net/', function(status) {
+	if (loaded == true) {
+		//console.log(page.content);
+		page.evaluate(function () {
+			var links = document.querySelectorAll('div[class="link_group"] > div[class="link"] > a[href*="://"]');
+			for (var i = 0; i < links.length; ++i) {
+				var res = links[i].querySelector('span').childNodes.item(0).nodeValue.match(/\d+/);
+				if (oldres > res) break;
+				console.log(links[i].attributes.getNamedItem("href").value);
+				var oldres = res;
+			}
+		});
+		phantom.exit();
+	} else {
+		page.evaluate((function () {
+			document.querySelector('input[name=sf_url]').value = 'URL';
+			document.querySelector('form').submit();
+		}).toString().replace('URL', phantom.args[0]));
+		loaded = true;
+	}
+});
