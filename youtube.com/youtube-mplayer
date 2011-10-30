@@ -1,0 +1,2 @@
+#!/bin/sh
+mplayer -cache 10000 "`savefrom "$1" | tail -n 1`"
