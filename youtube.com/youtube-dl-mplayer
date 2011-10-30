@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# ИOPYTHOИ
+
+mplayer $(youtube-dl -g $1)
