@@ -1,0 +1,25 @@
+#!/usr/bin/perl -w
+#
+# Usage: ./search <request> [page (counting from 1)]
+#
+
+use LWP::UserAgent;
+use HTTP::Request;
+use URI::Escape;
+
+$ua = LWP::UserAgent->new;
+$req = HTTP::Request->new("GET");
+$query = $ARGV[0];
+$page = $ARGV[1] ? $ARGV[1] : "1";
+$req->uri("http://z-music.ru/search/?q=".uri_escape($query)."&page=$page");
+$response = $ua->request($req);
+$req->uri("http://z-music.ru/theme/new/js/lang.js");
+$response2 = $ua->request($req);
+
+$response2->content =~ m/(?<=hsh=").+?(?=")/gx; $hsh = $&;
+foreach $m ($response->content =~ m!<a\ class="info".+?</a>!gx) {
+    $m =~ m/(?<=data-aid=").+?(?=")/x; $aid = $&;
+    $m =~ m/(?<=>).+(?=<)/x; $title = $&;
+    print "http://z-music.ru/files/$aid/?h=$hsh $title\n";
+}
+
