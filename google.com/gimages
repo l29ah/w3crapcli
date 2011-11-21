@@ -1,0 +1,8 @@
+#!/bin/bash
+r="`urlencode <<< "$1"`"
+for (( i=0; i<${2:-4}; i=$i+1 )); do
+	curl -sLA "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; en) Opera 10.00" "http://www.google.com/search?hl=en&tbm=isch&safe=off&q=$r&sourceid=opera&ie=utf-8&oe=utf-8&start=$((i*20))" 
+done |
+tr \> \\n |
+sed -n -e 's/.*imgurl=\(.*\)&amp;imgref.*/\1/p' |
+htmldecode
