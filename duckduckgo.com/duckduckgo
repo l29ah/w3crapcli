@@ -1,0 +1,3 @@
+#!/bin/sh
+curl -s "http://duckduckgo.com/html/?q=$(printf "$1" | urlencode)&kp=-1&kl=wt-wt&ki=-1&kz=-1&kc=-1&kn=-1&kf=-1&kb=n&kd=-1&ko=-1&k4=-1" | 
+Xtract-html '*//a[@class="l le"]/@href'
