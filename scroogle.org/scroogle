@@ -1,0 +1,4 @@
+#!/bin/sh
+curl -s https://ssl.scroogle.org/cgi-bin/nbbwssl.cgi -d "Gw=$1" |
+sed -n -e 's#^[0-9]*\. <a href="\([^"]*\)".*#\1#p' |
+htmldecode
