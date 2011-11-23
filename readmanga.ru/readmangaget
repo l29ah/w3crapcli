@@ -19,7 +19,7 @@ fetchChapter() {
     mkdir -p "$title/$volume/$chapter"
     cd "$title/$volume/$chapter"
 
-    curl -s "$url" | grep pics | sed 1q | perl -pe 's/.*?url:"(.*?)".*?}(];)?/\1\n/g' | wget -ci-
+    curl -s "$url" | grep 'var pics' | sed 1q | perl -pe 's/.*?url:"(.*?)".*?}(];)?/\1\n/g' | wget -ci-
 
     cd "../../../"
 }
@@ -44,7 +44,7 @@ then
     fetchChapter "$1"
 else
     # $1 is readmanga URL or title
-    urls="`readmangachapters \"$1\" | cut -f1`"
+    urls="`readmangachapters \"$1\" | cut -f1 -d'	'`"
     if [ -z "`echo \"$urls\" | grep 'There are few mangas that satisfy your query'`" ]
     then
         for url in $urls
