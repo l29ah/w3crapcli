@@ -6,14 +6,18 @@ if (phantom.args.length !== 1) {
 	phantom.exit();
 } else {
 	fname = phantom.args[0];
+	var loads = 0;
 	page.open("http://imagebin.org/index.php?page=add", function () {
-		page.uploadFile('input[name=image]', fname);
-		page.evaluate(function () {
-			document.querySelector('input[name=nickname]').value = 'phantom';
-			document.querySelector('input[name=disclaimer_agree]').click()
-			document.querySelector('form').submit();
-		});
-		window.setTimeout(function () {
+		loads++;
+		if (loads == 2) {
+			page.uploadFile('input[name=image]', fname);
+			page.evaluate(function () {
+				document.querySelector('input[name=nickname]').value = 'phantom';
+				document.querySelector('input[name=disclaimer_agree]').click()
+				document.querySelector('form').submit();
+			});
+		}
+		if (loads == 4) {
 			page.onConsoleMessage = function(msg) {
 				console.log(msg);
 			};
@@ -21,6 +25,6 @@ if (phantom.args.length !== 1) {
 				console.log(document.URL);
 			});
 			phantom.exit();
-		}, 3000);
+		}
 	});
 }
