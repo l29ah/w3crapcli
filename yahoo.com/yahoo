@@ -1,0 +1,4 @@
+#!/bin/sh
+curl -s "http://search.yahoo.com/search?fr=ush-news&p=$(printf "$1" | urlencode)" |
+sed -e 's/>/>\n/g' |
+sed -n -e 's#.*yschttl spt.*href="\([^"]*\)".*#\1#p'
