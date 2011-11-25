@@ -1,0 +1,9 @@
+#!/bin/bash
+Xtract '*//div[@class="box"]/-' <(curl -s "http://val.az/$(
+			curl -s "http://val.az/search.php?q=$(printf "$1" | urlencode)&l=1" | 
+			sed -n -e '/a href="lyrics\?/{s#.*href="\(lyrics\?[^"]*\)".*#\1#p;q}'
+		)" |
+		tidy -asxml 2>/dev/null
+	) | 
+htmldecode | 
+sed -n -e '4,${0~2p}'
