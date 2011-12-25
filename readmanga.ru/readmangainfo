@@ -39,14 +39,14 @@ url="$urls"
 # mature=1 means reader is 18 years old or above
 page="`curl -s \"$url?mature=1\"`"
 
-mangaTitle="`echo \"$page\" | grep -A 7 'leftContent' | tr -d "\n\r" | sed -r 's#.*<div class="leftContent"> +<h1>Манга (.*)</h1> +.*#\1#; s# +# #g; s#\((.*)\)#/ \1#; s# $##'`"
+mangaTitle="`echo \"$page\" | grep -A 2 'leftContent' | tr -d "\n\r" | sed -r 's#.*<div class="leftContent"> +<h1>(<span.*">|)Манга(</span>|) (.*)</h1>.*#\3#; s# +# #g; s#\((.*)\)#/ \1#; s# $##'`"
 rateInfo="`echo \"$page\" | grep -A 2 'rate_info' | tr -d "\n\r" | sed -r 's#.*<p class="smallText rate_info">.*Рейтинг: <b>([^<]+)</b>.*Всего голосов: <b>([0-9]+).*#\1 (\2 голосов)#'`"
 volumesInfo="`echo \"$page\" | grep -A 2 'Томов:' | tr -d "\n\r" | sed -r 's#.*<b>Томов:</b> +([0-9]+).*#\1#'`"
-translationStatus="`echo \"$page\" | grep -A 3 'Перевод:' | tr -d "\n\r" | sed -r 's#.*<p><b>Перевод:</b> +(.*) + </p> +<p><b>Жанры:.*#\1#; s# +$##'`"
+translationStatus="`echo \"$page\" | grep -A 3 'Перевод:' | tr -d "\n\r" | sed -r 's#.*<p><b>Перевод:</b> +(.*) +</p>.*#\1#; s# +$##'`"
 genres="`echo \"$page\" | grep '/genre/' | tr -d "\n\r" | sed -r 's#<a href="[^"]+">([^<]*)</a>#\1#g; s# +# #g'`"
-author="`echo \"$page\" | grep '/author/' | sed -r 's#.*<a.*>(.*)</a>#\1#'`"
-translators="`echo \"$page\" | grep 'redirect' | sed -r 's#.*<a href="/redirect\?url=(.*)" target="_blank">(.*)</a>.*#  * \2 ( \1 )#' | urldecode`"
-description="`echo \"$page\" | tr -d "\n\r" | sed -r 's#.*<div class="mangaDescription">(.*)Редактировать описание</a>.*#\1#; s#<em>(.*)</em>#\n\n\1#; s#<[^>]*>##g; s# +# #g; s# $##' | htmldecode`"
+author="`echo \"$page\" | grep '/author/' | sed -r 's#.*<a.*>(.*)</a>#\1#' | tr "\n\r" " "`"
+translators="`echo \"$page\" | grep translator | sed -r 's#.*<a href="([^"]*)">([^<]*)</a>.*#  • \2 ( http://readmanga.ru\1 )#;' | urldecode`"
+description="`echo \"$page\" | tr -d "\n\r" | sed -r 's#.*<div class="mangaDescription">(.*)#\1#; s# *Описание *##; s#Редактировать описание</a>.*##; s#<em>(.*)</em>#\n\n\1#; s#<br(/| /|)>#\n#g; s#<[^>]*>##g; s# +# #g; s# $##; s#\s+Редактировать описание.*##' | htmldecode`"
 
 echo "${clBold}${mangaTitle}${clReset}"
 echo "${clBold}${author}${clReset}\n"
@@ -59,7 +59,7 @@ if [ -n "$volumesInfo" ];
 then echo "${clBold}Томов:${clReset} $volumesInfo"
 fi
 echo "${clBold}Перевод:${clReset} $translationStatus"
-echo "${clBold}Переводчики:${clReset}\n${translators}\n"
+echo "${clBold}Переводчик(и):${clReset}\n${translators}\n"
 
-echo "$description\n"
+echo "${clBold}Описание${clReset}:\n$description\n"
 
