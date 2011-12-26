@@ -3,5 +3,5 @@
 mkdir -p "$1" || exit 1
 cd "$1" || exit 1
 for u in `Xtract '*//div/small/a/@href' <(curl -s "http://www.last.fm/music/${1// /+}/+tracks" | sed -e  '/<!–\[if IE\]/d' | tidy -asxml 2>/dev/null | cat -v) | urldecode | urldecode`; do
-	echo "$u" -O "${${u##*/}//+/ }"
+	wget "$u" -O "${${u##*/}//+/ }"
 done
