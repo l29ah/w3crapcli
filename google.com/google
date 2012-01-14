@@ -2,7 +2,7 @@
 # Usage: $0 [mode] <search term> ...
 google() {
 	urlencode <<< "$1" | 
-	xargs -i{} curl -sLA "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; en) Opera 10.00" "http://www.google.com/search?hl=en&safe=off&q={}&sourceid=opera&ie=utf-8&oe=utf-8&num=${2:-100}" | 
+	xargs -i{} curl -sLA 'Opera/9.80 (Windows NT 6.1; U; es-ES) Presto/2.9.181 Version/12.00' "http://www.google.com/search?hl=en&safe=off&q={}&sourceid=opera&ie=utf-8&oe=utf-8&num=${2:-100}" -b 'PREF=ID=03fd476a699d6487:SG=2' | 
 	grep -Eo "<h3 class=[^=]+=\"http:[^\"]+" | 
 	cut -d\" -f4-  | 
 	egrep -v '(^$|googleusercontent)' |
@@ -11,7 +11,7 @@ google() {
 
 nonshit() {
 	# Elaborate blacklist; now contains stuff you would block when googling torrents.
-	egrep -v '^http://[^/]*(megabook.us|mp3searchy.com|ebookee.net|btscene.eu|top4serials.com|musik-mp3-download.com|torrentv.org|mp3boo.com|bittorrent.am|biggweb.com|torrentfunk.com|kickasstorrents.com|yourbittorrent.com|torrentz.eu|torrentroom.com|btjunkie.org|tracktvlinks.com|ifindfile.com|animedownloadlinks.com|anidl.net|avaxdownload.com|getvn.com|darelease.com|torrentz.com|usniff.com|ebookee.org|nettopdf.info|ebooklink.net|ebooksx.com|docjax.net|filecatch.com|usemeplz.com|ebook30.com|gosong.net|downv.com|torrentdeluxe.com|gigabitwarez.com|rapidmore.com|4megaupload.com|wareseeker.com|shreweb.com|truetorrent.com|btmon.com|torrentfall.com|torrenthound.com|intorrentz.com|torrentzap.com|torrent-link.com|limetorrents.com|heroturko.org|freshwap.net|therapidbay.com|picktorrent.com|rs4fun.com|terabitwarez.ws|shareonl.com|torrentreactor.net|evodl.com|fullrshare.com|downarchive.com|vertor.com|freshdl.com|rs-free-download.com|win7dl.com|free-download-ebooks.com|ebookcomputer.com|pdfebook.net|ebookpdf.net|torrentdownloads.net|filestube.com|rapidsharegfx.com|soft-catalog.net|pdf-freedownload.com|rs-code.com|bergfiles.com|fulldls.com|pdfcast.org/paid|ebook3k.com|217.23.9.210|xpter.info|worid-of-books.com|kindlebookdownload.us|ebookg.com|tower.com|experts-exchange.com|spirit-of-metal.com|mp3download.ws|megaupload-files.com|mediafire-files.com)/'
+	egrep -v '^http://[^/]*(edocfind.com|edocfind.info|ebooks-team.e8b.org|best-ebook.idl.az.pl|bitsnoop.com|megabook.us|mp3searchy.com|ebookee.net|btscene.eu|top4serials.com|musik-mp3-download.com|torrentv.org|mp3boo.com|bittorrent.am|biggweb.com|torrentfunk.com|kickasstorrents.com|yourbittorrent.com|torrentz.eu|torrentroom.com|btjunkie.org|tracktvlinks.com|ifindfile.com|animedownloadlinks.com|anidl.net|avaxdownload.com|getvn.com|darelease.com|torrentz.com|usniff.com|ebookee.org|nettopdf.info|ebooklink.net|ebooksx.com|docjax.net|filecatch.com|usemeplz.com|ebook30.com|gosong.net|downv.com|torrentdeluxe.com|gigabitwarez.com|rapidmore.com|4megaupload.com|wareseeker.com|shreweb.com|truetorrent.com|btmon.com|torrentfall.com|torrenthound.com|intorrentz.com|torrentzap.com|torrent-link.com|limetorrents.com|heroturko.org|freshwap.net|therapidbay.com|picktorrent.com|rs4fun.com|terabitwarez.ws|shareonl.com|torrentreactor.net|evodl.com|fullrshare.com|downarchive.com|vertor.com|freshdl.com|rs-free-download.com|win7dl.com|free-download-ebooks.com|ebookcomputer.com|pdfebook.net|ebookpdf.net|torrentdownloads.net|filestube.com|rapidsharegfx.com|soft-catalog.net|pdf-freedownload.com|rs-code.com|bergfiles.com|fulldls.com|pdfcast.org/paid|ebook3k.com|217.23.9.210|xpter.info|worid-of-books.com|kindlebookdownload.us|ebookg.com|tower.com|experts-exchange.com|spirit-of-metal.com|mp3download.ws|megaupload-files.com|mediafire-files.com)/'
 }
 
 case "$1" in
