@@ -2,7 +2,7 @@
 
 COOKIEF=$1
 
-wget --load-cookies "$COOKIEF" -q -O - "http://vkontakte.ru/feed2.php" | 
+wget --load-cookies "$COOKIEF" -q -O - "http://vk.com/feed2.php" | 
 cut -d, -f 2-10 --output-delimiter='
 ' |
 sed 's/.*": \([0-9]*\)}/\1/' | 

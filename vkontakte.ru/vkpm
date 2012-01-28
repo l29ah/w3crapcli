@@ -8,8 +8,8 @@ TEXT=$*
 
 TITLE=`echo -n "$TITLE" | iconv -t cp1251 | urlencode`
 TEXT=`echo -n "$TEXT" | iconv -t cp1251 | urlencode`
-wget --load-cookies "$COOKIEF" --post-data=`wget --load-cookies "$COOKIEF" "http://vkontakte.ru/mail.php?act=write&to=$SPAMTO" -qO- | 
+wget --load-cookies "$COOKIEF" --post-data=`wget --load-cookies "$COOKIEF" "http://vk.com/mail.php?act=write&to=$SPAMTO" -qO- | 
 sed -n '/name="secure"/p
 /name="chas"/p' | 
 sed 's/.*value="\([0-9a-f]*\)".*/\1/' | 
-(read a; read b; echo "secure=$a&chas=$b")`"&photo=0&to_id=$SPAMTO&to_reply=0&act=sent&title=$TITLE&message=$TEXT" -qO/dev/null "http://vkontakte.ru/mail.php"
+(read a; read b; echo "secure=$a&chas=$b")`"&photo=0&to_id=$SPAMTO&to_reply=0&act=sent&title=$TITLE&message=$TEXT" -qO/dev/null "http://vk.com/mail.php"
