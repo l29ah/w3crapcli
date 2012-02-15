@@ -88,7 +88,7 @@ errors = 0
 
 wait = 5
 
-Url = 'http://ompldr.org/'
+Url = 'http://omploader.org/'
 Max_size = 2**30
 
 used_stdin = false
