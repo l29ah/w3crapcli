@@ -1,0 +1,12 @@
+#!/bin/sh
+for u in `curl -s "http://www.mangafox.com/manga/$1/" | sed -n  -e 's#.*href="\(http://www.mangafox.com/manga/[^"]*\)".*#\1#p' | sed -n -e '2,$p'`; do
+	pn="`curl -s "$u" | sed -n -e 's#.*\tof \([0-9]*\).*#\1#p' | sed q`"
+	[ -z "$pn" ] && continue
+	bu="`dirname "$u"`"
+	for p in `seq 1 $pn`; do
+		cu="$bu/$p.html"
+		f="`echo $cu | sed 's#http://www.mangafox.com/manga/##;s/html$/jpeg/'`"
+		mkdir -p "`dirname "$f"`"
+		wget "`curl -s "$cu" | sed -n -e 's#.*enlarge()"><img src="\([^"]*\)".*#\1#p'`" -O "$f"
+	done
+done
