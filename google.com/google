@@ -1,8 +1,10 @@
 #!/bin/bash
 # Usage: $0 [mode] <search term> ...
 google() {
-	urlencode <<< "$1" | 
-	xargs -i{} curl -sLA 'Opera/9.80 (Windows NT 6.1; U; es-ES) Presto/2.9.181 Version/12.00' "http://www.google.com/search?hl=en&safe=off&q={}&sourceid=opera&ie=utf-8&oe=utf-8&num=${2:-100}" -b 'PREF=ID=03fd476a699d6487:SG=2' | 
+	r="`urlencode <<< "$1"`"
+	for s in `seq 0 100 ${2:-100}`; do
+		curl -sLA 'Opera/9.80 (Windows NT 6.1; U; es-ES) Presto/2.9.181 Version/12.00' "http://www.google.com/search?hl=en&safe=off&q=$r&sourceid=opera&ie=utf-8&oe=utf-8&num=100&start=$s" -b 'PREF=ID=03fd476a699d6487:SG=2'
+	done | 
 	grep -Eo "<h3 class=[^=]+=\"http:[^\"]+" | 
 	cut -d\" -f4-  | 
 	egrep -v '(^$|googleusercontent)' |
