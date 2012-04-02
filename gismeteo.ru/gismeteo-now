@@ -1,0 +1,2 @@
+#!/bin/sh
+curl -s http://m.gismeteo.ru/ | sed -ne 's#.*>\([^&]*\)&deg;C.*#\1#p' 
