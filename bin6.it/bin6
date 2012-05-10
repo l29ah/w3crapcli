@@ -4,6 +4,9 @@ c="`tempfile`"
 d="`tempfile`"
 trap "rm \"$c\"; rm \"$d\"" EXIT
 f="`curl -c "$c" -s http://bin6.it/ | tr -d '\n' | sed -ne 's#.*"name", "\([^"]*\)".*"value", "\([^"]*\)".*#\1=\2#p'`"
-p="`urlencode`"
-curl -s -b "$c" -D "$d" http://bin6.it/ -d "do_paste=yes&paste_type=0&paste_paste=$p&cust_name=&paste_pw=&$f"
+{
+	echo -n 'do_paste=yes&paste_type=0&paste_paste='
+	urlencode
+	echo -n "&cust_name=&paste_pw=&$f"
+} | curl -s -b "$c" -D "$d" http://bin6.it/ -d '@-' 
 sed -ne 's#^Location: \(.*\)$#http://bin6.it\1#p' "$d"
