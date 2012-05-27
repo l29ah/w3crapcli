@@ -1,2 +1,2 @@
 #!/bin/bash
-curl -s whatthecommit.com | sed -n 's/^<p>//p'
+curl -s whatthecommit.com | sed -n 's/^<p>//p; s#</p>$##; s#<br */>#\n#g' | htmldecode
