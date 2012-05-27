@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#  Copyright (c) 2011, Alexander Batischev
+#  Copyright (c) 2011, 2012 Alexander Batischev
 #  All rights reserved.
 
 clBold="`echo '\033[1m'`"
@@ -40,7 +40,7 @@ url="$urls"
 page="`curl -s \"$url?mature=1\"`"
 
 mangaTitle="`echo \"$page\" | grep -A 2 'leftContent' | tr -d "\n\r" | sed -r 's#.*<div class="leftContent"> +<h1>(<span.*">|)Манга(</span>|) (.*)</h1>.*#\3#; s# +# #g; s#\((.*)\)#/ \1#; s# $##'`"
-rateInfo="`echo \"$page\" | grep -A 2 'rate_info' | tr -d "\n\r" | sed -r 's#.*<p class="smallText rate_info">.*Рейтинг: <b>([^<]+)</b>.*Всего голосов: <b>([0-9]+).*#\1 (\2 голосов)#'`"
+rateInfo="`echo \"$page\" | grep -A 2 'rate_info' | tr -d "\n\r" |  sed -r 's#.*<p class="smallText rate_info">.*Рейтинг: <b><span itemprop="ratingValue">([0-9,\.]+).*Всего голосов: <b><span itemprop="ratingCount">([0-9]+).*#\1 (\2 голосов)#'`"
 volumesInfo="`echo \"$page\" | grep -A 2 'Томов:' | tr -d "\n\r" | sed -r 's#.*<b>Томов:</b> +([0-9]+).*#\1#'`"
 translationStatus="`echo \"$page\" | grep -A 3 'Перевод:' | tr -d "\n\r" | sed -r 's#.*<p><b>Перевод:</b> +(.*) +</p>.*#\1#; s# +$##'`"
 genres="`echo \"$page\" | grep '/genre/' | tr -d "\n\r" | sed -r 's#<a href="[^"]+">([^<]*)</a>#\1#g; s# +# #g'`"
