@@ -17,7 +17,7 @@ fetchChapter() {
 
     if [ -n "$pages" ]
     then
-        mkdir "$chapter"
+        mkdir -p "$chapter"
         cd "$chapter"
 
         echo "$pages" | grep img | grep "$title" | sed -r 's#<img src="(.*)" title.*#\1#;  s#^#http://anymanga.com#' > urls
@@ -38,7 +38,7 @@ fetchVolume() {
         sed -r 's#.*a href="(.*)" >.*#\1#;  s#/[^/]+/[^/]+/([^/]+)/#\1#'`"
     if [ -n "$chapters" ]
     then
-        mkdir "$volume"
+        mkdir -p "$volume"
         cd "$volume"
 
         for chapter in $chapters
@@ -58,14 +58,14 @@ fetchTitle() {
 
     if [ -n "$volumesAndChapters" ]
     then
-        mkdir "$title"
+        mkdir -p "$title"
         cd "$title"
 
         for i in $volumesAndChapters
         do
             volume="`dirname $(echo \"$i\")`"
             chapter="`basename $(echo \"$i\")`"
-            mkdir "$volume"
+            mkdir -p "$volume"
             cd "$volume"
             fetchChapter "$volume" "$volume" "$chapter"
             cd ..
