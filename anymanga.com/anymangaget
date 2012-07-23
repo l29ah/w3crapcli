@@ -20,10 +20,7 @@ fetchChapter() {
         mkdir -p "$chapter"
         cd "$chapter"
 
-        echo "$pages" | grep img | grep "$title" | sed -r 's#<img src="(.*)" title.*#\1#;  s#^#http://anymanga.com#' > urls
-
-        wget --continue --input=urls
-        rm -f urls
+        echo "$pages" | grep img | grep "$title" | sed -r 's#<img src="(.*)" title.*#\1#;  s#^#http://anymanga.com#' | wget -ci-
 
         cd ..
     fi
@@ -67,7 +64,7 @@ fetchTitle() {
             chapter="`basename $(echo \"$i\")`"
             mkdir -p "$volume"
             cd "$volume"
-            fetchChapter "$volume" "$volume" "$chapter"
+            fetchChapter "$title" "$volume" "$chapter"
             cd ..
         done
        
