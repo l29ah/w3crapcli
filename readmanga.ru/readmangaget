@@ -27,7 +27,7 @@ fetchChapter() {
 clBold="`echo '\033[1m'`"
 clReset="`echo '\033[m'`"
 
-if [ -z "$1"  -o  "$1" = "-h" ]
+if [ -z "$*"  -o  "$1" = "-h" ]
 then
     echo "Usage: $0 ${clBold}title${clReset}"
     echo "       $0 ${clBold}readmanga URL${clReset}"
@@ -38,13 +38,13 @@ then
     exit
 fi
 
-if [ -n "`echo \"$1\" | egrep '/vol[[:digit:]]+/'`" ]
+if [ -n "`echo \"$*\" | egrep '/vol[[:digit:]]+/'`" ]
 then
-    # $1 is chapter URL
-    fetchChapter "$1"
+    # $* is chapter URL
+    fetchChapter "$*"
 else
-    # $1 is readmanga URL or title
-    urls="`readmangachapters \"$1\" | cut -f1 -d'	'`"
+    # $* is readmanga URL or title
+    urls="`readmangachapters \"$*\" | cut -f1 -d'	'`"
     if [ -z "`echo \"$urls\" | grep 'There are few mangas that satisfy your query'`" ]
     then
         for url in $urls
