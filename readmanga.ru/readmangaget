@@ -19,7 +19,7 @@ fetchChapter() {
     mkdir -p "$title/$volume/$chapter"
     cd "$title/$volume/$chapter"
 
-    curl -s "$url" | grep 'var pics' | sed 1q | perl -pe 's/.*?url:"(.*?)".*?}(];)?/\1\n/g' | wget -ci-
+    curl -s "$url" | grep 'var pictures' | sed 1q | perl -pe 's/.*?url:"(.*?)".*?}(];)?/\1\n/g' | wget -ci-
 
     cd "../../../"
 }
