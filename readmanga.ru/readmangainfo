@@ -39,7 +39,7 @@ url="$urls"
 # mature=1 means reader is 18 years old or above
 page="`curl -s \"$url?mature=1\"`"
 
-mangaTitle="`echo \"$page\" | grep -A 2 'leftContent' | tr -d "\n\r" | echo \"$page\" | grep -A 9 'leftContent' | tr -d "\n\r" | sed -r 's#.*<div class="leftContent" itemscope itemtype="http://schema.org/CreativeWork"> +<h1> *<span.*"> *Манга *</span> (.*)</h1>.*#\1#; s# +# #g; s# $##'`"
+mangaTitle="`echo \"$page\" | grep 'eng-name' | sed 's#^\s*##; s#\s*$##; s#<[^>]*>##g'`"
 rateInfo="`echo \"$page\" | grep -A 2 'rate_info' | tr -d "\n\r" |  sed -r 's#.*<p class="smallText rate_info">.*Рейтинг: <b><span itemprop="ratingValue">([0-9,\.]+).*Всего голосов: <b><span itemprop="ratingCount">([0-9]+).*#\1 (\2 голосов)#'`"
 volumesInfo="`echo \"$page\" | grep -A 2 'Томов:' | tr -d "\n\r" | sed -r 's#.*<b>Томов:</b> +([0-9]+).*#\1#'`"
 translationStatus="`echo \"$page\" | grep -A 3 'Перевод:' | tr -d "\n\r" | sed -r 's#.*<p><b>Перевод:</b> +(.*) +</p>.*#\1#; s# +$##'`"
