@@ -1,0 +1,4 @@
+#!/bin/bash
+c="`tempfile`"
+trap "rm \"$c\"" EXIT
+curl -b "$c" -s http://gdeposylka.ru/ -d "token=$(curl -c "$c" -s http://gdeposylka.ru/ | sed -ne 's#.*name="token" value="\([^"]*\)">.*#\1#p')&track_origin=UPU&track_id=$1" | grep 'span class="key"' | sed 's#<[^>]*>##g;s#	##g' | head -n -2
