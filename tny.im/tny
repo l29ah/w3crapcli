@@ -1,0 +1,2 @@
+#!/bin/sh
+curl http://tny.im/yourls-api.php -d "action=shorturl&format=simple&payoutaddr=$2&price=$3&url=$(printf "$1" | urlencode)"
