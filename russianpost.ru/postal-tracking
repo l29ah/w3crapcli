@@ -1,2 +1,6 @@
 #!/bin/bash
-Xtract '//table[@class="pagetext"]/tbody/tr/td/-' <(curl -s 'http://www.russianpost.ru/resp_engine.aspx?Path=rp/servise/ru/home/postuslug/trackingpo' -d 'OP=&PATHCUR=rp%2Fservise%2Fru%2Fhome%2Fpostuslug%2Ftrackingpo&PATHFROM=&WHEREONOK=&ASP=&PARENTID=&FORUMID=&NEWSID=&DFROM=&DTO=&CA=&CDAY=&CMONTH=&CYEAR=&NAVCURPAGE=&SEARCHTEXT=&searchAdd=&PATHWEB=RP%2FINDEX%2FRU%2FHome&PATHPAGE=RP%2FINDEX%2FRU%2FHome%2FSearch&search1=&BarCode='"$1"'&searchsign=1&entryBarCode=') | htmldecode
+f="`tempfile`"
+trap "rm \"$f\"" EXIT
+curl -s 'http://www.russianpost.ru/resp_engine.aspx?Path=rp/servise/ru/home/postuslug/trackingpo' -d 'OP=&PATHCUR=rp%2Fservise%2Fru%2Fhome%2Fpostuslug%2Ftrackingpo&PATHFROM=&WHEREONOK=&ASP=&PARENTID=&FORUMID=&NEWSID=&DFROM=&DTO=&CA=&CDAY=&CMONTH=&CYEAR=&NAVCURPAGE=&SEARCHTEXT=&searchAdd=&PATHWEB=RP%2FINDEX%2FRU%2FHome&PATHPAGE=RP%2FINDEX%2FRU%2FHome%2FSearch&search1=&BarCode='"$1"'&searchsign=1&entryBarCode=' > "$f"
+grep -q '<head></head>' "$f" && rm -rf "$f" && exec "$0" "$1"
+Xtract '//table[@class="pagetext"]/tbody/tr/td/-' "$f" | htmldecode
