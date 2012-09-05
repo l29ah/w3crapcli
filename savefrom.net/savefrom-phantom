@@ -9,7 +9,7 @@ page.open('http://savefrom.net/', function(status) {
 	if (loaded == true) {
 		//console.log(page.content);
 		page.evaluate(function () {
-			var links = document.querySelectorAll('div[class="link_group"] > div[class="link"] > a[href*="://"]');
+			var links = document.querySelectorAll('div[class="link-box"] > div > div[class="link"] > a[href*="://"]');
 			for (var i = 0; i < links.length; ++i) {
 				var res = links[i].querySelector('span').childNodes.item(0).nodeValue.match(/\d+/);
 				if (oldres > res) break;
