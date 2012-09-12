@@ -1,0 +1,6 @@
+#!/bin/bash
+word="$1"
+curl -s http://www.urbandictionary.com/define.php?term=`echo -n "$word" | urlencode` |
+perl -ne 's/<br\/>/\n/sg; s/<a href="\/define.php\?term=.*?">(.*?)<\/a>/$1/sg; /<div class="definition">(.*?)<\/div>/ms and print "\n$1\n"; /<div class="example">(.*?)<\/div>/ and print "\t$1\n"' |
+htmldecode
+
