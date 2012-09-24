@@ -1,0 +1,2 @@
+#!/bin/sh
+curl -s http://www.cbr.ru/ | egrep -o "[0-9,]+&nbsp;" | sed "5q;1~2d;s/\&.*//g;" | tr '\n' ' ' | awk '{ print "$ " $1 " € " $2}'
