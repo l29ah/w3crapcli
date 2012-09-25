@@ -1,0 +1,5 @@
+#!/bin/sh
+login=''
+password=''
+token=`curl -s -d "login=$login&password=$password" https://stat.telenet.ru/login  | grep -o /news?ticket=[a-zA-Z0-9\*]*`
+curl -s "https://stat.telenet.ru$token" | grep Balance | egrep -o "[0-9.]+"
