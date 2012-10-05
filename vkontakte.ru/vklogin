@@ -1,7 +1,5 @@
 #!/bin/bash
-LOGIN=$1
-PASSWORD=$2
-COOKIEF=$3
-
-wget -S --save-cookies "$COOKIEF" --keep-session-cookies --post-data="success_url=&fail_url=&try_to_login=1&email=$LOGIN&pass=$PASSWORD" 'http://vk.com/login.php' -O /dev/null -q &> /dev/null
+# Usage: $0 <cookie> < "<login> <password>"
+read login password
+curl -sL -c "$1" 'https://login.vk.com/' -d "act=login&to=&from_host=m.vk.com&ip_h=`curl -sL http://m.vk.com | sed -ne 's#.*&ip_h=\([^&]*\)&.*#\1#p'`&pda=1&email=$login&pass=$password" > /dev/null
 
