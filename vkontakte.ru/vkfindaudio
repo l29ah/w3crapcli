@@ -1,10 +1,13 @@
 #!/bin/bash
-COOKIEF=$1
-shift 1
-FIND=$*
-
-FIND=`echo -n "$FIND" | urlencode`
-wget --load-cookies "$COOKIEF" "http://vk.com/gsearch.php?q=$FIND&section=audio" -qO- | 
-iconv -f cp1251 |
-sed -ne 's/.*onclick="return operate([0-9]*,\([0-9]*\),\([0-9]*\),'\''\([0-9a-f]*\)'\'',[0-9]*);".*/http:\/\/cs\1.vk.com\/u\2\/audio\/\3.mp3/p; 
-s/.*performer[0-9]*">\(.*\)<\/b> - <span id="title[0-9]*">\(.*\)<\/spa.*/\1 - \2/p;'
+# Usage: $0 cookies terms
+t="`tempfile`"
+trap "rm \"$t\"" EXIT
+find="`echo -n "$2" | urlencode`"
+offset=0
+result=1
+while test $result = 1; do
+	curl -LsS -d "act=search&al=1&from=pad&offset=$offset&performer=0&q=$find" -b "$1" http://vk.com/audio > "$t"
+	iconv -f cp1251 "$t" | sed -n -e '/input/{N;N;N;s#.*value="\([^,]*\),.*return false">\(.*\)</div>.*#\1\t\2#;s#</*span[^>]*>##g;s#</a></b>##;p}' | htmldecode
+	result="`tail -n 1 "$t" | sed 's#.*has_more":\([^,]\),.*#\1#'`"
+	offset="`tail -n 1 "$t" | sed 's#.*searchOffset":\([^,]*\),.*#\1#'`"
+done
