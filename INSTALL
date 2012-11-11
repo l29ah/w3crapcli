@@ -9,3 +9,5 @@ There're plenty of options:
    environment variable. Note, though, that this way it's harder to mantain
    scripts up-to-date (you would need to move new versions, too).
 
+3) some scripts are supported outside w3crapcli project. One may fetch them
+   using `get-aliens.sh' script.
