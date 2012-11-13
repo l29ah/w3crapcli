@@ -1,8 +1,8 @@
 #!/usr/bin/perl
 
 # ~/.config/lastfm looks like this:
-# login = 'vpupkin';
-# password = 'mycoolpassword';
+# $login = 'vpupkin';
+# $password = 'mycoolpassword';
 
 $hs_url = "http://post.audioscrobbler.com/";
 $client_id = "lsd";
