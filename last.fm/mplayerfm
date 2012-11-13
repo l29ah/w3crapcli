@@ -5,6 +5,7 @@ scrobble() {
 	album="`gettag TALB <<< "$data"`"
 	artist="`gettag TPE1 <<< "$data"`"
 
+	[[ -z "$title" ]] && return 1
 	lastfm.pl "$artist" "$title" "$album" 180
 }
 
