@@ -2,4 +2,7 @@
 # Usage: $0 <cookie> < "<login> <password>"
 read login password
 curl -sL -c "$1" 'https://login.vk.com/' -d "act=login&to=&from_host=m.vk.com&ip_h=`curl -sL http://m.vk.com | sed -ne 's#.*&ip_h=\([^&]*\)&.*#\1#p'`&pda=1&email=$login&pass=$password" > /dev/null
-
+grep -q remixsid "$1" || {
+	echo 'Login failed!' 1>&2
+	exit 1
+}
