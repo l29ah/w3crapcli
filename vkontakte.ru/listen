@@ -1,8 +1,4 @@
 #!/bin/bash
-fn=`tempfile -p vkbashcookies`
-umask 0077
-vklogin "$fn" < ~/.config/vkbash
-out=`vkfindaudio "$fn" "$*"`
+out=`vkfindaudio-api "$*" < ~/.config/vkbash`
 echo $out
 mplayer `egrep -o 'http[^ ]*\.mp3' <<< $out`
-rm "$fn"

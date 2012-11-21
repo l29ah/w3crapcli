@@ -1,0 +1,20 @@
+#!/bin/bash
+# Usage: $0 <terms> < "<login> <password>"
+TMOUT=10
+spit () {
+	jq -r '.response[] | .url + "	" + .artist + " - " + .title' 2>/dev/null
+}
+cnt=300
+fn=`tempfile -p vkbashcookies`
+t=`tempfile -p vkbashdata`
+trap 'rm "$t"; rm "$fn";' EXIT
+umask 0077
+read login password
+wget --save-cookies "$fn" "https://login.vk.com/?act=login" --post-data "email=`printf %s "$login" | urlencode`&pass=`printf %s "$password" | urlencode`" -O /dev/null 2> /dev/null
+at="$(wget --load-cookies "$fn" "http://oauth.vk.com/authorize?client_id=3082784&scope=audio&redirect_uri=http://oauth.vk.com/blank.html&display=wap&response_type=token" --post-data='submit=Разрешить' -O /dev/null 2>&1 | grep "access_token" | cut -d "=" -f2 | cut -d "&" -f1)"
+wget --load-cookies "$fn" "https://api.vk.com/method/audio.search?q=`printf %s "$1" | urlencode`&offset=0&count=$cnt&access_token=$at" -O- 2> /dev/null > "$t"
+n="`jq -r '.response[0]' < "$t"`"
+spit < "$t"
+for o in `seq 300 300 "$n"`; do
+	wget --load-cookies "$fn" "https://api.vk.com/method/audio.search?q=`printf %s "$1" | urlencode`&offset=$o&count=$cnt&access_token=$at" -O- 2> /dev/null | spit
+done
