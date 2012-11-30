@@ -19,6 +19,10 @@ e="`jq -r '.error.error_msg' < "$t"`"
 	exit 1
 }
 n="`jq -r '.response[0]' < "$t"`"
+[ "$n" -eq 0 ] && {
+	echo Nothing found. Either there are no tracks satisfying the request, or you are sending requests too frequently. 1>&2
+	exit 1
+}
 spit < "$t"
 for o in `seq 300 300 "$n"`; do
 	wget --load-cookies "$fn" "https://api.vk.com/method/audio.search?q=`printf %s "$1" | urlencode`&offset=$o&count=$cnt&access_token=$at" -O- 2> /dev/null | spit
