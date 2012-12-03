@@ -1,0 +1,2 @@
+#!/bin/sh
+curl -sL http://pogoda.yandex.ru/ | sed -ne 's#.*>\([^&]*\)°C.*#\1#p' | head -n1 | tr -d ' '
