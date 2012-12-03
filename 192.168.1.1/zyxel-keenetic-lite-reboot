@@ -1,0 +1,2 @@
+#!/bin/bash
+curl --anyauth -u admin:$password http://192.168.1.1/req/reboot
