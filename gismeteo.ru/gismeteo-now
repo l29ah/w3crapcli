@@ -1,2 +1,2 @@
 #!/bin/sh
-curl -s http://m.gismeteo.ru/ | sed -ne 's#.*>\([^&]*\)&deg;C.*#\1#p' 
+curl -s http://m.gismeteo.ru/ | perl -ne 's#.*temp">([^<]*)&deg;C<.*#\1# and print' | htmldecode
