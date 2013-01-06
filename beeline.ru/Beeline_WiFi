@@ -1,0 +1,8 @@
+#!/bin/sh
+while :; do
+	curl -s --connect-timeout 4 -m 7 http://49.212.202.172/ip | grep -qi html && {
+		wget -o /dev/null -O /dev/null "http://cp.beelinewifi.ru$(
+			wget -o /dev/null -O- 'http://cp.beelinewifi.ru/v?lang=ru&url=aHR0cDovL3lhLnJ1&id=1' | sed -ne 's#.*'\''url'\'': '\''\([^'\'']*\)'\''#\1#p' | tail -n1)"
+	}
+	sleep 5
+done
