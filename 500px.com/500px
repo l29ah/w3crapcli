@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+query=$1
+
+if [[ $query == '' ]]; then
+	query="popular"
+fi
+
+photo_paths=`curl -s "http://500px.com/search?q="$query | grep "photo/" | grep -vE 'canvas|download' | sed 's/>.*//;s/<a href="//;s/"//;s/\t//g'`
+
+for i in `echo $photo_paths`; do
+	curl -s "http://500px.com"$i | grep -A1 thephoto | tail -n 1 | sed 's/<a href="//;s/">//;s/\t//;s/ //g'
+done
