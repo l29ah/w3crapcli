@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
 query=`echo $1 | tr ' ' '+'`
-porn_ids=`curl -s "http://it-the-drote.tk/prontest/search.php?searchquery="$query | grep grab | cut -f 5 -d '=' | sed 's/".*//'`
 
-for i in $porn_ids; do
-	curl -s "http://it-the-drote.tk/prontest/grab.php?id="$i | grep cdn | cut -f 4 -d ' ' | sed 's/href="//;s/".*//;s/\&amp\;/\&/g'
+porn_pages=`curl -sL "http://www.youporn.com/search/relevance/?category_id=0&type=straight&page=1&query="$query | grep "videoTitle" | cut -f 3 -d "/"`
+
+
+for i in `echo $porn_pages | tr ' ' '\n'`; do
+	curl -sL 'http://youporn.com/watch/'$i | grep "For iPhone" | sed 's:</li>:^:g;s:<a :*:g' | cut -f 3 -d '^' | cut -f 2 -d '*' | sed 's:>MP4.*::;s:href=\"::;s:\&amp:\&:g;s:\"::;s:\t::g;s:</ul>::'
 done
