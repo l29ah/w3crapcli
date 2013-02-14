@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+query=`echo $1 | tr ' ' '+'`
+porn_ids=`curl -s "http://it-the-drote.tk/prontest/search.php?searchquery="$query | grep grab | cut -f 5 -d '=' | sed 's/".*//'`
+
+for i in $porn_ids; do
+	curl -s "http://it-the-drote.tk/prontest/grab.php?id="$i | grep cdn | cut -f 4 -d ' ' | sed 's/href="//;s/".*//'
+done
