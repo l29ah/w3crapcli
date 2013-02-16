@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+#Warning! This service receives only jpeg & bmp images. $1 is a path to image.
+curl -F userfile=@$1 -F outputencoding="utf-8" -F outputformat="txt" http://michelle.ocrgrid.org/cgi-bin/weocr/submit_e1.cgi
