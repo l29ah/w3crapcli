@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+echo $(curl -s "http://v4v6.ipv6-test.com/api/myip.php")
