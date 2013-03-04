@@ -1,0 +1,2 @@
+#!/bin/bash
+Xtract '/ValCurs/Valute[@ID="R01235"]/Value/-' <(curl -s http://www.cbr.ru/scripts/XML_daily.asp | iconv -f cp1251)
