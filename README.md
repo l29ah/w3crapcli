@@ -4,9 +4,6 @@ About
 This is an attempt to facilitate the unbearable PAIN while using modern
 web2.0ish wonders by providing command line interfaces for them.
 
-The main repo is at http://w3crapcli.blasux.ru/git
-There's also a mirror at http://repo.or.cz/w/w3crapcli.git
-
 
 How do I install scripts I like?
 ================================
@@ -17,7 +14,7 @@ See INSTALL file.
 How do I contribute?
 ====================
 
-git clone http://w3crapcli.blasux.ru/git w3crapcli
+git clone
 cd w3crapcli
 [hack-hack]
 git commit
@@ -27,6 +24,4 @@ git send-email --to=zl29ah@gmail.com origin
 Contacts
 ========
 
-Project is hosted at http://w3crapcli.blasux.ru/
-There's also a Jabber conference at w3crapcli@conference.jabber.ru
-
+There's a XMPP multiuser char at w3crapcli@conference.jabber.ru
