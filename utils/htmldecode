@@ -1,2 +1,2 @@
 #!/bin/sh
-perl -Mencoding=utf8 -MHTML::Entities -ne 'print decode_entities($_)'
+perl -MHTML::Entities -ne 'print decode_entities($_)'
