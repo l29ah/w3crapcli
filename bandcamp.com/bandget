@@ -1,0 +1,18 @@
+#!/bin/bash
+f="`tempfile`"
+trap 'rm "$f"' EXIT
+curl -s "$1" > "$f"
+artist="`sed -ne 's#.*artist : "\([^"]*\).*#\1#p' "$f"`"
+album="`sed -ne 's#.*album_title : "\([^"]*\).*#\1#p' "$f"`"
+d="$artist - $album"
+mkdir -p "$d"
+cd "$d"
+export IFS='
+'
+for c in `tr '}' '\n' < "$f" | sed -ne 's#\\\/#/#g;s#.*"track_num":\([^,]*\),.*"title":"\([^"]*\)".*"file":{"[^"]*":"\(ht[^"]*\)".*#\1	\2	\3#p'`; do
+	IFS='	' read track_num title url <<< "$c"
+	IFS=' '
+	fn="`printf '%.2d' "$track_num"` $title.mp3"
+	wget -c "$url" -O "$fn"
+	mid3v2 -a "$artist" -A "$album" -t "$title" -T "$track_num" "$fn"
+done
