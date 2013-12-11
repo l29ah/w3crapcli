@@ -1,2 +1,2 @@
-#!/bin/bash
-curl -s http://mailinator.com/randomdomain.jsp | tail -n 1
+#!/bin/sh
+curl -s http://mailinator.com/ | sed -ne '/color:#000/{N;s#.*@##p}'
