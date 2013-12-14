@@ -12,12 +12,22 @@ umask 0077
 read login password
 wget --save-cookies "$fn" "https://login.vk.com/?act=login" --post-data "email=`printf %s "$login" | urlencode`&pass=`printf %s "$password" | urlencode`" -O /dev/null 2> /dev/null
 at="$(wget --load-cookies "$fn" "http://oauth.vk.com/authorize?client_id=3082784&scope=audio&redirect_uri=http://oauth.vk.com/blank.html&display=wap&response_type=token" --post-data='submit=Разрешить' -O /dev/null 2>&1 | grep "access_token" | cut -d "=" -f2 | cut -d "&" -f1)"
-wget --load-cookies "$fn" "https://api.vk.com/method/audio.search?q=`printf %s "$1" | urlencode`&offset=0&count=$cnt&access_token=$at" -O- 2> /dev/null > "$t"
-e="`jq -r '.error.error_msg' < "$t"`"
-[ -n "$e" -a "$e" != null ] && {
-	echo $e 1>&2
-	exit 1
-}
+e=foobar
+while [ -n "$e" -a "$e" != null ]; do
+	wget --load-cookies "$fn" "https://api.vk.com/method/audio.search?q=`printf %s "$1" | urlencode`&offset=0&count=$cnt&access_token=${at}$caf" -O- 2> /dev/null > "$t"
+	e="`jq -r '.error.error_msg' < "$t"`"
+	[ -n "$e" -a "$e" != null ] && {
+		echo $e 1>&2
+		if [ "$e" = "Captcha needed" ]; then
+			cid="`jq -r '.error.captcha_sid' < "$t"`"
+			cimg="`jq -r '.error.captcha_img' < "$t"`"
+			ck=`captcha <(curl -s "$cimg")`
+			caf="&captcha_sid=$cid&captcha_key=$ck"
+		else
+			exit 1
+		fi
+	}
+done
 n="`jq -r '.response[0]' < "$t"`"
 [ "$n" -eq 0 ] && {
 	echo Nothing found. Either there are no tracks satisfying the request, or you are sending requests too frequently. 1>&2

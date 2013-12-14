@@ -1,0 +1,11 @@
+#!/bin/bash
+if [[ "$1" =~ /dev/fd/.* ]]; then
+	file="`tempfile`"
+	cp "$1" "$file"
+	trap "rm $file" EXIT
+else
+	file="$1"
+fi
+qiv "$file" &
+dmenu < /dev/null
+kill %1
