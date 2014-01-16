@@ -1,0 +1,4382 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+ <html lang="en" class="no-js"><!--<![endif]-->
+ 
+    <head>
+     
+        <title>Show Foods</title>
+        <link rel="shortcut icon" href="/ndb/images/favicon.ico" type="image/x-icon" />
+    
+     
+
+         
+         
+         
+         <link rel='stylesheet' type='text/css' href='/ndb/plugins/richui-0.8/css/autocomplete.css' />
+<script type='text/javascript' src='/ndb/plugins/richui-0.8/js/yui/yahoo-dom-event/yahoo-dom-event.js'></script>
+<script type='text/javascript' src='/ndb/plugins/richui-0.8/js/yui/connection/connection-min.js'></script>
+<script type='text/javascript' src='/ndb/plugins/richui-0.8/js/yui/datasource/datasource-min.js'></script>
+<script type='text/javascript' src='/ndb/plugins/richui-0.8/js/yui/animation/animation-min.js'></script>
+<script type='text/javascript' src='/ndb/plugins/richui-0.8/js/yui/autocomplete/autocomplete-min.js'></script>
+           
+<link rel="stylesheet" href="/ndb/static/css/main.css" />
+ 
+     <link href="http://www.nal.usda.gov/sites/default/files/federated-analytics/analytics.js"/>
+	<script type="text/JavaScript"> 
+		 var _gaq = _gaq || [];
+		 // NAL 
+		  _gaq.push(['_setAccount', 'UA-28627214-1']);
+		  _gaq.push(['_setDomainName', 'nal.usda.gov']);
+		  _gaq.push(['_setAllowLinker', true]);
+		  _gaq.push(['_trackPageview']);
+		 //
+		// _gaq.push(['_setAccount', 'UA-3876418-1']);
+		//  _gaq.push(['_trackPageview']);
+		  // for NDB
+		  _gaq.push(['_setAccount', 'UA-36442725-1']);
+		  _gaq.push(['_trackPageview']);
+			// USDA servers
+		  _gaq.push(['_setAccount', 'UA-466807-3']);
+		  _gaq.push(['_setDomainName', 'usda.gov']);
+		  _gaq.push(['_setAllowLinker', true]);
+		  _gaq.push(['_trackPageview']);
+		  //
+		  _gaq.push(['a._setAccount', 'UA-27627304-18']);
+		  _gaq.push(['a._setDomainName', 'usda.gov']);
+		  _gaq.push(['a._setAllowLinker', true]);
+		  _gaq.push(['a._trackPageview']);
+			//
+		  _gaq.push(['b._setAccount', 'UA-27627304-1']);
+		  _gaq.push(['b._setDomainName', 'usda.gov']);
+		  _gaq.push(['b._setAllowLinker', true]);
+		  _gaq.push(['b._trackPageview']);
+		 
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 
+		'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 
+		'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; 
+		s.parentNode.insertBefore(ga, s);
+		  })();
+	</script> 
+      
+     
+          
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="layout" content="main"/>
+        
+        
+       
+                
+
+
+    
+          <script src="/ndb/static/plugins/yui-2.8.2.1/js/yui/yahoo-dom-event/yahoo-dom-event.js" type="text/javascript" ></script>
+<script src="/ndb/static/plugins/yui-2.8.2.1/js/yui/animation/animation-min.js" type="text/javascript" ></script>
+<script src="/ndb/static/plugins/yui-2.8.2.1/js/yui/connection/connection-min.js" type="text/javascript" ></script>
+<script src="/ndb/static/plugins/yui-2.8.2.1/js/yui/element/element-min.js" type="text/javascript" ></script>
+<script src="/ndb/static/plugins/yui-2.8.2.1/js/yui/dragdrop/dragdrop-min.js" type="text/javascript" ></script>
+<script src="/ndb/static/bundle-bundle_yui-container_head.js" type="text/javascript" ></script>
+<link href="/ndb/static/bundle-bundle_yui-container_head.css" type="text/css" rel="stylesheet" media="screen, projection" />
+<link href="/ndb/static/plugins/yui-2.8.2.1/js/yui/fonts/fonts-min.css" type="text/css" rel="stylesheet" media="screen, projection" />
+<script src="/ndb/static/plugins/grails-ui-1.2.3/js/grailsui/grailsui.js" type="text/javascript" ></script>
+<link href="/ndb/static/plugins/jquery-ui-1.8.24/jquery-ui/themes/ui-lightness/jquery-ui-1.8.24.custom.css" type="text/css" rel="stylesheet" media="screen, projection" />
+<script src="/ndb/static/plugins/jquery-1.10.2/js/jquery/jquery-1.10.2.min.js" type="text/javascript" ></script>
+<script src="/ndb/static/plugins/jquery-ui-1.8.24/jquery-ui/js/jquery-ui-1.8.24.custom.min.js" type="text/javascript" ></script>
+<script src="/ndb/static/bundle-bundle_yui-menu_head.js" type="text/javascript" ></script>
+<link href="/ndb/static/bundle-bundle_yui-menu_head.css" type="text/css" rel="stylesheet" media="screen, projection" />
+<script src="/ndb/static/bundle-bundle_yui-button_head.js" type="text/javascript" ></script>
+<link href="/ndb/static/bundle-bundle_yui-button_head.css" type="text/css" rel="stylesheet" media="screen, projection" />
+
+    </head>
+<body class="yui-skin-sam">  
+<br/>
+	<div class="section clearfix" > 
+			<div style="padding-left:15px;">
+                <a href="http://www.usda.gov" target="_blank">
+                <img src="/ndb/static/images/USDA-Logo.jpg" style="border:none;" alt="United States Department of Agriculture" id="USDALOGO" title="United States Department of Agriculture" height="51" width="72">
+                </a>&#160;&#160;&#160;&#160;
+                <span style="font-size:15px;font-weight:bolder;">Agricultural Research Service</span>
+			</div>
+           <div style="padding-left:15px;">
+           <span style="font-size:15px;font-weight: bolder;">United States Department of Agriculture</span>
+           </div>
+                
+	</div>
+	<br/>
+<!-- <div id="name-and-slogan" style="padding-left:15px;" >
+         <a href="http://www.ars.usda.gov">
+         <img id="masthead-map" usemap="#masthead-map" src="/ndb/static/images/masthead.jpg" alt="National Nutrient Database" border="0" /></a>
+     <map id="masthead-map" name="masthead-map">
+			<area shape="rect" coords="4,2,54,52" href="http://www.usda.gov" alt="" title="USDA Website"    />
+			<area shape="rect" coords="66,1,128,49" href="http://www.ars.usda.gov" alt="" title="Agricultural Research Service Website"    />
+			<area shape="rect" coords="127,0,336,50" href="http://www.nal.usda.gov" alt="" title="National Agricultural Library Website"    />
+			<area shape="rect" coords="470,2,679,52" href="http://www.ars.usda.gov/main/site_main.htm?modecode=12-35-45-00" alt="" title="Nutrient Data Laboratory Website"    />
+			<area shape="rect" coords="702,6,742,47" href="http://fnic.nal.usda.gov" alt="" title="Food and Nutrition Information Center Website"    />
+	</map>  
+
+</div>
+ -->
+
+<div id='site-slogan'  align='left'>
+National Nutrient Database for Standard Reference<br/>Release 26
+</div>
+<div class="bodywrapper">
+  <div class="nav">
+        <span class="menuButton"> <a href="http://www.ars.usda.gov/main/site_main.htm?modecode=12-35-45-00" class="home" title="Go the NDL home page">NDL Home</a></span>
+        <span class="menuButton"><a href="/ndb/search/list" class="list" name="menu-advanced" title="Browse the foods list">Food Search</a></span>
+        <span class="menuButton"><a href="/ndb/nutrients/index" class="list" name="menu-advanced" title="Create a nutrients list report">Nutrients List</a></span>
+        <span class="menuButton"><a href="/ndb/beef/show" class="calc" title="Use the ground beef calculator">Ground Beef Calculator</a></span>
+        <span class="menuButton"><a href="http://www.ars.usda.gov/sp2UserFiles/Place/12354500/Data/SR26/sr26_doc.pdf" class="docs" title="View and download release documentation" target="_help">SR26 Documentation</a></span>
+
+        <span class="menuButton"><a href="/ndb/help/index" class="help" target="_help" title="Read help on how to use the website">Help</a></span>
+       </div> 
+        
+        
+  <div class="body">
+ 
+  <div id="view-name" style="width:auto">
+       
+     Full Report (All Nutrients):
+     
+        &nbsp;02029, Spices, parsley, dried
+      
+   </h1>
+       </div>
+       <div class="menuButton" >
+                 
+                                 <a href="/ndb/search/list?fg=&amp;man=&amp;lfacet=&amp;count=&amp;max=&amp;sort=&amp;qlookup=&amp;offset=&amp;format=Full&amp;new=&amp;measureby=" name="search" class="previous" title="Return to results list">Return to Search Results</a><script type='text/javascript'> var myTooltip = new YAHOO.widget.Tooltip("myTooltip", { context:"null" } );</script>
+	
+		<a href="/ndb/foods/show/254?fg=&amp;man=&amp;lfacet=&amp;count=&amp;max=&amp;sort=&amp;qlookup=&amp;offset=&amp;format=Abridged&amp;new=&amp;measureby=" name="basic" class="list" title="View Basic Report">Basic Report</a><script type='text/javascript'> var myTooltip = new YAHOO.widget.Tooltip("myTooltip", { context:"null" } );</script>
+	
+	
+	
+		<a href="/ndb/foods/show/254?fg=&amp;man=&amp;lfacet=&amp;count=&amp;max=&amp;sort=&amp;qlookup=&amp;offset=&amp;format=Stats&amp;new=&amp;measureby=" class="list" name="stats" title="View Statistics Report">Statistics Report</a><script type='text/javascript'> var myTooltip = new YAHOO.widget.Tooltip("myTooltip", { context:"null" } );</script>
+	
+
+                 
+                 
+                                 
+                                        <a href="/ndb/foods/show/254?format=Full&amp;reportfmt=csv" class="excel">Download (CSV)</a>
+                                        
+                                        
+                                
+                                <a href="/ndb/foods/show/254?format=Full&amp;reportfmt=pdf&amp;pdfQvs=%7B%7D" class="docs">Print (PDF)</a>
+                        
+
+         
+            
+            
+            <div class="dialog">
+            
+               
+                         <div class="prop" style="line-height:1.5em;">
+                            <span class="name">Food Group:</span>&#160;<span class="value">Spices and Herbs</span>
+                    </div>
+                    
+                    
+                            <div class="prop" style="line-height:1.5em;">
+                           <span valign="top" class="name">Scientific Name:&#160;</span>
+                            <span class="value">Petroselinum crispum</span>
+                         </div>
+                    
+                    
+                            <div class="prop" style="line-height:1.5em;width:auth">
+                                <span style="background:#f0f0f0;width:auto" valign="top" class="name">
+                                
+                            Carbohydrate Factor:</span>
+                                 <span class="value">3.57&#160;&#160;</span>
+                          
+                               
+                                                <span style="background:#F0F0F0;width:auto" class="name">
+                                                        Fat Factor:</span><span class="value">8.37&#160;&#160;</span>
+                       
+                      
+                               <span class="name" style="background:#F0F0F0">Protein Factor:</span>
+                          <span class="value">2.44&#160;&#160;</span>
+                         
+                         
+                                         <span style="background:#f0f0f0;" valign="top" class="name">
+                                                 Nitrogen to Protein Conversion Factor: </span>
+                                     <span class="value">6.25</span>&#160;&#160;
+                   
+                   </div>
+                   <div class="prop" style="line-height:1.5em;width:auth">
+                           
+                    </div>
+                    <table style="border:0" >
+                       
+                        <tr class="prop"><td></td><td></td></tr>
+                        
+                        </table>
+                
+                
+        <div class="null">
+            <div id="measuresHelpDialog">
+                <div class="hd">Modifying household measures</div>
+                <div class="bd">
+                    
+                        <div id="helpDiv"></div>
+                         
+                </div>
+            </div>
+        </div>
+        <script>
+            function init_dlg_measuresHelpDialog() {
+                // Instantiate the Dialog
+                GRAILSUI.measuresHelpDialog = new YAHOO.widget.Dialog("measuresHelpDialog",
+                { 'width': '600px',
+'class': 'helpDialog',
+'draggable': true,
+'modal': false,
+'fixedcenter': true,
+'visible': false,
+'params': [],
+'constraintoviewport': true,
+'buttons': [{'text': 'OK',
+handler: function() {this.cancel();},
+'isDefault': true}] });
+                GRAILSUI.measuresHelpDialog.render(document.body);
+                
+        
+            }
+            YAHOO.util.Event.onDOMReady(init_dlg_measuresHelpDialog);
+        </script>
+               
+               <!-- NUTRIENT DATA TABLE -->
+               <form action="/ndb/foods/show/254" method="get" >
+                                
+               <input type="hidden" name="man" value="" id="man" />
+               <input type="hidden" name="lfacet" value="" id="lfacet" />
+               <input type="hidden" name="count" value="" id="count" />
+               <input type="hidden" name="max" value="" id="max" />
+               <input type="hidden" name="qlookup" value="" id="qlookup" />
+               <input type="hidden" name="offset" value="" id="offset" />
+               <input type="hidden" name="sort" value="" id="sort" />
+               <input type="hidden" name="format" value="Full" id="format" />
+               <input type="hidden" name="reportfmt" value="other" id="reportfmt" />
+               <input type="hidden" name="rptfrm" value="" id="rptfrm" />
+               <input type="hidden" name="ndbno" value="" id="ndbno" />
+               <input type="hidden" name="nutrient1" value="" id="nutrient1" />
+               <input type="hidden" name="nutrient2" value="" id="nutrient2" />
+               <input type="hidden" name="nutrient3" value="" id="nutrient3" />
+               <input type="hidden" name="subset" value="" id="subset" />
+               <input type="hidden" name="totCount" value="" id="totCount" />
+               <input type="hidden" name="measureby" value="" id="measureby" />
+             
+                       <div class="nutlist-hscroll">
+                        
+                    <p style="font-style:italic;font-size:.8em"> Nutrient values and weights are for edible portion</p>
+                      
+                                        
+<table style="width:700px;">
+<thead>
+	<td colspan="27" style="vertical-align:middle;text-align:center;height:2em;font-size:1.2em" class="buttons"><input type="submit" name="_action_show" value="Apply Changes" class="calc" title="Click to recalculate measures" id="254" /><a href="/ndb/help/contextHelp/measures" onclick="jQuery.ajax({type:'POST', url:'/ndb/help/contextHelp/measures',success:function(data,textStatus){jQuery('#helpDiv').html(data);},error:function(XMLHttpRequest,textStatus,errorThrown){},complete:function(XMLHttpRequest,textStatus){GRAILSUI.measuresHelpDialog.show();}});return false;" id="measures"><img title="Click for more information on calculating household measures" src="/ndb/static/images/skin/help.png" alt="Help" border="0" style="vertical-align:middle"/></a></span></td></tr>
+
+   <th style="vertical-align:middle;">Nutrient</th>
+	<th style="vertical-align:middle" >Unit</th>
+    <th style="vertical-align:middle"><input type="text" name="Qv" style="width:30px;text-align:right;border-style:inset;height:15px" maxlength="5" value="1" id="Qv" /><br/>Value per 100 g</th>
+     
+          <th style="vertical-align:middle" ># of Data Points</th>
+          <th style="vertical-align:middle">Std. Error</th>
+      
+      
+  <th style="width:130px;line-height:1.2em;text-align:center">
+  	<input type="text" name="Q625" style="width:30px;text-align:right;border-style:inset;height:15px" maxlength="5" value="1.0" id="Q625" />
+  	<br/>
+  	tsp
+  	<br/>0.5g
+  	</th>
+
+  <th style="width:130px;line-height:1.2em;text-align:center">
+  	<input type="text" name="Q626" style="width:30px;text-align:right;border-style:inset;height:15px" maxlength="5" value="1.0" id="Q626" />
+  	<br/>
+  	tbsp
+  	<br/>1.6g
+  	</th>
+
+
+</thead>
+<tbody>
+
+	
+		
+		<tr class="even" >
+	    <td style="font-weight:bold"  bgcolor="#dddddd" colspan="27" > Proximates</td>
+	  	</tr>
+	
+	
+	
+		
+			<tr  style="display:;" id="Proximates-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Water
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+				<a href="#id-2"><sup>2</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">5.89</td>
+		
+			<td style="text-align:right;width: 30px;">3</td>
+			<td style="text-align:right;width: 30px;">
+			  0.068
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.03</td>
+		
+				<td style="text-align:right; width:130px;">0.09</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Proximates-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Energy
+		
+		
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">kcal</td>
+		<td style="text-align:right;width: 30px;">292</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">1</td>
+		
+				<td style="text-align:right; width:130px;">5</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Proximates-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Energy
+		
+		
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">kJ</td>
+		<td style="text-align:right;width: 30px;">1220</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">6</td>
+		
+				<td style="text-align:right; width:130px;">20</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Proximates-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Protein
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+				<a href="#id-2"><sup>2</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">26.63</td>
+		
+			<td style="text-align:right;width: 30px;">3</td>
+			<td style="text-align:right;width: 30px;">
+			  0.036
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.13</td>
+		
+				<td style="text-align:right; width:130px;">0.43</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Proximates-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Total lipid (fat)
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+				<a href="#id-2"><sup>2</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">5.48</td>
+		
+			<td style="text-align:right;width: 30px;">3</td>
+			<td style="text-align:right;width: 30px;">
+			  0.049
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.03</td>
+		
+				<td style="text-align:right; width:130px;">0.09</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Proximates-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Ash
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+				<a href="#id-2"><sup>2</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">11.36</td>
+		
+			<td style="text-align:right;width: 30px;">3</td>
+			<td style="text-align:right;width: 30px;">
+			  0.326
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.06</td>
+		
+				<td style="text-align:right; width:130px;">0.18</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Proximates-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Carbohydrate, by difference
+		
+		
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">50.64</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.25</td>
+		
+				<td style="text-align:right; width:130px;">0.81</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Proximates-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Fiber, total dietary
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+				<a href="#id-2"><sup>2</sup></a>
+			
+				<a href="#id-3"><sup>3</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">26.7</td>
+		
+			<td style="text-align:right;width: 30px;">4</td>
+			<td style="text-align:right;width: 30px;">
+			  1.845
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.1</td>
+		
+				<td style="text-align:right; width:130px;">0.4</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Proximates-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Sugars, total
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">7.27</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.04</td>
+		
+				<td style="text-align:right; width:130px;">0.12</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Proximates-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Sucrose
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">4.09</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.02</td>
+		
+				<td style="text-align:right; width:130px;">0.07</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Proximates-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Glucose (dextrose)
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">2.76</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.01</td>
+		
+				<td style="text-align:right; width:130px;">0.04</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Proximates-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Fructose
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.42</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.00</td>
+		
+				<td style="text-align:right; width:130px;">0.01</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Proximates-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Lactose
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.00</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.00</td>
+		
+				<td style="text-align:right; width:130px;">0.00</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Proximates-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Maltose
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.00</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.00</td>
+		
+				<td style="text-align:right; width:130px;">0.00</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Proximates-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Galactose
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.00</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.00</td>
+		
+				<td style="text-align:right; width:130px;">0.00</td>
+		
+		
+	</tr>
+ 
+	
+
+	
+		
+		<tr class="even" >
+	    <td style="font-weight:bold"  bgcolor="#dddddd" colspan="27" > Minerals</td>
+	  	</tr>
+	
+	
+	
+		
+			<tr  style="display:;" id="Minerals-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Calcium, Ca
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+				<a href="#id-2"><sup>2</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">mg</td>
+		<td style="text-align:right;width: 30px;">1140</td>
+		
+			<td style="text-align:right;width: 30px;">3</td>
+			<td style="text-align:right;width: 30px;">
+			  56.667
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">6</td>
+		
+				<td style="text-align:right; width:130px;">18</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Minerals-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Iron, Fe
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+				<a href="#id-2"><sup>2</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">mg</td>
+		<td style="text-align:right;width: 30px;">22.04</td>
+		
+			<td style="text-align:right;width: 30px;">3</td>
+			<td style="text-align:right;width: 30px;">
+			  8.257
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.11</td>
+		
+				<td style="text-align:right; width:130px;">0.35</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Minerals-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Magnesium, Mg
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+				<a href="#id-2"><sup>2</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">mg</td>
+		<td style="text-align:right;width: 30px;">400</td>
+		
+			<td style="text-align:right;width: 30px;">3</td>
+			<td style="text-align:right;width: 30px;">
+			  29.000
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">2</td>
+		
+				<td style="text-align:right; width:130px;">6</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Minerals-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Phosphorus, P
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+				<a href="#id-2"><sup>2</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">mg</td>
+		<td style="text-align:right;width: 30px;">436</td>
+		
+			<td style="text-align:right;width: 30px;">3</td>
+			<td style="text-align:right;width: 30px;">
+			  13.000
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">2</td>
+		
+				<td style="text-align:right; width:130px;">7</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Minerals-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Potassium, K
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+				<a href="#id-2"><sup>2</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">mg</td>
+		<td style="text-align:right;width: 30px;">2683</td>
+		
+			<td style="text-align:right;width: 30px;">3</td>
+			<td style="text-align:right;width: 30px;">
+			  36.667
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">13</td>
+		
+				<td style="text-align:right; width:130px;">43</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Minerals-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Sodium, Na
+		
+		
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">mg</td>
+		<td style="text-align:right;width: 30px;">452</td>
+		
+			<td style="text-align:right;width: 30px;">14</td>
+			<td style="text-align:right;width: 30px;">
+			  54.300
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">2</td>
+		
+				<td style="text-align:right; width:130px;">7</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Minerals-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Zinc, Zn
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+				<a href="#id-2"><sup>2</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">mg</td>
+		<td style="text-align:right;width: 30px;">5.44</td>
+		
+			<td style="text-align:right;width: 30px;">3</td>
+			<td style="text-align:right;width: 30px;">
+			  0.243
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.03</td>
+		
+				<td style="text-align:right; width:130px;">0.09</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Minerals-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Copper, Cu
+		
+		
+			
+				<a href="#id-2"><sup>2</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">mg</td>
+		<td style="text-align:right;width: 30px;">0.780</td>
+		
+			<td style="text-align:right;width: 30px;">2</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.004</td>
+		
+				<td style="text-align:right; width:130px;">0.012</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Minerals-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Manganese, Mn
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+				<a href="#id-2"><sup>2</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">mg</td>
+		<td style="text-align:right;width: 30px;">9.810</td>
+		
+			<td style="text-align:right;width: 30px;">3</td>
+			<td style="text-align:right;width: 30px;">
+			  0.723
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.049</td>
+		
+				<td style="text-align:right; width:130px;">0.157</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Minerals-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Selenium, Se
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">µg</td>
+		<td style="text-align:right;width: 30px;">14.1</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.1</td>
+		
+				<td style="text-align:right; width:130px;">0.2</td>
+		
+		
+	</tr>
+ 
+	
+
+	
+		
+		<tr class="even" >
+	    <td style="font-weight:bold"  bgcolor="#dddddd" colspan="27" > Vitamins</td>
+	  	</tr>
+	
+	
+	
+		
+			<tr  style="display:;" id="Vitamins-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Vitamin C, total ascorbic acid
+		
+		
+			
+				<a href="#id-2"><sup>2</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">mg</td>
+		<td style="text-align:right;width: 30px;">125.0</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.6</td>
+		
+				<td style="text-align:right; width:130px;">2.0</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Vitamins-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Thiamin
+		
+		
+			
+				<a href="#id-2"><sup>2</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">mg</td>
+		<td style="text-align:right;width: 30px;">0.196</td>
+		
+			<td style="text-align:right;width: 30px;">2</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.001</td>
+		
+				<td style="text-align:right; width:130px;">0.003</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Vitamins-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Riboflavin
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+				<a href="#id-2"><sup>2</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">mg</td>
+		<td style="text-align:right;width: 30px;">2.383</td>
+		
+			<td style="text-align:right;width: 30px;">3</td>
+			<td style="text-align:right;width: 30px;">
+			  0.043
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.012</td>
+		
+				<td style="text-align:right; width:130px;">0.038</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Vitamins-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Niacin
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+				<a href="#id-2"><sup>2</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">mg</td>
+		<td style="text-align:right;width: 30px;">9.943</td>
+		
+			<td style="text-align:right;width: 30px;">3</td>
+			<td style="text-align:right;width: 30px;">
+			  0.357
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.050</td>
+		
+				<td style="text-align:right; width:130px;">0.159</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Vitamins-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Pantothenic acid
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+				<a href="#id-2"><sup>2</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">mg</td>
+		<td style="text-align:right;width: 30px;">1.062</td>
+		
+			<td style="text-align:right;width: 30px;">3</td>
+			<td style="text-align:right;width: 30px;">
+			  0.040
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.005</td>
+		
+				<td style="text-align:right; width:130px;">0.017</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Vitamins-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Vitamin B-6
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+				<a href="#id-2"><sup>2</sup></a>
+			
+				<a href="#id-4"><sup>4</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">mg</td>
+		<td style="text-align:right;width: 30px;">0.900</td>
+		
+			<td style="text-align:right;width: 30px;">5</td>
+			<td style="text-align:right;width: 30px;">
+			  0.219
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.005</td>
+		
+				<td style="text-align:right; width:130px;">0.014</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Vitamins-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Folate, total
+		
+		
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">µg</td>
+		<td style="text-align:right;width: 30px;">180</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">1</td>
+		
+				<td style="text-align:right; width:130px;">3</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Vitamins-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Folic acid
+		
+		
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">µg</td>
+		<td style="text-align:right;width: 30px;">0</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0</td>
+		
+				<td style="text-align:right; width:130px;">0</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Vitamins-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Folate, food
+		
+		
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">µg</td>
+		<td style="text-align:right;width: 30px;">180</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">1</td>
+		
+				<td style="text-align:right; width:130px;">3</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Vitamins-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Folate, DFE
+		
+		
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">µg</td>
+		<td style="text-align:right;width: 30px;">180</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">1</td>
+		
+				<td style="text-align:right; width:130px;">3</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Vitamins-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Choline, total
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">mg</td>
+		<td style="text-align:right;width: 30px;">97.1</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.5</td>
+		
+				<td style="text-align:right; width:130px;">1.6</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Vitamins-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Betaine
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">mg</td>
+		<td style="text-align:right;width: 30px;">1.7</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.0</td>
+		
+				<td style="text-align:right; width:130px;">0.0</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Vitamins-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Vitamin B-12
+		
+		
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">µg</td>
+		<td style="text-align:right;width: 30px;">0.00</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.00</td>
+		
+				<td style="text-align:right; width:130px;">0.00</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Vitamins-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Vitamin B-12, added
+		
+		
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">µg</td>
+		<td style="text-align:right;width: 30px;">0.00</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.00</td>
+		
+				<td style="text-align:right; width:130px;">0.00</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Vitamins-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Vitamin A, RAE
+		
+		
+			
+				<a href="#id-2"><sup>2</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">µg</td>
+		<td style="text-align:right;width: 30px;">97</td>
+		
+			<td style="text-align:right;width: 30px;">2</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0</td>
+		
+				<td style="text-align:right; width:130px;">2</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Vitamins-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Retinol
+		
+		
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">µg</td>
+		<td style="text-align:right;width: 30px;">0</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0</td>
+		
+				<td style="text-align:right; width:130px;">0</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Vitamins-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Carotene, beta
+		
+		
+			
+				<a href="#id-2"><sup>2</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">µg</td>
+		<td style="text-align:right;width: 30px;">1152</td>
+		
+			<td style="text-align:right;width: 30px;">2</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">6</td>
+		
+				<td style="text-align:right; width:130px;">18</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Vitamins-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Carotene, alpha
+		
+		
+			
+				<a href="#id-2"><sup>2</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">µg</td>
+		<td style="text-align:right;width: 30px;">17</td>
+		
+			<td style="text-align:right;width: 30px;">2</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0</td>
+		
+				<td style="text-align:right; width:130px;">0</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Vitamins-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Cryptoxanthin, beta
+		
+		
+			
+				<a href="#id-2"><sup>2</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">µg</td>
+		<td style="text-align:right;width: 30px;">4</td>
+		
+			<td style="text-align:right;width: 30px;">2</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0</td>
+		
+				<td style="text-align:right; width:130px;">0</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Vitamins-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Vitamin A, IU
+		
+		
+			
+				<a href="#id-2"><sup>2</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">IU</td>
+		<td style="text-align:right;width: 30px;">1939</td>
+		
+			<td style="text-align:right;width: 30px;">2</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">10</td>
+		
+				<td style="text-align:right; width:130px;">31</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Vitamins-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Lycopene
+		
+		
+			
+				<a href="#id-2"><sup>2</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">µg</td>
+		<td style="text-align:right;width: 30px;">0</td>
+		
+			<td style="text-align:right;width: 30px;">2</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0</td>
+		
+				<td style="text-align:right; width:130px;">0</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Vitamins-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Lutein + zeaxanthin
+		
+		
+			
+				<a href="#id-2"><sup>2</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">µg</td>
+		<td style="text-align:right;width: 30px;">2428</td>
+		
+			<td style="text-align:right;width: 30px;">2</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">12</td>
+		
+				<td style="text-align:right; width:130px;">39</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Vitamins-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Vitamin E (alpha-tocopherol)
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">mg</td>
+		<td style="text-align:right;width: 30px;">8.96</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.04</td>
+		
+				<td style="text-align:right; width:130px;">0.14</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Vitamins-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Vitamin E, added
+		
+		
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">mg</td>
+		<td style="text-align:right;width: 30px;">0.00</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.00</td>
+		
+				<td style="text-align:right; width:130px;">0.00</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Vitamins-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Tocopherol, beta
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">mg</td>
+		<td style="text-align:right;width: 30px;">0.02</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.00</td>
+		
+				<td style="text-align:right; width:130px;">0.00</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Vitamins-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Tocopherol, gamma
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">mg</td>
+		<td style="text-align:right;width: 30px;">1.53</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.01</td>
+		
+				<td style="text-align:right; width:130px;">0.02</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Vitamins-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Tocopherol, delta
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">mg</td>
+		<td style="text-align:right;width: 30px;">0.00</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.00</td>
+		
+				<td style="text-align:right; width:130px;">0.00</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Vitamins-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Vitamin D (D2 + D3)
+		
+		
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">µg</td>
+		<td style="text-align:right;width: 30px;">0.0</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.0</td>
+		
+				<td style="text-align:right; width:130px;">0.0</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Vitamins-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Vitamin D
+		
+		
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">IU</td>
+		<td style="text-align:right;width: 30px;">0</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0</td>
+		
+				<td style="text-align:right; width:130px;">0</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Vitamins-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Vitamin K (phylloquinone)
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">µg</td>
+		<td style="text-align:right;width: 30px;">1359.5</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">6.8</td>
+		
+				<td style="text-align:right; width:130px;">21.8</td>
+		
+		
+	</tr>
+ 
+	
+
+	
+	
+		
+		<tr>
+			<td style="font-weight:bold;" colspan="27" bgcolor="#dddddd" >
+			<a id="Lipids_open" style="display: block;" onclick="toggleTable('Lipids','Lipids_open','Lipids_close');">
+			<img src="/ndb/static/images/details_open.png" style="vertical-align:middle;" />Lipids
+			</a>
+			<a id="Lipids_close" style="display: none;" onclick="toggleTable('Lipids','Lipids_open','Lipids_close');">
+			<img src="/ndb/static/images/details_close.png" style="vertical-align:middle;" />Lipids
+			 </a>
+			</td>
+		</tr>
+		
+	
+	
+	
+		
+			<tr  style="display:'' id="Lipids-0" class="odd" >
+		
+		<td style="text-align:left;width:60px;" >Fatty acids, total saturated
+		
+		
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">1.378</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.007</td>
+		
+				<td style="text-align:right; width:130px;">0.022</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >4:0
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >6:0
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >8:0
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >10:0
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >12:0
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >13:0
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >14:0
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >15:0
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >16:0
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">1.223</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.006</td>
+		
+				<td style="text-align:right; width:130px;">0.020</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >17:0
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >18:0
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.058</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.001</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >20:0
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.005</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >22:0
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.028</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >24:0
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.063</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.001</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:'' id="Lipids-0" class="odd" >
+		
+		<td style="text-align:left;width:60px;" >Fatty acids, total monounsaturated
+		
+		
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.761</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.004</td>
+		
+				<td style="text-align:right; width:130px;">0.012</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >14:1
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >15:1
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >16:1 undifferentiated
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >16:1 c
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >16:1 t
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >17:1
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >18:1 undifferentiated
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.761</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.004</td>
+		
+				<td style="text-align:right; width:130px;">0.012</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >18:1 c
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.761</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.004</td>
+		
+				<td style="text-align:right; width:130px;">0.012</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >18:1 t
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >20:1
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >22:1 undifferentiated
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >22:1 c
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >22:1 t
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >24:1 c
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:'' id="Lipids-0" class="odd" >
+		
+		<td style="text-align:left;width:60px;" >Fatty acids, total polyunsaturated
+		
+		
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">3.124</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.016</td>
+		
+				<td style="text-align:right; width:130px;">0.050</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >18:2 undifferentiated
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">1.248</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.006</td>
+		
+				<td style="text-align:right; width:130px;">0.020</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >18:2 n-6 c,c
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">1.248</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.006</td>
+		
+				<td style="text-align:right; width:130px;">0.020</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >18:2 CLAs
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >18:3 undifferentiated
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">1.876</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.009</td>
+		
+				<td style="text-align:right; width:130px;">0.030</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >18:3 n-3 c,c,c (ALA)
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">1.860</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.009</td>
+		
+				<td style="text-align:right; width:130px;">0.030</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >18:3 n-6 c,c,c
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.016</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >18:4
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >20:2 n-6 c,c
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >20:3 undifferentiated
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >20:3 n-6
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >20:4 undifferentiated
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >20:5 n-3 (EPA)
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >22:4
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >22:5 n-3 (DPA)
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >22:6 n-3 (DHA)
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:'' id="Lipids-0" class="odd" >
+		
+		<td style="text-align:left;width:60px;" >Fatty acids, total trans
+		
+		
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:'' id="Lipids-0" class="odd" >
+		
+		<td style="text-align:left;width:60px;" >Fatty acids, total trans-monoenoic
+		
+		
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Lipids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Cholesterol
+		
+		
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">mg</td>
+		<td style="text-align:right;width: 30px;">0</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0</td>
+		
+				<td style="text-align:right; width:130px;">0</td>
+		
+		
+	</tr>
+ 
+	
+
+	
+	
+		
+		<tr>
+			<td style="font-weight:bold;" colspan="27" bgcolor="#dddddd" >
+			<a id="Amino Acids_open" style="display: block;" onclick="toggleTable('Amino Acids','Amino Acids_open','Amino Acids_close');">
+			<img src="/ndb/static/images/details_open.png" style="vertical-align:middle;" />Amino Acids
+			</a>
+			<a id="Amino Acids_close" style="display: none;" onclick="toggleTable('Amino Acids','Amino Acids_open','Amino Acids_close');">
+			<img src="/ndb/static/images/details_close.png" style="vertical-align:middle;" />Amino Acids
+			 </a>
+			</td>
+		</tr>
+		
+	
+	
+	
+		
+			<tr  style="display:none;" id="Amino Acids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Tryptophan
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.475</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.002</td>
+		
+				<td style="text-align:right; width:130px;">0.008</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Amino Acids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Threonine
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">1.193</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.006</td>
+		
+				<td style="text-align:right; width:130px;">0.019</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Amino Acids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Isoleucine
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">1.546</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.008</td>
+		
+				<td style="text-align:right; width:130px;">0.025</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Amino Acids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Leucine
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">2.794</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.014</td>
+		
+				<td style="text-align:right; width:130px;">0.045</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Amino Acids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Lysine
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">2.098</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.010</td>
+		
+				<td style="text-align:right; width:130px;">0.034</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Amino Acids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Methionine
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.596</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.003</td>
+		
+				<td style="text-align:right; width:130px;">0.010</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Amino Acids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Cystine
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.298</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.001</td>
+		
+				<td style="text-align:right; width:130px;">0.005</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Amino Acids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Phenylalanine
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">1.712</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.009</td>
+		
+				<td style="text-align:right; width:130px;">0.027</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Amino Acids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Tyrosine
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">1.159</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.006</td>
+		
+				<td style="text-align:right; width:130px;">0.019</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Amino Acids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Valine
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">2.021</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.010</td>
+		
+				<td style="text-align:right; width:130px;">0.032</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Amino Acids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Arginine
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">1.756</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.009</td>
+		
+				<td style="text-align:right; width:130px;">0.028</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Amino Acids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Histidine
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.718</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.004</td>
+		
+				<td style="text-align:right; width:130px;">0.011</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Amino Acids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Alanine
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">1.778</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.009</td>
+		
+				<td style="text-align:right; width:130px;">0.028</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Amino Acids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Aspartic acid
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">3.169</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.016</td>
+		
+				<td style="text-align:right; width:130px;">0.051</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Amino Acids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Glutamic acid
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">3.688</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.018</td>
+		
+				<td style="text-align:right; width:130px;">0.059</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Amino Acids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Glycine
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">1.756</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.009</td>
+		
+				<td style="text-align:right; width:130px;">0.028</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Amino Acids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Proline
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">2.010</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.010</td>
+		
+				<td style="text-align:right; width:130px;">0.032</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Amino Acids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Serine
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">1.159</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.006</td>
+		
+				<td style="text-align:right; width:130px;">0.019</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:none;" id="Amino Acids-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Hydroxyproline
+		
+		
+			
+				<a href="#id-1"><sup>1</sup></a>
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.000</td>
+		
+			<td style="text-align:right;width: 30px;">1</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+				<td style="text-align:right; width:130px;">0.000</td>
+		
+		
+	</tr>
+ 
+	
+
+	
+		
+		<tr class="even" >
+	    <td style="font-weight:bold"  bgcolor="#dddddd" colspan="27" > Other</td>
+	  	</tr>
+	
+	
+	
+		
+			<tr  style="display:;" id="Other-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Alcohol, ethyl
+		
+		
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">g</td>
+		<td style="text-align:right;width: 30px;">0.0</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0.0</td>
+		
+				<td style="text-align:right; width:130px;">0.0</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Other-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Caffeine
+		
+		
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">mg</td>
+		<td style="text-align:right;width: 30px;">0</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0</td>
+		
+				<td style="text-align:right; width:130px;">0</td>
+		
+		
+	</tr>
+ 
+		
+			<tr  style="display:;" id="Other-0" class="odd">
+		
+		<td style="text-align:left;width:60px;" >Theobromine
+		
+		
+			
+		
+		</td>
+		<td style="text-align:center;width: 30px;">mg</td>
+		<td style="text-align:right;width: 30px;">0</td>
+		
+			<td style="text-align:right;width: 30px;">--</td>
+			<td style="text-align:right;width: 30px;">
+			  --
+		   </td>
+		
+		
+			
+				<td style="text-align:right; width:130px;">0</td>
+		
+				<td style="text-align:right; width:130px;">0</td>
+		
+		
+	</tr>
+ 
+	
+
+
+	
+		
+	<tr><td style="font-weight:bold"  colspan="27" >Flavonoids</td></tr>
+	
+	
+		<tr class="odd">
+		<td colspan="27"  >
+			<a id="Flavones_open" style="display: block;" onclick="toggleTable('Flavones','Flavones_open','Flavones_close');">
+				<img src="/ndb/static/images/details_open.png" style="vertical-align:middle;" />Flavones
+			</a>
+			<a id="Flavones_close" style="display: none;" onclick="toggleTable('Flavones','Flavones_open','Flavones_close');">
+				<img src="/ndb/static/images/details_close.png" style="vertical-align:middle;" />Flavones
+			 </a>
+		</td>
+		</tr>
+		
+		
+		
+			<tr style="display:none;" id="Flavones-0" class="odd">
+		    	<td  style="text-align:left;width: 60px;padding-left:18px;" >Apigenin
+		     	
+		      
+		         
+		             <a href="#id-6"><sup>6</sup></a>
+		          
+		             <a href="#id-7"><sup>7</sup></a>
+		          
+		       
+
+		   </td>      	
+		    <td style="text-align:center;width: 30px;">mg</td>
+		    <td style="text-align:right;width: 30px;">4503.5</td>
+			
+		         <td style="text-align:right;">5</td>
+		         <td style="text-align:right;">
+		           	2,254.33
+                 </td>
+		     
+		      
+		           <td style="text-align:right;">22.5</td>
+		       
+		           <td style="text-align:right;">72.1</td>
+		       
+			</tr>
+		
+			<tr style="display:none;" id="Flavones-0" class="odd">
+		    	<td  style="text-align:left;width: 60px;padding-left:18px;" >Luteolin
+		     	
+		      
+		         
+		             <a href="#id-7"><sup>7</sup></a>
+		          
+		       
+
+		   </td>      	
+		    <td style="text-align:center;width: 30px;">mg</td>
+		    <td style="text-align:right;width: 30px;">19.8</td>
+			
+		         <td style="text-align:right;">1</td>
+		         <td style="text-align:right;">
+		           	--
+                 </td>
+		     
+		      
+		           <td style="text-align:right;">0.1</td>
+		       
+		           <td style="text-align:right;">0.3</td>
+		       
+			</tr>
+		
+	
+
+		<tr class="even">
+		<td colspan="27"  >
+			<a id="Flavonols_open" style="display: block;" onclick="toggleTable('Flavonols','Flavonols_open','Flavonols_close');">
+				<img src="/ndb/static/images/details_open.png" style="vertical-align:middle;" />Flavonols
+			</a>
+			<a id="Flavonols_close" style="display: none;" onclick="toggleTable('Flavonols','Flavonols_open','Flavonols_close');">
+				<img src="/ndb/static/images/details_close.png" style="vertical-align:middle;" />Flavonols
+			 </a>
+		</td>
+		</tr>
+		
+		
+		
+			<tr style="display:none;" id="Flavonols-0" class="odd">
+		    	<td  style="text-align:left;width: 60px;padding-left:18px;" >Isorhamnetin
+		     	
+		      
+		         
+		             <a href="#id-7"><sup>7</sup></a>
+		          
+		       
+
+		   </td>      	
+		    <td style="text-align:center;width: 30px;">mg</td>
+		    <td style="text-align:right;width: 30px;">331.2</td>
+			
+		         <td style="text-align:right;">1</td>
+		         <td style="text-align:right;">
+		           	--
+                 </td>
+		     
+		      
+		           <td style="text-align:right;">1.7</td>
+		       
+		           <td style="text-align:right;">5.3</td>
+		       
+			</tr>
+		
+			<tr style="display:none;" id="Flavonols-0" class="odd">
+		    	<td  style="text-align:left;width: 60px;padding-left:18px;" >Kaempferol
+		     	
+		      
+		         
+		             <a href="#id-7"><sup>7</sup></a>
+		          
+		       
+
+		   </td>      	
+		    <td style="text-align:center;width: 30px;">mg</td>
+		    <td style="text-align:right;width: 30px;">0.0</td>
+			
+		         <td style="text-align:right;">1</td>
+		         <td style="text-align:right;">
+		           	--
+                 </td>
+		     
+		      
+		           <td style="text-align:right;">0.0</td>
+		       
+		           <td style="text-align:right;">0.0</td>
+		       
+			</tr>
+		
+			<tr style="display:none;" id="Flavonols-0" class="odd">
+		    	<td  style="text-align:left;width: 60px;padding-left:18px;" >Quercetin
+		     	
+		      
+		         
+		             <a href="#id-6"><sup>6</sup></a>
+		          
+		       
+
+		   </td>      	
+		    <td style="text-align:center;width: 30px;">mg</td>
+		    <td style="text-align:right;width: 30px;">0.0</td>
+			
+		         <td style="text-align:right;">4</td>
+		         <td style="text-align:right;">
+		           	0
+                 </td>
+		     
+		      
+		           <td style="text-align:right;">0.0</td>
+		       
+		           <td style="text-align:right;">0.0</td>
+		       
+			</tr>
+		
+	
+
+		<tr class="odd">
+		<td colspan="27"  >
+			<a id="Proanthocyanidin_open" style="display: block;" onclick="toggleTable('Proanthocyanidin','Proanthocyanidin_open','Proanthocyanidin_close');">
+				<img src="/ndb/static/images/details_open.png" style="vertical-align:middle;" />Proanthocyanidin
+			</a>
+			<a id="Proanthocyanidin_close" style="display: none;" onclick="toggleTable('Proanthocyanidin','Proanthocyanidin_open','Proanthocyanidin_close');">
+				<img src="/ndb/static/images/details_close.png" style="vertical-align:middle;" />Proanthocyanidin
+			 </a>
+		</td>
+		</tr>
+		
+		
+		
+			<tr style="display:none;" id="Proanthocyanidin-0" class="odd">
+		    	<td  style="text-align:left;width: 60px;padding-left:18px;" >Proanthocyanidin monomers
+		     	
+		      
+		         
+		             <a href="#id-5"><sup>5</sup></a>
+		          
+		       
+
+		   </td>      	
+		    <td style="text-align:center;width: 30px;">mg</td>
+		    <td style="text-align:right;width: 30px;">0.0</td>
+			
+		         <td style="text-align:right;">1</td>
+		         <td style="text-align:right;">
+		           	--
+                 </td>
+		     
+		      
+		           <td style="text-align:right;">0.0</td>
+		       
+		           <td style="text-align:right;">0.0</td>
+		       
+			</tr>
+		
+			<tr style="display:none;" id="Proanthocyanidin-0" class="odd">
+		    	<td  style="text-align:left;width: 60px;padding-left:18px;" >Proanthocyanidin dimers
+		     	
+		      
+		         
+		             <a href="#id-5"><sup>5</sup></a>
+		          
+		       
+
+		   </td>      	
+		    <td style="text-align:center;width: 30px;">mg</td>
+		    <td style="text-align:right;width: 30px;">0.0</td>
+			
+		         <td style="text-align:right;">1</td>
+		         <td style="text-align:right;">
+		           	--
+                 </td>
+		     
+		      
+		           <td style="text-align:right;">0.0</td>
+		       
+		           <td style="text-align:right;">0.0</td>
+		       
+			</tr>
+		
+			<tr style="display:none;" id="Proanthocyanidin-0" class="odd">
+		    	<td  style="text-align:left;width: 60px;padding-left:18px;" >Proanthocyanidin trimers
+		     	
+		      
+		         
+		             <a href="#id-5"><sup>5</sup></a>
+		          
+		       
+
+		   </td>      	
+		    <td style="text-align:center;width: 30px;">mg</td>
+		    <td style="text-align:right;width: 30px;">0.0</td>
+			
+		         <td style="text-align:right;">1</td>
+		         <td style="text-align:right;">
+		           	--
+                 </td>
+		     
+		      
+		           <td style="text-align:right;">0.0</td>
+		       
+		           <td style="text-align:right;">0.0</td>
+		       
+			</tr>
+		
+			<tr style="display:none;" id="Proanthocyanidin-0" class="odd">
+		    	<td  style="text-align:left;width: 60px;padding-left:18px;" >Proanthocyanidin 4-6mers
+		     	
+		      
+		         
+		             <a href="#id-5"><sup>5</sup></a>
+		          
+		       
+
+		   </td>      	
+		    <td style="text-align:center;width: 30px;">mg</td>
+		    <td style="text-align:right;width: 30px;">0.0</td>
+			
+		         <td style="text-align:right;">1</td>
+		         <td style="text-align:right;">
+		           	--
+                 </td>
+		     
+		      
+		           <td style="text-align:right;">0.0</td>
+		       
+		           <td style="text-align:right;">0.0</td>
+		       
+			</tr>
+		
+			<tr style="display:none;" id="Proanthocyanidin-0" class="odd">
+		    	<td  style="text-align:left;width: 60px;padding-left:18px;" >Proanthocyanidin 7-10mers
+		     	
+		      
+		         
+		             <a href="#id-5"><sup>5</sup></a>
+		          
+		       
+
+		   </td>      	
+		    <td style="text-align:center;width: 30px;">mg</td>
+		    <td style="text-align:right;width: 30px;">0.0</td>
+			
+		         <td style="text-align:right;">1</td>
+		         <td style="text-align:right;">
+		           	--
+                 </td>
+		     
+		      
+		           <td style="text-align:right;">0.0</td>
+		       
+		           <td style="text-align:right;">0.0</td>
+		       
+			</tr>
+		
+			<tr style="display:none;" id="Proanthocyanidin-0" class="odd">
+		    	<td  style="text-align:left;width: 60px;padding-left:18px;" >Proanthocyanidin polymers (>10mers)
+		     	
+		      
+		         
+		             <a href="#id-5"><sup>5</sup></a>
+		          
+		       
+
+		   </td>      	
+		    <td style="text-align:center;width: 30px;">mg</td>
+		    <td style="text-align:right;width: 30px;">0.0</td>
+			
+		         <td style="text-align:right;">1</td>
+		         <td style="text-align:right;">
+		           	--
+                 </td>
+		     
+		      
+		           <td style="text-align:right;">0.0</td>
+		       
+		           <td style="text-align:right;">0.0</td>
+		       
+			</tr>
+		
+	
+
+
+
+
+
+
+
+
+
+
+
+	
+
+</tbody>
+</table>
+                
+
+                                
+                                 </div>
+               </form>
+               
+         
+                         <div style="font-size:.8em;"><span style="font-weight:bold;">Sources of Data</span>
+                         
+                                 
+                                 <br/><span width="100%" style="line-height:1.2em;"><a name="id-1"></a><sup>1</sup><i>Nutrient Data Laboratory, ARS, USDA</i>&#160;<b>National Food and Nutrient Analysis Program Wave 6h </b>,&#160;2002&#160;&#160;Beltsville
+                                 
+                                 MD
+                                 
+                                 &#160;
+                                 
+                         
+                                 </span>
+                         
+                                 
+                                 <br/><span width="100%" style="line-height:1.2em;"><a name="id-2"></a><sup>2</sup><i>Nutrient Data Laboratory, ARS, USDA</i>&#160;<b>National Food and Nutrient Analysis Program, Wave 9p </b>,&#160;2005&#160;&#160;Beltsville
+                                 
+                                 MD
+                                 
+                                 &#160;
+                                 
+                         
+                                 </span>
+                         
+                                 
+                                 <br/><span width="100%" style="line-height:1.2em;"><a name="id-3"></a><sup>3</sup><i>Nutrient Data Laboratory, ARS, USDA</i>&#160;<b>Total dietary fiber in 104 foods </b>,&#160;1992&#160;&#160;Beltsville
+                                 
+                                 MD
+                                 
+                                 &#160;
+                                 
+                         
+                                 </span>
+                         
+                                 
+                                 <br/><span width="100%" style="line-height:1.2em;"><a name="id-4"></a><sup>4</sup><i>S.W. Leonard, K. Hardin, J.E. Leklem</i>&#160;<b>Vitamin B-6 Content of Spices </b>,&#160;2001&#160;Journal of Food Composition and Analysis&#160;14
+                                 
+                                 &#160;
+                                 
+                                         pp.163-167
+                                 
+                         
+                                 </span>
+                         
+                         
+                 </div>
+         
+         
+                         <div style="font-size:.8em;"><span style="font-weight:bold;">Sources of Data</span>
+                         
+                                          <br/><span width="100%" style="line-height:1.2em;"><a name="id-5"></a><sup>5</sup><i>Gu, L., Kelm, M.A., Hammerstone, J.F., Beecher, G., Holden, J., Haytowitz, D., Gebhardt, S., and Prior, R.L. </i>&#160;<b>Concentrations of proanthocyanidins in common foods and estimations of normal consumption. </b>,&#160;2004&#160;J. Nutr.&#160;134
+                                 
+                                 &#160;
+                                 
+                                         pp.613-617
+                                 
+                         
+                                 </span>
+                         
+                                          <br/><span width="100%" style="line-height:1.2em;"><a name="id-6"></a><sup>6</sup><i>Huber, L. S., Hoffman-Ribani, R., and Rodriguez-Amaya, D. B. </i>&#160;<b>Quantitative variation in Brazilian vegetable sources of flavonols and flavones. </b>,&#160;2009&#160;Food Chemistry&#160;113
+                                 
+                                 &#160;
+                                 
+                                         pp.1278-1282
+                                 
+                         
+                                 </span>
+                         
+                                          <br/><span width="100%" style="line-height:1.2em;"><a name="id-7"></a><sup>7</sup><i>Mattila, P., Astola, J., and Kumpulainen, J.</i>&#160;<b>Determination of flavonoids in plant material by HPLC with diode-array and electro-array detection. </b>,&#160;2000&#160;J. Agric. Food Chem.&#160;48
+                                 
+                                 &#160;
+                                 
+                                         pp.5834-5841
+                                 
+                         
+                                 </span>
+                         
+                         
+                 </div>
+         
+                
+                
+                 
+                            <br>
+                            <div style="font-size:.8em;"><span style="font-weight:bold;">LanguaL Code(s)</span>
+                            <br>
+                            
+                                <ul>
+                                
+                                    <li>A0113&#160;SPICE OR HERB (US CFR)</li>
+                                
+                                    <li>A1272&#160;0200 SPICES AND HERBS (USDA SR)</li>
+                                
+                                    <li>B1550&#160;PARSLEY</li>
+                                
+                                    <li>C0200&#160;LEAF</li>
+                                
+                                    <li>E0151&#160;SOLID</li>
+                                
+                                    <li>F0003&#160;NOT HEAT-TREATED</li>
+                                
+                                    <li>G0003&#160;COOKING METHOD NOT APPLICABLE</li>
+                                
+                                    <li>H0138&#160;WATER REMOVED</li>
+                                
+                                    <li>J0117&#160;HEAT DRIED</li>
+                                
+                                    <li>K0003&#160;NO PACKING MEDIUM USED</li>
+                                
+                                    <li>M0001&#160;CONTAINER OR WRAPPING NOT KNOWN</li>
+                                
+                                    <li>N0001&#160;FOOD CONTACT SURFACE NOT KNOWN</li>
+                                
+                                    <li>P0024&#160;HUMAN FOOD, NO AGE SPECIFICATION</li>
+                                
+                                </ul>
+                                </div>
+                    
+            </div>
+           
+       </div>
+    
+ </div>
+ </div>
+        <div class="footer">
+        National Nutrient Database for Standard Reference<br/>Release 26
+			&#160;&#160;Software v.1.3.1
+		</div>
+    </body>
+    <script src="/ndb/static/js/application.js" type="text/javascript" ></script>
+
+</html>
