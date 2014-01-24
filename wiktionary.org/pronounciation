@@ -1,3 +1,3 @@
 #!/bin/sh
 # Usage: $0 en androgynous
-curl -s "https://${1}.wiktionary.org/wiki/`printf %s "$2" | urlencode`" | sed -ne '/.*<span class="IPA" lang="" xml:lang="">.*/{s#.*ml:lang="">/\([^/]*\)/.*#\1#p;q}'
+curl -s "https://${1}.wiktionary.org/wiki/`printf %s "$2" | urlencode`" | sed -ne '/.*<span class="IPA" lang="">.*/{s#.*lang="">/\([^/]*\)/.*#\1#p;q}'
