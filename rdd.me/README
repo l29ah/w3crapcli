@@ -1,15 +1,15 @@
 This set of scripts enables you to shorten URLs using Readability service,
-rdd.me. It not only shortens the URL but also provides reading interface that
-presents the page in an uncluttered way (no bars, no columns, no nothing -
-content only).
+rdd.me. But It not only shortens the URL, though, it also provides reading
+interface that presents the page in an uncluttered way (no bars, no columns, no
+nothing - content only).
 
 The service also allows you to download ePub version of the cleaned page. The
 script won't download the file for you, though. You should pass the URL to the
-external program (e.g. wget) who would do that for you.
+external program (e.g. wget) that would do it for you.
 
 The script is hosted by w3crapcli project [1]
 
-    1. http://w3crapcli.blasux.ru
+    1. https://github.com/l29ah/w3crapcli
 
 All the code is licensed under the 3-clause BSD license. See LICENSE for more
 details.
@@ -52,8 +52,11 @@ $ rdd.me.pl --epub 'http://perldoc.perl.org/functions/say.html'
 
 You should probably pipe the result into wget or something so the file is
 downloaded right away. Note that as of this writing (August 2013) ePub
-filenames are rather cryptic (it starts with rdb and contains numerical ID of
-some kind), so you should probably change the output filename, too.
+filenames are rather cryptic (they start with rdb and contain numerical ID of
+some kind), so you should probably change the output filename, too. Note also
+the fact that the service needs some time to prepare the ePub, so you should
+retry downloading the file until you're sure it returned ePub document and not
+HTML one. While doing so, please show some love to the service - use delays.
 
 
 Author
