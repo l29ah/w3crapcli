@@ -1,0 +1,67 @@
+This set of scripts enables you to shorten URLs using Readability service,
+rdd.me. But It not only shortens the URL, though, it also provides reading
+interface that presents the page in an uncluttered way (no bars, no columns, no
+nothing - content only).
+
+The service also allows you to download ePub version of the cleaned page. The
+script won't download the file for you, though. You should pass the URL to the
+external program (e.g. wget) that would do it for you.
+
+The script is hosted by w3crapcli project [1]
+
+    1. https://github.com/l29ah/w3crapcli
+
+All the code is licensed under the 3-clause BSD license. See LICENSE for more
+details.
+
+
+How to Install
+==============
+
+All you need to do is place the script in one of the directories mentioned in
+your PATH environment variable. You can either create separate directory for
+scripts like that and add it to your PATH, or just copy scripts someplace that
+is already in your PATH.
+
+Make sure all dependencies are available.
+
+
+Dependencies
+============
+
+* Perl 5.10 or above, placed or symlinked at /usr/bin/perl
+* Perl libraries:
+  - Getopt::Long
+  - HTTP::Lite
+  - JSON
+
+
+Usage
+=====
+
+Simply call rdd.me.pl with a URL to shorten:
+
+$ rdd.me.pl 'http://perldoc.perl.org/functions/say.html'
+
+(we use quotes to prevent the shell from messing with the URL). The script
+should promptly return shortened URL.
+
+If you want a URL of the ePub to download, pass --epub parameter:
+
+$ rdd.me.pl --epub 'http://perldoc.perl.org/functions/say.html'
+
+You should probably pipe the result into wget or something so the file is
+downloaded right away. Note that as of this writing (August 2013) ePub
+filenames are rather cryptic (they start with rdb and contain numerical ID of
+some kind), so you should probably change the output filename, too. Note also
+the fact that the service needs some time to prepare the ePub, so you should
+retry downloading the file until you're sure it returned ePub document and not
+HTML one. While doing so, please show some love to the service - use delays.
+
+
+Author
+======
+
+The script is written by Alexander Batischev. You can contact me via email:
+eual dot jp at gmail dot com.
+
