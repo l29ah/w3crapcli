@@ -1,0 +1,3 @@
+#!/bin/sh
+# Usage: $0 hashrate power price
+curl -s "http://www.coinwarz.com/cryptocurrency/?sha256HashRate=1000.00&sha256Power=500.00&sha256PowerCost=0.1000&scryptHashRate=$1&scryptPower=$2&scryptPowerCost=$3&sha256Check=false&scryptCheck=true&e=BTCe" | sed -ne '/coin" class="link"><b>/{N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;/SHA-256/b;s#.*coin" class="link"><b>\([^\r]*\).* *\(\$[0-9]*\.[0-9]*\).*#\1	\2#p}'
