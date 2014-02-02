@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
 query=`echo $1 | tr ' ' '+'`
-
-porn_pages=`curl -sL "http://www.youporn.com/search/relevance/?category_id=0&type=straight&page=1&query="$query | grep "videoTitle" | cut -f 3 -d "/"`
+porn_pages=`curl -sL "http://www.youporn.com/search/relevance/?category_id=0&type=straight&page=1&query="$query | grep -E "videoTitle.*watch" | cut -f 3 -d "/"`
 
 
 for i in `echo $porn_pages | tr ' ' '\n'`; do
-	curl -sL 'http://youporn.com/watch/'$i | grep "For iPhone" | sed 's:</li>:^:g;s:<a :*:g' | cut -f 3 -d '^' | cut -f 2 -d '*' | sed 's:>MP4.*::;s:href=\"::;s:\"::;s:\t::g;s:</ul>::' | htmldecode
+    curl -sL 'http://youporn.com/watch/'$i | grep '$video.src' | uniq | sed -e "s|\$video.src = '||;s|'\;||"
 done
