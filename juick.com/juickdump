@@ -6,20 +6,21 @@ use utf8;
 binmode STDOUT, ":utf8";
 $page=1;
 $url="http://juick.com/$ARGV[0]/";
+$before="9999999";
 while (1) {
-	$response = get("$url?page=$page");
-	@posts = ($response =~ m#<li class="liav".*?</li>#sg);
+	$response = get("$url?before=$before");
+	@posts = ($response =~ m#<li.*?class="msg">.*?</li>#sg);
+	#print Dumper(@posts);
 	if ($#posts == -1) {
 		print "All done!\n";
 		exit 0;
 	}
 	foreach $post (@posts) {
-		$post =~ m#<div class="msgnum">.*?">(.*?)</a></div>#s;
-		print "$1 ";
-		foreach $tag ($post =~ m#<a href="./\?tag=.*?">\*(.*?)</a>#sg) {
-			print "*$tag ";
-		}
-		$post =~ m#<div class="msgtxt">(.*?)</div>#s;
+		$post =~ m#id="msg-([0-9]*)"#s;
+		$before=$1;
+		print "$1: ";
+		map { print "*$_ " } ($post =~ m#\*<a href=".*?/\?tag=.*?">(.*?)</a>#sg);
+		$post =~ m#<div class="msg-txt">(.*?)</div>#s;
 		$body = $1;
 		$body =~ s#<a href="http://juick.com/[0-9]*.*">(.*?)</a>#$1#sg;
 		$body =~ s#<a href="(.*?)" rel="nofollow">.*?</a>#$1#sg;
@@ -28,5 +29,4 @@ while (1) {
 		print "\n$body\n";
 		print "-"x80 . "\n";
 	}
-	$page++;
 }
