@@ -6,5 +6,5 @@ else
 	trap 'rm "$f"' EXIT
 	cat > "$f"
 fi
-curl -w %{redirect_url} -F "file=@$f" http://dump.bitcheese.net/upload-file?simple
+curl -w %{redirect_url} -F "file=@\"$f\"" http://dump.bitcheese.net/upload-file?simple
 echo
