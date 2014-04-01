@@ -1,3 +1,0 @@
-#!/bin/bash
-# Usage: $0 http://soundcloud.com/electric_children
-curl -Ls "$1" | sed -ne 's#.*,"title":"\([^"]*\)",.*,"streamUrl":"\([^"]*\)",.*#\1\t\2#p'
