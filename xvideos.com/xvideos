@@ -1,0 +1,3 @@
+#!/bin/sh
+# Usage: $0 http://www.xvideos.com/video7009497/perfect_babes_first_tag_team
+curl -s "$1" | sed -ne 's#.*&amp;flv_url=\([^&]*\)&.*#\1#p' | urldecode
