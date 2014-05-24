@@ -1,0 +1,40 @@
+#!/bin/bash
+# Usage: $0 <peer ID, as in https://vk.com/im?sel=12345>
+PEER="${1:?You must specify the peer ID.}"
+umask 0077
+read LOGIN PASSWORD < ~/.config/vkbash
+TMP_COOKIE="`mktemp`"
+TMP_LOGDIR="`mktemp -d`"
+trap 'rm -rf "$TMP_COOKIE" "$TMP_LOGDIR"' EXIT
+regex='/<tr id=\"mess\d*\" class="im_(in|out).*date=\"(\d*)\">[\s\S]*?<td class=\"im_log_body\">.*?<\/div>([\s\S]*?)<\/div><\/td>[\s\S]*?<\/tr>/gi'
+PRCMD="perl -e '\$a=\"\"; foreach(<STDIN>) {\$a=\"\$a\$_\";} while(\$a =~ $regex) {print \"\$1|\$2|\$3\\n\";}'"
+UA="Mozilla/5.0 (X11; Linux x86_64; rv:16.0) Gecko/20100101 Firefox/16.0"
+
+IP_H=$(curl -A "$UA" -L http://vk.com 2> /dev/null | grep -Po "ip_h=[^&]*")
+IP_H=${IP_H:5}
+
+curl -L -d act="login" \
+	-d role="al_frame" \
+	-d expire="" \
+	-d captcha_sid="" \
+	-d captcha_key="" \
+	-d _origin="http://vk.com" \
+	-d ip_h="$IP_H" \
+	-d email="$LOGIN" \
+	-d pass="$PASSWORD" \
+	-b "$TMP_COOKIE" -c "$TMP_COOKIE" -A "$UA" "https://login.vk.com?act=login" &> /dev/null
+
+offset=0
+cd "$TMP_LOGDIR"
+while :; do
+	curl -A "$UA" -L "http://vk.com/al_im.php" -b "$TMP_COOKIE" -c "$TMP_COOKIE" \
+		-d act="a_history" \
+		-d al="1" \
+		-d offset="$offset" \
+		-d peer="$PEER" \
+		-d whole="1" 2> /dev/null | iconv -f cp1251 | perl -e "\$a=\"\"; foreach(<STDIN>) {\$a=\"\$a\$_\";} while(\$a =~ $regex) {print \"\$1|\$2|\$3\\n\";}" > "$offset"
+	[ -s "$offset" ] || break
+	offset=$((offset + 2000))
+done
+
+cat `ls -1c` | sed -e 's#<br>#\n#g;s#<[^>]*>##g;s#^in|#<#;s#^out|#>#' | htmldecode
