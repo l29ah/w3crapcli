@@ -1,0 +1,10 @@
+#!/bin/bash
+# Usage: $0 < "<login> <password>"
+fn=`tempfile -p vkbashcookies`
+trap 'rm "$fn";' EXIT
+umask 0077
+read login password
+wget --save-cookies "$fn" "https://login.vk.com/?act=login" --post-data "email=`printf %s "$login"`&pass=`printf %s "$password" | urlencode`" -O /dev/null 2> /dev/null
+url="$(wget --load-cookies "$fn" "http://oauth.vk.com/authorize?client_id=3082784&scope=audio&redirect_uri=http://oauth.vk.com/blank.html&display=wap&response_type=token" --post-data='submit=Разрешить' -O - -o /dev/null | sed -n 's#.*action="\([^"]*\).*#\1#p')"
+wget --load-cookies "$fn" "$url" -O - -o /dev/null
+
