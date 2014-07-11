@@ -5,9 +5,9 @@ There're plenty of options:
 
 1) some scripts got Makefiles and/or INSTALL files - check them out
 
-2) you can always move scripts to some directory mentioned in your PATH
-   environment variable. Note, though, that this way it's harder to mantain
-   scripts up-to-date (you would need to move new versions, too).
+2) you can always symlink scripts to some directory mentioned in your PATH
+   environment variable. Note, though, that some scripts may depend on other
+   scripts, and you should put them into your PATH too.
 
 3) some scripts are supported outside w3crapcli project. One may fetch them
    using `get-aliens.sh' script.
