@@ -14,14 +14,14 @@ See INSTALL file.
 How do I contribute?
 ====================
 
-git clone
-cd w3crapcli
-[hack-hack]
-git commit
-git send-email --to=zl29ah@gmail.com origin
++ git clone
++ cd w3crapcli
++ [hack-hack]
++ git commit
++ git send-email --to=zl29ah@gmail.com origin
 
 
 Contacts
 ========
 
-There's a XMPP multiuser char at w3crapcli@conference.jabber.ru
+There's a XMPP multiuser chat at w3crapcli@conference.jabber.ru
