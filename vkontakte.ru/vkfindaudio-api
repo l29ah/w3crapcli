@@ -2,7 +2,7 @@
 # Usage: $0 <terms> < "<login> <password>"
 TMOUT=10
 spit () {
-	jq -r '.response[] | .url + "	" + .artist + " - " + .title' 2>/dev/null
+	jq -r '.response[] | .url + "	" + .artist + " - " + .title' 2>/dev/null | htmldecode
 }
 cnt=300
 fn=`tempfile -p vkbashcookies`
