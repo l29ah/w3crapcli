@@ -1,8 +1,5 @@
-#!/bin/bash
-msgs="`mailibox ${1:?Usage: $0 <username>}`"
-if [ -z "$msgs" ]; then
-	echo "No mail for $1." 1>&2
-	exit 1
-else
-	echo "${msgs}" | xargs -n 1 mailiread $1
-fi
+#!/bin/sh
+tok=202055f2976f4cbd936c2f13de990cc4
+for i in `curl -s "https://api.mailinator.com/api/inbox?to=$1&token=$tok" | jq -r '.messages[].id'`; do
+	curl -s "https://api.mailinator.com/api/email?msgid=$i&token=$tok" | jq -r '"Subject: " + .data.subject, .data.parts[].body'
+done

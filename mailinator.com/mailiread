@@ -1,6 +1,0 @@
-#!/bin/bash
-usage="Usage: $0 <username> <messageid from mailibox>"
-# HTML version
-# Xtract "*//div[@id = 'message']//*" <(hget "http://mailinator.com/showmail.jsp?email=$1&msgid=$2&utf8=yep" | tidy -asxml 2>/dev/null)
-# Plain text
-curl -s "http://mailinator.com/showmail2.jsp?email=${1:?$usage}&msgid=${2:?$usage}"

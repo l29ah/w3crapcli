@@ -1,3 +1,0 @@
-#!/bin/sh
-# Usage: $0 <address w/o domain and '@'>
-curl -s "http://mailinator.com/maildir.jsp?email=$(printf %s $1 | urlencode)&x=0&y=0" | sed -ne 's#.*<font color=red>\(.*\)#\1#p'

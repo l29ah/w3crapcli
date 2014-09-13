@@ -1,2 +1,0 @@
-#!/bin/bash
-curl -s "http://mailinator.com/maildir.jsp?email=${1:?Usage: $0 <username>}" | tr "&>" "\n\n" | sed -ne 's/msgid=\([0-9]*\)/\1/p'
