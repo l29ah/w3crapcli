@@ -1,2 +1,4 @@
-#!/bin/sh
-perl -MHTML::Entities -ne 'print decode_entities($_)'
+#!/usr/bin/perl -CS
+use utf8;
+use HTML::Entities;
+while (<>) { print decode_entities($_); }
