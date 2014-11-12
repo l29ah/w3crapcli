@@ -18,3 +18,5 @@ cd dump.bitcheese.net
 get 'https://gist.github.com/Voker57/221804/raw/dump.sh' dump.sh
 chmod +x dump.sh
 cd ..
+
+git clone https://git.fleshless.org/zfh-tools zfh.so
