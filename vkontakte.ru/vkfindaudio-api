@@ -36,7 +36,7 @@ n="`jq -r '.response[0]' < "$t"`"
 spit < "$t"
 for o in `seq 300 300 "$n"`; do
 	wget --load-cookies "$fn" "https://api.vk.com/method/audio.search?q=`printf %s "$1" | urlencode`&offset=$o&count=$cnt&access_token=$at" -O- 2> /dev/null > "$t"
-	[ `jq -r '.response[1]' < "$t"` = null ] && break
+	[ "`jq -r '.response[1]' < "$t"`" = null ] && break
 	sleep 0.3
 	spit < "$t"
 done
