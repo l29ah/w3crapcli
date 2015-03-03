@@ -1,0 +1,4 @@
+#!/bin/bash
+./vkfindaudio-api "$@" < ~/.config/vkbash | while read url name; do
+	wget --no-check-certificate "${url}" -O "${name}.mp3"
+done
