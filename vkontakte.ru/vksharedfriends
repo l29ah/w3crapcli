@@ -1,0 +1,7 @@
+#!/bin/bash
+getfriends=$(dirname $(which "$0"))/vkgetfriends
+count=$#
+while [[ -n "$1" ]]; do
+	$getfriends "$1"
+	shift
+done | sort | uniq -c | sed -rn "s#\s+${count} ##p"
