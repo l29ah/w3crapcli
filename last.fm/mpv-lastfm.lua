@@ -1,7 +1,7 @@
 -- last.fm scrobbler for mpv
 --
 -- Usage:
--- put this file to ~/.mpv/lua
+-- put this file in ~/.config/mpv/scripts
 -- put lastfm.pl somewhere in your PATH
 -- create a file ~/.config/lastfm with the following content:
 -- $login = 'vpupkin';
