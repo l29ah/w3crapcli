@@ -5,7 +5,7 @@ auth() {
 	umask 0077
 	read login password
 	wget --save-cookies "$fn" "https://login.vk.com/?act=login" --post-data "email=`printf %s "$login" | urlencode`&pass=`printf %s "$password" | urlencode`" -O /dev/null 2> /dev/null
-	export at=$(wget --load-cookies "$fn" "http://oauth.vk.com/authorize?client_id=3082784&scope=audio&redirect_uri=http://oauth.vk.com/blank.html&display=wap&response_type=token" --post-data='submit=Разрешить' -O /dev/null 2>&1 | grep "access_token" | cut -d "=" -f2 | cut -d "&" -f1)
+	export at=$(wget --load-cookies "$fn" "http://oauth.vk.com/authorize?client_id=2740767&scope=$1&redirect_uri=http://oauth.vk.com/blank.html&display=wap&response_type=token" --post-data='submit=Разрешить' -O /dev/null 2>&1 | grep "access_token" | cut -d "=" -f2 | cut -d "&" -f1)
 }
 
 dbg() {

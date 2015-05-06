@@ -1,7 +1,7 @@
 #!/bin/bash
 . $(dirname $(which "$0"))/vkapi.sh
 
-auth
+auth audio
 
 while [ -f "$1" ]; do
 	t="$(api "audio.getUploadServer?access_token=${at}" | jq -r '.response.upload_url')"

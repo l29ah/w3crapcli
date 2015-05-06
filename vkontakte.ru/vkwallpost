@@ -1,0 +1,8 @@
+#!/bin/bash
+. $(dirname $(which "$0"))/vkapi.sh
+
+auth wall < ~/.config/vkbash
+
+text="`urlencode`"
+attach="`printf "$1" | urlencode`"
+api "wall.post?access_token=${at}&message=$text&attachments=$attach"
