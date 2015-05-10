@@ -1,0 +1,6 @@
+#!/bin/sh
+tags="`printf %s $1 | urlencode`"
+clubs="`printf %s $2 | urlencode`"
+text="`urlencode`"
+login="`cat ~/.config/bnwbash`"
+curl -s "https://bnw.im/api/post" -d "tags=$tags&clubs=$clubs&text=$text&login=$login" | sed -e 's#.* \(http[^"]*\).*#\1#'
