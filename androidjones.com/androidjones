@@ -1,0 +1,20 @@
+#!/bin/bash
+base="http://androidjones.com"
+curl -s $base/tag/event-posters/ |
+sed -n 's#.*'$base'/tag/\([^/]*\)/.*#\1#p' |
+sort -u |
+while read tag; do
+	mkdir $tag
+	cd $tag
+	posts=$(curl -s "$base/tag/$tag/" |
+		sed -n 's#.*pw\.feeds.* = \({.*}\).*#\1#p' |
+		jq -c '.feed_outline')
+	curl -s \
+		--data '{"args":{"post_ids":'"$posts"',"fields":"preview","options":{"galleries":{"include_galleries":false,"move_galleries":true,"parent_post":true,"require_image":false,"include_posts":true}}},"nonce":78}' \
+		$base/wp-admin/admin-ajax.php?action=pw_get_posts |
+		jq -r '.data[].image.sizes.full.url' |
+	while read url; do
+		wget "$url"
+	done
+	cd ..
+done
