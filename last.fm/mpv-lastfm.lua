@@ -55,7 +55,7 @@ function on_metadata()
 		album = nil
 		length = nil
 	else
-		length = mp.get_property("length")
+		length = mp.get_property("duration")
 		if length and tonumber(length) < 30 then return end	-- last.fm doesn't allow scrobbling short tracks
 		artist = m["artist"]
 		if not artist then
