@@ -3,14 +3,19 @@ baseurl="http://visionlabart.com/"
 page=1
 while :; do
 	empty=1
-	curl -s "${baseurl}collections/types?q=Fine%20Art&page=$i" |
-	sed -rn 's#.*href="/(products[^"]*)".*#\1#p' |
-	while read pgurl; do
+	pgurls=$(
+		curl -s "${baseurl}collections/types?q=Fine%20Art&page=$page" |
+		sed -rn 's#.*href="/(products[^"]*)".*#\1#p'
+	)
+	for pgurl in $pgurls; do
 		empty=0
+		echo $pgurl
 		url=$(curl -s "${baseurl}/${pgurl}" |
 			grep '<a.*id="mainImage"' |
 			sed -rne 's#.*href="([^?"]*)[?"].*#http:\1#p')
 		wget "$url"
-	done
+	done 
+
+	((page++))
 	[[ "$empty" == "1" ]] && break
 done
