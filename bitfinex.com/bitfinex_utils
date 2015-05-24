@@ -1,0 +1,43 @@
+#!/bin/bash
+BITFINEX_KEY=
+BITFINEX_SECRET=
+
+nonce() {
+	local nonce=$(cat nonce 2>/dev/null)
+	nonce=${nonce:-0}
+	((nonce++))
+	echo $nonce > nonce
+	echo $nonce
+}
+
+dbg() {
+	>&2 echo "$@"
+}
+
+api() {
+	[[ -z "$BITFINEX_KEY" || -z "$BITFINEX_SECRET" ]] && {
+		dbg "ERROR: you should set BITFINEX_KEY and BITFINEX_SECRET"
+		exit 1
+	}
+	local request=$1
+	local json=$(jq -c ".request=\"/v1$request\" | .nonce=\"$(nonce)\"")
+	#dbg "$(jq . <<<"$json")"
+	local payload=$(echo -n "$json" | base64 -w0)
+	local signature=$(echo -n "$payload" | openssl sha384 -r -hex -hmac "$BITFINEX_SECRET" | cut -f1 -d' ')
+	((NONCE++))
+	curl -s \
+		-H "X-BFX-APIKEY: $BITFINEX_KEY" \
+		-H "X-BFX-PAYLOAD: $payload" \
+		-H "X-BFX-SIGNATURE: $signature" \
+		-d "" \
+		https://api.bitfinex.com/v1${request}
+}
+
+get_history() {
+	api /history <<<"{\"currency\":\"$1\", \"wallet\":\"$2\"}"
+}
+
+bfx_deposit_profit() {
+	get_history $1 deposit |
+	jq 'reduce .[] as $item (0; . + if ($item.description | contains("Swap Payment")) then ($item.amount | tonumber) else 0 end)'
+}
