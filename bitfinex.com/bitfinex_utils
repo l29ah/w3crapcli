@@ -2,6 +2,10 @@
 BITFINEX_KEY=
 BITFINEX_SECRET=
 
+BITFINEX_API_URL="https://api.bitfinex.com/v1"
+
+source "$(dirname $(readlink -f "$0"))/../utils/define_colors.sh"
+
 nonce() {
 	local nonce=$(cat nonce 2>/dev/null)
 	nonce=${nonce:-0}
@@ -12,6 +16,10 @@ nonce() {
 
 dbg() {
 	>&2 echo "$@"
+}
+
+api_open() {
+	curl -s "${BITFINEX_API_URL}${1}"
 }
 
 api() {
@@ -30,14 +38,107 @@ api() {
 		-H "X-BFX-PAYLOAD: $payload" \
 		-H "X-BFX-SIGNATURE: $signature" \
 		-d "" \
-		https://api.bitfinex.com/v1${request}
+		"${BITFINEX_API_URL}${request}"
 }
 
-get_history() {
+
+bfx_ticker() {
+	api_open /pubticker/${1}
+}
+
+bfx_stats() {
+	api_open /stats/${1}
+}
+
+bfx_lendbook() {
+	api_open /lendbook/${1}
+}
+
+bfx_orderbook() {
+	api_open /book/${1}
+}
+
+bfx_trades() {
+	api_open /trades/${1}
+}
+
+bfx_lends() {
+	api_open /lends/${1}
+}
+
+bfx_symbols() {
+	api_open /symbols
+}
+
+bfx_symbols_details() {
+	api_open /symbols_details
+}
+
+bfx_history() {
 	api /history <<<"{\"currency\":\"$1\", \"wallet\":\"$2\"}"
 }
 
-bfx_deposit_profit() {
-	get_history $1 deposit |
+bfx_history_movements() {
+	api /history/movements <<<"{\"currency\":\"$1\"}"
+}
+
+bfx_offers() {
+	api /offers <<<"{}"
+}
+
+bfx_credits() {
+	api /credits <<<"{}"
+}
+
+bfx_pretty_profit() {
+	bfx_history $1 deposit |
 	jq 'reduce .[] as $item (0; . + if ($item.description | contains("Swap Payment")) then ($item.amount | tonumber) else 0 end)'
+}
+
+_bfx_convert_rate() {
+	#bc -l <<<"e(1/365*l(1+${1}/100))"
+	echo "$[$1/365]"
+}
+
+_bfx_pretty_offers() {
+	jq -r '.[] | [.currency, .amount, .rate, .timestamp, .period | tostring] | join("\t")' | {
+		echo -e		"${BWhi}Amount           ${RCol}│ ${BWhi}Rate       ${RCol}│ ${BWhi}Estimated profit ${RCol}│ ${BWhi}Days left ${RCol}│ ${BWhi}Opened at          $RCol"
+		echo -e		"═════════════════╪════════════╪══════════════════╪═══════════╪════════════════════"
+		while read currency amount rate timestamp period; do
+			timestamp=${timestamp%%.*}
+			now=$(date +%s)
+			rate=$(_bfx_convert_rate $rate)
+			printf	"%-3s ${Gre}%12f${RCol} │ %8.4f %% │ %-3s ${BIGre}%12f${RCol} │ %-9d │ %-15s\n" \
+				"$currency" \
+				"$amount" \
+				"$[rate]" \
+				"$currency" \
+				"$[amount*rate]" \
+				"$[period - (now-timestamp)/86400]" \
+				"$(date --date="@$timestamp" "+%X %x")"
+		done
+		echo -e		"─────────────────┴────────────┴──────────────────┴───────────┴────────────────────"
+	}
+	echo -ne "$RCol"
+}
+
+bfx_pretty_swap_state() {
+	echo
+	echo "${BGre}Swaps currently provided${RCol}"
+	echo
+	bfx_credits | _bfx_pretty_offers
+	echo
+	echo "${BYel}Unfilled swap offers${RCol}"
+	echo
+	bfx_offers | _bfx_pretty_offers
+	echo
+	echo "${BCya}Lendbook (USD)${RCol}"
+	echo
+	echo "${BWhi} --=={ ${BRed}Bids ${BWhi}}==--     --=={ ${BGre}Asks ${BWhi}}==--"
+	bfx_lendbook USD | \
+	jq -r '[.bids, .asks] | transpose | map({"bid": .[0], "ask": .[1]}) | .[] | [.bid.amount, ((.bid.rate | tonumber)/365|tostring), .ask.amount, ((.ask.rate|tonumber)/365|tostring)] | join("\t")' | head -n 10 |
+	while read bamnt bid aamnt ask; do
+		printf "${BWhi}%6.4f ${Whi}[%10.2f]  ${BWhi}%6.4f ${Whi}[%10.2f]\n" "$bid" "$bamnt" "$ask" "$aamnt"
+	done
+	echo -ne "${RCol}"
 }
