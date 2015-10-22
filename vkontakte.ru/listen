@@ -1,4 +1,8 @@
 #!/bin/bash
-out=`vkfindaudio-api "$*" < ~/.config/vkbash`
+if [[ -n "$2" ]]; then
+	out=`vkfindaudio-api "$1" < ~/.config/vkbash | egrep "$2"`
+else
+	out=`vkfindaudio-api "$1" < ~/.config/vkbash`
+fi
 echo $out
-mplayer `egrep -o 'http[^ ]*\.mp3' <<< $out`
+mpv `egrep -o 'http[^ ]*\.mp3' <<< $out`
