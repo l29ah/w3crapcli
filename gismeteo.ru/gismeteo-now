@@ -1,2 +1,2 @@
 #!/bin/sh
-curl -s http://m.gismeteo.ru/ | perl -ne 's#.*temp">([^<]*)&deg;C<.*#\1# and print' | htmldecode
+curl -s -A Firefox http://m.gismeteo.ru/ | sed -ne 's#.*weather__temp"><span>\([^<]*\).*#\1#p'
