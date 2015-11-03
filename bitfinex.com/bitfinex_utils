@@ -75,7 +75,7 @@ bfx_symbols_details() {
 }
 
 bfx_history() {
-	api /history <<<"{\"currency\":\"$1\", \"wallet\":\"$2\"}"
+	api /history <<<"{\"currency\":\"$1\"${2:+, \"wallet\":\"$2\"}}"
 }
 
 bfx_history_movements() {
@@ -88,6 +88,10 @@ bfx_offers() {
 
 bfx_credits() {
 	api /credits <<<"{}"
+}
+
+bfx_positions() {
+	api /positions <<<"{}"
 }
 
 bfx_pretty_profit() {
@@ -141,4 +145,23 @@ bfx_pretty_swap_state() {
 		printf "${BWhi}%6.4f ${Whi}[%10.2f]  ${BWhi}%6.4f ${Whi}[%10.2f]\n" "$bid" "$bamnt" "$ask" "$aamnt"
 	done
 	echo -ne "${RCol}"
+}
+
+bfx_pretty_positions() {
+	bfx_positions | jq -r '.[] | [.timestamp, .symbol, .base, .amount, .swap, .pl ] | join("\t")' | {
+		echo -e		"${BWhi}Opened at         │ Symbol │   Rate   │  Amount  │  Swap  │ Profit/Loss        "
+		echo -e		"${BWhi}══════════════════╪════════╪══════════╪══════════╪════════╪════════════════════"
+		while read timestamp symbol base amount swap pl; do
+			timestamp=${timestamp%%.*}
+			[[ "$pl" -gt "0" ]] && plcolor=$BIGre || plcolor=$BIRed
+			printf	"%-15s │ ${Gre}%6s${RCol} │ %8.4f │ %8.4f │ %6.2f │ ${plcolor}%8.2f${RCol}\n" \
+				"$(date --date="@$timestamp" "+%X %x")" \
+				"$symbol" \
+				"$base" \
+				"$amount" \
+				"$swap" \
+				"$pl"
+		done
+		echo -e		"${BWhi}──────────────────┴────────┴──────────┴──────────┴────────┴────────────────────"
+	}
 }
