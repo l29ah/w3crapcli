@@ -1,10 +1,16 @@
 #!/bin/bash
+up() {
+	curl -sw %{redirect_url} -F "file=@\"$1\"" https://dump.bitcheese.net/upload-file?simple | sed -e 's#http#https#' | urldecode
+	echo
+}
 if [[ -n "$1" ]]; then
-	f="$1"
+	while [[ -n "$1" ]]; do
+		up "$1"
+		shift
+	done
 else
 	f="`tempfile`"
 	trap 'rm "$f"' EXIT
 	cat > "$f"
+	up "$f"
 fi
-curl -w %{redirect_url} -F "file=@\"$f\"" https://dump.bitcheese.net/upload-file?simple | sed -e 's#http#https#'
-echo
