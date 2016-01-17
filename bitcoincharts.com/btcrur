@@ -1,0 +1,2 @@
+#!/bin/sh
+curl -s http://api.bitcoincharts.com/v1/markets.json | jq '.[] | select(.symbol=="btceRUR").close'
