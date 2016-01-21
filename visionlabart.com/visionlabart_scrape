@@ -1,21 +1,24 @@
 #!/bin/bash
-baseurl="http://visionlabart.com/"
+baseurl="http://visionlabart.com"
 page=1
-while :; do
-	empty=1
-	pgurls=$(
-		curl -s "${baseurl}collections/types?q=Fine%20Art&page=$page" |
-		sed -rn 's#.*href="/(products[^"]*)".*#\1#p'
-	)
-	for pgurl in $pgurls; do
-		empty=0
-		echo $pgurl
-		url=$(curl -s "${baseurl}/${pgurl}" |
-			grep '<a.*id="mainImage"' |
-			sed -rne 's#.*href="([^?"]*)[?"].*#http:\1#p')
-		wget "$url"
-	done 
 
-	((page++))
-	[[ "$empty" == "1" ]] && break
+collections=$(
+	curl -s "${baseurl}/pages/all-artists" |
+	sed -rn 's#.*href="/collections/([^"]*-art)".*#\1#p'
+)
+for coll in $collections; do
+	mkdir $coll
+	products=$(
+		curl -s "${baseurl}/collections/${coll}?view=all" |
+		sed -rn 's#.*href="/collections/.*-art/products/([^"]*)".*#\1#p' |
+		sort -u
+	)
+	for prod in $products; do
+		url=$(
+			curl -s "${baseurl}/collections/${coll}/products/${prod}" |
+			sed -rn 's#.*data-zoom-image="([^"]*)".*#https:\1#p'
+		)
+		echo "$coll/$prod"
+		wget -q "$url" -O "$coll/${prod}.jpg"
+	done 
 done
