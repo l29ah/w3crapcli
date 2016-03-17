@@ -1,0 +1,45 @@
+#!/bin/bash
+[[ -f "$1" ]] || {
+	echo "$1 not found"
+	exit 1
+}
+
+t=$(mktemp)
+
+tac "$1" |
+awk -F, '
+	BEGIN {
+		OFS=",";
+		v["EXCHANGE"] = 0.0;
+		v["TRADING"] = 0.0;
+		v["DEPOSIT"] = 0.0;
+	}
+
+	{
+		sub(/^.* on wallet /, "", $2);
+		v[toupper($2)] = $4;
+		print $5, v["EXCHANGE"], v["TRADING"], v["DEPOSIT"]
+	}
+' > "$t"
+
+gp=$(mktemp)
+cat >$gp <<EOF
+set datafile separator ","
+set xdata time
+set timefmt "%Y-%m-%d %H:%M:%S"
+set format x "%m.%y"
+
+set style data lines
+set grid
+
+#set term png size 2000,600
+#set output 'bfx_hist_usd.png'
+plot \
+	'$t' using 1:2 title 'Exchange', \
+	'$t' using 1:3 title 'Trading', \
+	'$t' using 1:4 title 'Deposit'
+pause -1
+EOF
+
+gnuplot "$gp"
+rm "$t" "$gp"
