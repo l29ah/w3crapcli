@@ -1,7 +1,10 @@
 #!/bin/bash
 up() {
-	curl -sw %{redirect_url} -F "file=@\"$1\"" https://dump.bitcheese.net/upload-file?simple | sed -e 's#http#https#' | urldecode
-	echo
+	sum=`sha512sum "$1" | cut -d\  -f1`
+	url=`curl -sf https://dump.bitcheese.net/search/sha512/$sum?simple` && echo $url || {
+		curl -sw %{redirect_url} -F "file=@\"$1\"" https://dump.bitcheese.net/upload-file?simple | sed -e 's#http#https#' | urldecode
+		echo
+	}
 }
 if [[ -n "$1" ]]; then
 	while [[ -n "$1" ]]; do
