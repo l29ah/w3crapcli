@@ -4,6 +4,12 @@
 . $(dirname $(which "$0"))/vkapi.sh
 TMOUT=10
 auth audio
-aid=`echo "$1" | sed -e 's#.*album_id=\([0-9]*\).*#\1#'`
-oid=`echo "$1" | sed -e 's#.*audios\(-*[0-9]*\).*#\1#'`
-wget -O- "https://api.vk.com/method/audio.get?owner_id=$oid&album_id=$aid&offset=0&count=6000&access_token=${at}" -O- 2> /dev/null | jq -r '.response[1:][] | .url + "	" + .artist + " - " + .title' | htmldecode
+spitpipe='.url + "	" + .artist + " - " + .title'
+if echo "$1" | grep -q wall; then
+	wid=`echo "$1" | sed -e 's#.*wall\(-*[0-9]*_[0-9]*\).*#\1#'`
+	wget -O- "https://api.vk.com/method/wall.getById?posts=$wid&offset=0&count=6000&access_token=${at}" -O- 2> /dev/null | jq -r ".response[].attachments[].audio | $spitpipe" 2>/dev/null | htmldecode
+else
+	aid=`echo "$1" | sed -e 's#.*album_id=\([0-9]*\).*#\1#'`
+	oid=`echo "$1" | sed -e 's#.*audios\(-*[0-9]*\).*#\1#'`
+	wget -O- "https://api.vk.com/method/audio.get?owner_id=$oid&album_id=$aid&offset=0&count=6000&access_token=${at}" -O- 2> /dev/null | jq -r ".response[1:][] | $spitpipe" 2>/dev/null | htmldecode
+fi
