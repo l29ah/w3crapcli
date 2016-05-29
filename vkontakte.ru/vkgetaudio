@@ -1,0 +1,9 @@
+#!/bin/bash
+# Usage: $0 <URL>
+# Example: $0 'https://vk.com/audios-3456205?album_id=51410843'
+. $(dirname $(which "$0"))/vkapi.sh
+TMOUT=10
+auth audio
+aid=`echo "$1" | sed -e 's#.*album_id=\([0-9]*\).*#\1#'`
+oid=`echo "$1" | sed -e 's#.*audios\(-*[0-9]*\).*#\1#'`
+wget -O- "https://api.vk.com/method/audio.get?owner_id=$oid&album_id=$aid&offset=0&count=6000&access_token=${at}" -O- 2> /dev/null | jq -r '.response[1:][] | .url + "	" + .artist + " - " + .title' | htmldecode
