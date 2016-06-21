@@ -4,7 +4,7 @@
 # $login = 'vpupkin';
 # $password = 'mycoolpassword';
 
-$hs_url = "http://post.audioscrobbler.com/";
+$hs_url = "https://post.audioscrobbler.com/";
 $client_id = "lsd";
 $client_version = "1.0.4";
 $debug = 1;
