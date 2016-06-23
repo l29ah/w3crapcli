@@ -1,0 +1,7 @@
+#!/bin/bash
+apikey='2106a30bdb931db58ebdb4416171cbe4'	# up to 60 requests per minute TOTAL, don't abuse plzkthx
+set -o pipefail
+while o="`curl -s 'http://api.openweathermap.org/data/2.5/find?q='"$1"'&units=metric&mode=json&APPID='$apikey | jq -r '.list[0].main.temp'`"; do
+	echo -n "$o"
+	[[ -z "$o" ]] || break
+done
