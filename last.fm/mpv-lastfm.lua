@@ -2,12 +2,18 @@
 --
 -- Usage:
 -- put this file in ~/.config/mpv/scripts
--- put lastfm.pl somewhere in your PATH
--- create a file ~/.config/lastfm with the following content:
--- $login = 'vpupkin';
--- $password = 'mycoolpassword';
+-- put https://github.com/hauzer/scrobbler somewhere in your PATH
+-- run `scrobbler add-user` and follow the instructions
+-- create a file ~/.mpv/lua-settings/lastfm.conf with the following content:
+-- username=<your last.fm user name>
 
 local msg = require 'mp.msg'
+require 'mp.options'
+
+local options = {
+	username = "change username in lua-settings/lastfm.conf"
+}
+read_options(options, 'lastfm')
 
 function mkmetatable()
 	local m = {}
@@ -27,20 +33,21 @@ function scrobble()
 
 	msg.info(string.format("Scrobbling %s - %s", artist, title))
 
-	-- Using https://github.com/l29ah/w3crapcli/blob/master/last.fm/lastfm.pl
-	os.execute(string.format("lastfm.pl '%s' '%s' '%s' %d", esc(artist), esc(title), esc(album), length))
+	optargs = ''
+	if album then
+		optargs = string.format("%s '--album=%s'", optargs, esc(album))
+	end
+	if length then
+		optargs = string.format("%s '--duration=%d'", optargs, length)
+	end
+	args = string.format("scrobbler scrobble '%s' '%s' '%s' now", esc(options.username), esc(artist), esc(title))
+	msg.debug(args)
+	os.execute(args)
 end
 
 function enqueue()
 	mp.resume_all()
 	if artist and title then
-		if not album then
-			album = ""
-		end
-		if not length then
-			length = 30	-- FIXME the old API sucks: it returns OK if the length is not specified/is 0/is -1, but doesn't scrobble anything.
-		end
-
 		if tim then tim.kill(tim) end
 		tim = mp.add_timeout(math.min(240, length / 2), scrobble)
 	end
