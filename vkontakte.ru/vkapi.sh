@@ -2,7 +2,7 @@
 auth() {
 	atf=~/.config/vkbash/access_token
 	if [ ! -e "$atf" ]; then
-		echo "Usage: go to <http://oauth.vk.com/authorize?client_id=2740767&scope=offline,audio,wall,photos&redirect_uri=http://oauth.vk.com/blank.html&display=wap&response_type=token> and copy the access_token from url to $atf" >&2
+		echo "Usage: go to <http://oauth.vk.com/authorize?client_id=2740767&scope=offline,audio,wall,photos&redirect_uri=http://oauth.vk.com/blank.html&display=page&response_type=token> and copy the access_token from url to $atf" >&2
 		exit 1
 	fi
 	export at=$(cat "$atf")
