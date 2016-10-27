@@ -1,5 +1,5 @@
 #!/bin/bash
-getfriends=$(dirname $(which "$0"))/vkgetfriends
+getfriends=$(dirname $(readlink -f $(which "$0")))/vkgetfriends
 count=$#
 while [[ -n "$1" ]]; do
 	$getfriends "$1"

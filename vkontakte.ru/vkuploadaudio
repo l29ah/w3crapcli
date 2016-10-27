@@ -1,5 +1,5 @@
 #!/bin/bash
-. $(dirname $(which "$0"))/vkapi.sh
+. $(dirname $(readlink -f $(which "$0")))/vkapi.sh
 
 auth audio
 

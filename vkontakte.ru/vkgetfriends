@@ -1,4 +1,4 @@
 #!/bin/bash
-. $(dirname $(which "$0"))/vkapi.sh
+. $(dirname $(readlink -f $(which "$0")))/vkapi.sh
 
 api "friends.get?user_id=${1}&fields=nickname" | jq -jr '.response[] | "https://vk.com/id", .uid, "\t", .first_name, " ", .last_name, "\n"'
