@@ -1,10 +1,10 @@
 #!/usr/bin/perl
 
-# ~/.config/lastfm looks like this:
+# ~/.config/librefm looks like this:
 # $login = 'vpupkin';
 # $password = 'mycoolpassword';
 
-$hs_url = "https://post.audioscrobbler.com/";
+$hs_url = "http://turtle.libre.fm/";
 $client_id = "lsd";
 $client_version = "1.0.4";
 $debug = 1;
@@ -14,13 +14,13 @@ use LWP::UserAgent;
 use Digest::MD5 qw(md5_hex);
 use URI::Escape;
 
-die "Usage: lastfm.pl <artist> <title> <album> <length>" unless $#ARGV==3;
+die "Usage: librefm.pl <artist> <title> <album> <length>" unless $#ARGV==3;
 $ua = LWP::UserAgent->new;
 
-do "$ENV{HOME}/.config/lastfm";
+do "$ENV{HOME}/.config/librefm";
 
 foreach ("login", "password") {
-	die "No $_ in ~/.config/lastfm" unless ${$_};
+	die "No $_ in ~/.config/librefm" unless ${$_};
 }
 
 my $resp = $ua->get($hs_url."?hs=true&p=1.1&c=$client_id&v=$client_version&u=$login");
