@@ -1,0 +1,10 @@
+#!/bin/bash
+# Usage: $0 "<search terms>"
+# You need to auth manually using w3m(1) before use
+for o in {0..500..50}
+do
+	w3m -o auto_uncompress=1 -O utf8 -dump_source \
+		"https://m.vk.com/audio?act=search&offset=$o&q=$(echo "$1" | urlencode)" |
+		sed -ne '/ai_artist/{N;N;N;N;s#.*ai_artist">\(.*\)</span.*divider.*ai_title">\(.*\)</span.*value="\([^"]*mp3[^"]*\)".*#\3	\1 - \2#;s#<[^>]*>##gp}' |
+		htmldecode
+done
