@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby24
+require 'nokogiri'
+require 'open-uri'
+
+cmd = "mpv -shuffle --"
+mainpage = Nokogiri.parse(open("http://musicforprogramming.net/"))
+mainpage.search("div#episodes/a").each do |a|
+	a_pg = Nokogiri.parse(open("http://musicforprogramming.net/" + a["href"]))
+	cmd = cmd + " " + a_pg.at("audio")["src"]
+end
+system(cmd)
