@@ -49,8 +49,14 @@
         return "[object Object]" === Object.prototype.toString.call(e)
     }
 
+    function unwrapFixAndWrap(s) {
+        var indexOfFirstSpace = /\s/.exec(s).index;
+        var url = s.slice(0, indexOfFirstSpace);
+        return a(url) + s.slice(indexOfFirstSpace);
+    }
+
     var s = readline();
     while (s !== null) {
-        print(a(s));
+        print(unwrapFixAndWrap(s));
         s = readline();
     }
