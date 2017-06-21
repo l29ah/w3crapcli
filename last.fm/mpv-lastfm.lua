@@ -50,10 +50,11 @@ function enqueue()
 	if artist and title then
 		if tim then tim.kill(tim) end
 		if length then
-			tim = mp.add_timeout(math.min(240, length / 2), scrobble)
+			timeout = math.min(240, length / 2)
 		else
-			tim = mp.add_timeout(240)
+			timeout = 240
 		end
+		tim = mp.add_timeout(timeout, scrobble)
 	end
 end
 
