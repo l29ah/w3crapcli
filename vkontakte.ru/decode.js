@@ -8,6 +8,16 @@
                 for (var i, a = n + n, o = e.length; o--;) i = a.indexOf(e[o]), ~i && (e[o] = a.substr(i - t, 1));
                 return e.join("")
             },
+            s: function(e, t) {
+                var n = e.length;
+                if (n) {
+                    var i = s(e, t),
+                        a = 0;
+                    for (e = e.split(""); ++a < n;) e[a] = e.splice(i[n - 1 - a], 1, e[a])[0];
+                    e = e.join("")
+                }
+                return e
+            },
             x: function(e, t) {
                 var n = [];
                 return t = t.charCodeAt(0), each(e.split(""), function(e, i) {
@@ -16,47 +26,45 @@
             }
         };
 
-    function a(e) {
+    function o(e) {
         if (~e.indexOf("audio_api_unavailable")) {
             var t = e.split("?extra=")[1].split("#"),
-                n = o(t[1]);
-            if (t = o(t[0]), !n || !t) return e;
-            n = n.split(String.fromCharCode(9));
-            for (var a, r, s = n.length; s--;) {
-                if (r = n[s].split(String.fromCharCode(11)), a = r.splice(0, 1, t)[0], !i[a]) return e;
-                t = i[a].apply(null, r)
+                n = "" === t[1] ? "" : r(t[1]);
+            if (t = r(t[0]), "string" != typeof n || !t) return e;
+            n = n ? n.split(String.fromCharCode(9)) : [];
+            for (var o, s, l = n.length; l--;) {
+                if (s = n[l].split(String.fromCharCode(11)), o = s.splice(0, 1, t)[0], !i[o]) return e;
+                t = i[o].apply(null, s)
             }
             if (t && "http" === t.substr(0, 4)) return t
         }
         return e
     }
 
-    function o(e) {
+    function r(e) {
         if (!e || e.length % 4 == 1) return !1;
         for (var t, i, a = 0, o = 0, r = ""; i = e.charAt(o++);) i = n.indexOf(i), ~i && (t = a % 4 ? 64 * t + i : i, a++ % 4) && (r += String.fromCharCode(255 & t >> (-2 * a & 6)));
         return r
     }
-    function each(e, t) {
-        if (!e) return e;
-        if (isObject(e) || "undefined" == typeof e.length) {
-            for (var n in e)
-                if (e.hasOwnProperty(n) && t.call(e[n], n, e[n]) === !1) break
-        } else
-            for (var i = 0, a = e.length; a > i && t.call(e[i], i, e[i]) !== !1; i++);
-        return e
-    }
-    function isObject(e) {
-        return "[object Object]" === Object.prototype.toString.call(e)
+
+    function s(e, t) {
+        var n = e.length,
+            i = [];
+        if (n) {
+            var a = n;
+            for (t = Math.abs(t); a--;) i[a] = (t += t * (a + n) / t) % n | 0
+        }
+        return i
     }
 
-    function unwrapFixAndWrap(s) {
-        var indexOfFirstSpace = /\s/.exec(s).index;
-        var url = s.slice(0, indexOfFirstSpace);
-        return a(url) + s.slice(indexOfFirstSpace);
+    function unwrapFixAndWrap(str) {
+        var indexOfFirstSpace = /\s/.exec(str).index;
+        var url = str.slice(0, indexOfFirstSpace);
+        return o(url) + str.slice(indexOfFirstSpace);
     }
 
-    var s = readline();
-    while (s !== null) {
-        print(unwrapFixAndWrap(s));
-        s = readline();
+    var str = readline();
+    while (str !== null) {
+        print(unwrapFixAndWrap(str));
+        str = readline();
     }
