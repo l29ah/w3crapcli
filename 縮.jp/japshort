@@ -1,2 +1,0 @@
-#!/bin/bash
-curl -s --data-urlencode "fUrl=$1" http://api.xn--jj0a.jp/generate.json | sed -r 's/.*"generated":"([^"]+)".*/\1\n/'
