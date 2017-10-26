@@ -38,9 +38,9 @@ function scrobble()
 		optargs = string.format("%s '--album=%s'", optargs, esc(album))
 	end
 	if length then
-		optargs = string.format("%s '--duration=%d'", optargs, length)
+		optargs = string.format("%s '--duration=%ds'", optargs, length)
 	end
-	args = string.format("scrobbler scrobble '%s' '%s' '%s' now > /dev/null", esc(options.username), esc(artist), esc(title))
+	args = string.format("scrobbler scrobble %s -- '%s' '%s' '%s' now > /dev/null", optargs, esc(options.username), esc(artist), esc(title))
 	msg.debug(args)
 	os.execute(args)
 end
