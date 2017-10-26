@@ -1,0 +1,7 @@
+#!/bin/sh
+# Usage: $0 https://waterflame.newgrounds.com/audio/
+for u in $(curl -s "$1" | sed -n -e 's,.*<a href="\([^"]*/\)listen\(/[^"]*\)".*,https:\1download\2,p'); do
+	relu="$(curl -v "$u" 2>&1 | sed -ne 's,.*location: \(https.*\),\1,p')"
+	fn="$(echo "$relu" | cut -d / -f 5- | cut -d \? -f 1)"
+	wget "$relu" -O "$fn"
+done
