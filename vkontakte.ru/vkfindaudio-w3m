@@ -1,11 +1,13 @@
 #!/bin/bash
 # Usage: $0 "<search terms>"
 # You need to auth manually using w3m(1) before use
+vkid=$(w3m -o auto_uncompress=1 -O utf8 -dump_source https://m.vk.com/ | sed -n -e 's,.*vk_id=\([^&]*\)&.*,\1,p')
 for o in {0..500..50}
 do
-	w3m -o auto_uncompress=1 -O utf8 -dump_source \
-		"https://m.vk.com/audio?act=search&offset=$o&q=$(echo "$1" | urlencode)" |
+	{
+		echo "$vkid"
+		w3m -o auto_uncompress=1 -O utf8 -dump_source "https://m.vk.com/audio?act=search&offset=$o&q=$(echo "$1" | urlencode)" |
 		sed -ne '/ai_title/{N;N;N;N;s#.*ai_title">\(.*\)</span.*divider.*ai_artist">\(.*\)</span.*value="\([^"]*mp3[^"]*\)">#\3	\2 - \1#;s#<[^>]*>##g;p}' |
-		htmldecode |
-		js -f "$(dirname "$(readlink -f "$(which "$0")")")/decode.js"
+		htmldecode
+	} | js45 -f "$(dirname "$(readlink -f "$(which "$0")")")/decode.js"
 done
