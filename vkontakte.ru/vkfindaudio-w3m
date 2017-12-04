@@ -1,6 +1,7 @@
 #!/bin/bash
 # Usage: $0 "<search terms>"
 # You need to auth manually using w3m(1) before use
+# spidermonkey-1.8.5 is recommended as it doesn't mess up unicode unlike 45.0.2
 vkid=$(w3m -o auto_uncompress=1 -O utf8 -dump_source https://m.vk.com/ | sed -n -e 's,.*vk_id=\([^&]*\)&.*,\1,p')
 for o in {0..500..50}
 do
@@ -9,5 +10,5 @@ do
 		w3m -o auto_uncompress=1 -O utf8 -dump_source "https://m.vk.com/audio?act=search&offset=$o&q=$(echo "$1" | urlencode)" |
 		sed -ne '/ai_title/{N;N;N;N;s#.*ai_title">\(.*\)</span.*divider.*ai_artist">\(.*\)</span.*value="\([^"]*mp3[^"]*\)">#\3	\2 - \1#;s#<[^>]*>##g;p}' |
 		htmldecode
-	} | js45 -f "$(dirname "$(readlink -f "$(which "$0")")")/decode.js"
+	} | js -f "$(dirname "$(readlink -f "$(which "$0")")")/decode.js"
 done
