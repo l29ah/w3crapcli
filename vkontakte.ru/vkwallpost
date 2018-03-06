@@ -5,4 +5,4 @@ auth wall < ~/.config/vkbash
 
 text="`urlencode`"
 attach="`printf "$1" | urlencode`"
-api "wall.post?access_token=${at}&message=$text&attachments=$attach"
+api "wall.post?access_token=${at}&message=$text&attachments=$attach&v=5.73"
