@@ -1,0 +1,4 @@
+#!/bin/sh
+out="$(curl -s https://www.quandl.com/api/v1/datasets/CURRFX/$1.csv | sed -ne '2{s#[^,]*,\([^,]*\),.*#\1#p;q}')"
+echo "$out" | grep -v exceed
+echo "$out" | grep exceed >&2
