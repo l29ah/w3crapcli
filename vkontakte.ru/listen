@@ -6,5 +6,5 @@ if [[ -n "$1" ]]; then
 else
 	out=`vkfindaudio-w3m "$st"`
 fi
-echo $out
+echo "$out"
 mpv `egrep -o 'http[^ ]*\.mp3' <<< $out`
