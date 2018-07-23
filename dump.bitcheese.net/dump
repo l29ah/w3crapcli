@@ -1,11 +1,13 @@
 #!/bin/bash
 set -o pipefail
 up() {
-	sum=`sha512sum "$1" | cut -d\  -f1`
-	url=`curl -sf https://dump.bitcheese.net/search/sha512/$sum?simple | sed -e 's#http#https#'` && echo $url || {
-		curl -sw %{redirect_url} -F "file=@\"$1\"" https://dump.bitcheese.net/upload-file?simple | sed -e 's#http#https#' | urldecode
+	sum=$(sha512sum "$1" | cut -d\  -f1)
+	if url=$(curl -sf "https://dump.bitcheese.net/search/sha512/$sum?simple" | sed -e 's#http#https#'); then
+		echo "$url"
+	else
+		curl -sw '%{redirect_url}' -F "file=@\"$1\"" https://dump.bitcheese.net/upload-file?simple | sed -e 's#http#https#' | urldecode
 		echo
-	}
+	fi
 }
 if [[ -n "$1" ]]; then
 	while [[ -n "$1" ]]; do
@@ -13,7 +15,7 @@ if [[ -n "$1" ]]; then
 		shift
 	done
 else
-	f="`tempfile`"
+	f="$(mktemp)"
 	trap 'rm "$f"' EXIT
 	cat > "$f"
 	up "$f"
