@@ -4,14 +4,14 @@
 -- put this file in ~/.config/mpv/scripts
 -- put https://github.com/hauzer/scrobbler somewhere in your PATH
 -- run `scrobbler add-user` and follow the instructions
--- create a file ~/.mpv/script-ops/lastfm.conf with the following content:
+-- create a file ~/.mpv/script-opts/lastfm.conf with the following content:
 -- username=<your last.fm user name>
 
 local msg = require 'mp.msg'
 require 'mp.options'
 
 local options = {
-	username = "change username in script-ops/lastfm.conf"
+	username = "change username in script-opts/lastfm.conf"
 }
 read_options(options, 'lastfm')
 
