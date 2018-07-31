@@ -31,18 +31,20 @@ function scrobble()
 		return string.gsub(s, "'", "'\\''")
 	end
 
-	msg.info(string.format("Scrobbling %s - %s", artist, title))
+	if artist and title then
+		msg.info(string.format("Scrobbling %s - %s", artist, title))
 
-	optargs = ''
-	if album then
-		optargs = string.format("%s '--album=%s'", optargs, esc(album))
+		optargs = ''
+		if album then
+			optargs = string.format("%s '--album=%s'", optargs, esc(album))
+		end
+		if length then
+			optargs = string.format("%s '--duration=%ds'", optargs, length)
+		end
+		args = string.format("scrobbler scrobble %s -- '%s' '%s' '%s' now > /dev/null", optargs, esc(options.username), esc(artist), esc(title))
+		msg.verbose(args)
+		os.execute(args)
 	end
-	if length then
-		optargs = string.format("%s '--duration=%ds'", optargs, length)
-	end
-	args = string.format("scrobbler scrobble %s -- '%s' '%s' '%s' now > /dev/null", optargs, esc(options.username), esc(artist), esc(title))
-	msg.debug(args)
-	os.execute(args)
 end
 
 function enqueue()
