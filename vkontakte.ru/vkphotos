@@ -1,0 +1,14 @@
+#!/bin/bash
+set -x
+. $(dirname $(which "$0"))/vkapi.sh
+
+auth photos < ~/.config/vkbash
+len=1
+counter=0
+file=$(tempfile -p vkphotos)
+wget -c $(while [[ $len -gt 0 ]]; do
+	api "photos.getAll?v=5.92&access_token=${at}&owner_id=$1&extended=0&count=200&offset=$((counter * 200))" | jq -r '.response.items[].sizes[] | select(.type | contains("z")).url' > "$file"
+	len=$(wc -l "$file" | cut -d\  -f1)
+	cat "$file"
+	counter=$((counter + 1))
+done)
