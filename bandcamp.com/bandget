@@ -1,18 +1,22 @@
 #!/bin/bash
-f="`tempfile`"
+f="$(mktemp)"
 trap 'rm "$f"' EXIT
 curl -s "$1" > "$f"
-artist="`sed -ne 's#.*artist : "\([^"]*\).*#\1#p' "$f"`"
-album="`sed -ne 's#.*album_title : "\([^"]*\).*#\1#p' "$f"`"
-d="$artist - $album"
+artist="$(sed -ne 's%.*artist: "\([^"]\+\)".*%\1%p' "$f" | head -n 1)"
+album="$(sed -ne 's%.*album_title: "\([^"]\+\)".*%\1%p' "$f")"
+
+d="${artist} - ${album}"
 mkdir -p "$d"
 cd "$d"
+
 export IFS='
 '
-for c in `tr '}' '\n' < "$f" | sed -ne 's#\\\/#/#g;s#.*"track_num":\([^,]*\),.*"title":"\([^"]*\)".*"file":{"[^"]*":"\(ht[^"]*\)".*#\1	\2	\3#p'`; do
-	IFS='	' read track_num title url <<< "$c"
-	IFS=' '
-	fn="`printf '%.2d' "$track_num"` $title.mp3"
-	wget -c "$url" -O "$fn"
-	mid3v2 -a "$artist" -A "$album" -t "$title" -T "$track_num" "$fn"
+for track in $(cat "$f" | grep 'trackinfo: ' | sed 's%trackinfo: %%g;s%}\],$%}\]%g' | jq -r '. | map([.["track_num"], .["title"], .["file"]["mp3-128"]] | join("𝕊")) | join("\n")'); do
+  IFS='𝕊' read track_num title url <<< "${track}"
+  IFS='
+'
+  mp3fn="$(printf '%.2d' "${track_num}") ${title}.mp3"
+  echo "${mp3fn}"
+  wget -c "${url}" -O "${mp3fn}"
+  id3v2 -a "${artist}" -A "${album}" -t "${title}" -T "${track_num}" "${mp3fn}"
 done
