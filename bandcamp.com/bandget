@@ -1,11 +1,12 @@
 #!/bin/bash
+# TODO: fix cyrillic/non-latin chars
 f="$(mktemp)"
 trap 'rm "$f"' EXIT
 curl -s "$1" > "$f"
 artist="$(sed -ne 's%.*artist: "\([^"]\+\)".*%\1%p' "$f" | head -n 1)"
 album="$(sed -ne 's%.*album_title: "\([^"]\+\)".*%\1%p' "$f")"
 
-d="${artist} - ${album}"
+d="$(printf "${artist} - ${album}" | sed 's%[<>/:|&]%_%g')"
 mkdir -p "$d"
 cd "$d"
 
@@ -15,7 +16,7 @@ for track in $(cat "$f" | grep 'trackinfo: ' | sed 's%trackinfo: %%g;s%}\],$%}\]
   IFS='𝕊' read track_num title url <<< "${track}"
   IFS='
 '
-  mp3fn="$(printf '%.2d' "${track_num}") ${title}.mp3"
+  mp3fn="$(printf '%.2d' "${track_num}") $(printf "${title}" | sed 's%[<>/:|&]%_%g').mp3"
   echo "${mp3fn}"
   wget -c "${url}" -O "${mp3fn}"
   id3v2 -a "${artist}" -A "${album}" -t "${title}" -T "${track_num}" "${mp3fn}"
