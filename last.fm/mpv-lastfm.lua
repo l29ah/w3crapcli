@@ -60,32 +60,43 @@ function enqueue()
 	end
 end
 
-function on_metadata()
-	local m = mkmetatable()
-	local icy = m["icy-title"]
-	if icy then
-		-- TODO better magic
-		artist, title = string.gmatch(icy, "(.+) %- (.+)")()
-		album = nil
-		length = nil
-	else
-		length = mp.get_property("duration")
-		if length and tonumber(length) < 30 then return end	-- last.fm doesn't allow scrobbling short tracks
-		artist = m["artist"]
-		if not artist then
-			artist = m["ARTIST"]
+function new_track()
+	if mp.get_property("metadata/list/count") then
+		local m = mkmetatable()
+		local icy = m["icy-title"]
+		if icy then
+			-- TODO better magic
+			artist, title = string.gmatch(icy, "(.+) %- (.+)")()
+			album = nil
+			length = nil
+		else
+			length = mp.get_property("duration")
+			if length and tonumber(length) < 30 then return end	-- last.fm doesn't allow scrobbling short tracks
+			artist = m["artist"]
+			if not artist then
+				artist = m["ARTIST"]
+			end
+			album = m["album"]
+			if not album then
+				album = m["ALBUM"]
+			end
+			title = m["title"]
+			if not title then
+				title = m["TITLE"]
+			end
 		end
-		album = m["album"]
-		if not album then
-			album = m["ALBUM"]
-		end
-		title = m["title"]
-		if not title then
-			title = m["TITLE"]
-		end
+		enqueue()
 	end
-	enqueue()
 end
 
-mp.register_event("metadata-update", on_metadata)
-mp.register_event("file-loaded", on_metadata)
+function on_restart()
+	audio_pts = mp.get_property("audio-pts")
+	-- FIXME a better check for -loop'ing tracks
+	if ((not audio_pts) or (tonumber(audio_pts) < 1)) then
+		new_track()
+	end
+end
+
+mp.register_event("metadata-update", new_track)
+mp.register_event("file-loaded", new_track)
+mp.register_event("playback-restart", on_restart)
