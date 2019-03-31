@@ -1,0 +1,4 @@
+#!/bin/bash
+radioid="${1:?Usage: $0 4}"
+hash='$baad15d58e5b8b61531f8704cf913cd120a5bab0*0.2974652781657737~'
+curl -s "https://www.jamendo.com/api/radios/planning?radioId=$radioid&limit=1000" -H 'Accept: application/json, text/javascript, */*; q=0.01' -H 'Accept-Language: en-US,en;q=0.5' --compressed -H "X-Jam-Call: $hash" -H 'X-Jam-Version: 1106ir' | jq '.[] | .trackId' | sed -e 's#^\(.*\)$#https://mp3l.jamendo.com/?trackid=\1\&format=mp34\&from=app-97dab294#'
