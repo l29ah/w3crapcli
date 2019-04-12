@@ -1,0 +1,2 @@
+#!/bin/sh
+exec curl -sLT "$@" https://pstbin.ru
