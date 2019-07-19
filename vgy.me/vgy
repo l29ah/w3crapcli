@@ -1,0 +1,2 @@
+#!/bin/sh
+curl -s -F "file=@$1" https://vgy.me/upload | grep -Po '(?<="image":")[^"]*' | sed 's/\\//g'
