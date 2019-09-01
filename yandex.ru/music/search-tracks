@@ -1,0 +1,2 @@
+#!/bin/bash
+curl -sS "https://music.yandex.ru/search?text=$(echo -n "$1" | urlencode)&type=tracks" | sed -ne 's#.*var Mu=\(.*\);</script><scri.*#\1#p' | jq -r '.pageData.result.tracks.items[] | "https://music.yandex.ru/album/" + (.albums[0].id | tostring) + "/track/" + (.id | tostring)'
