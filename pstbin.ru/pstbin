@@ -1,2 +1,2 @@
 #!/bin/sh
-exec curl -sLT "$@" https://pstbin.ru
+curl -sLT - https://pstbin.ru/ < "$@" | cut -d\  -f 1
