@@ -1,0 +1,8 @@
+#!/bin/sh
+if [ -n "$1" ]; then
+	# we got an URL
+	curl --trace-ascii - -L http://needsmorejpeg.com/upload -F 'image="";filename=""' -F "image=$1" | sed -n -e 's#.*<meta property="og:image" content="\([^"]*\)".*#\1#p'
+else
+	echo FIXME!
+	#curl -L http://needsmorejpeg.com/upload -F 'image=@-'
+fi
