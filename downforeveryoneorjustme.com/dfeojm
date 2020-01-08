@@ -1,0 +1,2 @@
+#!/bin/sh
+exec curl 'https://api.downfor.cloud/httpcheck/'"$1" --http2 -H 'Host: api.downfor.cloud' -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.9) Gecko/20100101 Goanna/4.4 Firefox/68.9 PaleMoon/28.8.0' -H 'Accept: */*' -H 'Accept-Language: en-US,en;q=0.5' --compressed -H 'origin: https://downforeveryoneorjustme.com' -H 'Referer: https://api.downfor.cloud/' -H 'Connection: keep-alive' -H 'Cache-Control: max-age=0'
