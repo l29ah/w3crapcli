@@ -1,0 +1,2 @@
+#!/bin/sh
+echo "https://hls.goodgame.ru/hls/$(curl -s "$1" | sed -ne 's#.* channel="\([^"]*\)".*#\1#p' | sed q).m3u8"
