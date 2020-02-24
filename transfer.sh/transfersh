@@ -1,0 +1,2 @@
+#!/bin/sh
+exec curl --upload-file "$1" "https://transfer.sh/$(basename "$1")"
