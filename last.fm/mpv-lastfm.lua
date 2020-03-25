@@ -97,6 +97,5 @@ function on_restart()
 	end
 end
 
-mp.register_event("metadata-update", new_track)
-mp.register_event("file-loaded", new_track)
+mp.observe_property("metadata/list/count", nil, new_track)
 mp.register_event("playback-restart", on_restart)
