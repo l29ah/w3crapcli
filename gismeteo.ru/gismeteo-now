@@ -1,2 +1,3 @@
 #!/bin/sh
-curl -s -A Firefox http://m.gismeteo.ru/ | sed -ne 's#.*weather__temp"><span>\([^<]*\).*#\1#p'
+w=https://m.gismeteo.ru/
+curl -sL -A Firefox "$w" | sed -n -e 's#.*\"cur_w\":{\"temp\":\([^,]*\),.*#\1#p'
