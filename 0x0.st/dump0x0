@@ -1,0 +1,2 @@
+#!/bin/sh
+exec curl "-Ffile=@$1" http://0x0.st
