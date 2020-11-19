@@ -1,0 +1,60 @@
+#!/bin/bash
+
+APPNAME=$(basename "${0}")
+if ! [[ ${1} =~ https*://transfiles.ru/[0-9a-z]+$ ]]; then
+	echo "usage: ${APPNAME} https://transfiles.ru/<ID>"
+	exit 1
+fi
+
+USERAGENT="Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0"
+REFERER="${1}"
+ORIGIN="${1%/*}"
+UP_LINK="${1##*/}"
+
+inf() {
+	echo "[${APPNAME}] ${1}"
+}
+
+err() {
+	if [[ ${1} -ne 0 ]]; then
+		echo "[${APPNAME}] ${2}" >&2
+		exit 1
+	fi
+}
+
+inf "Downloading webpage"
+WEBPAGE=$(curl -f --user-agent "${USERAGENT}" "${REFERER}")
+err ${?} "Downloading webpage failed"
+UP_URL=$(grep -oP "var UP_URL = '\K[0-9]+(?='.+$)" <<< "${WEBPAGE}")
+err ${?} "UP_URL variable not found on webpage"
+
+inf "Downloading AJAX data"
+AJAX_DATA=$(curl -f -d "link=${UP_LINK}" --user-agent "${USERAGENT}" --referer "${REFERER}" -H "Origin: ${ORIGIN}" -H "X-Requested-With: XMLHttpRequest" "${ORIGIN}/getFilelist")
+	# only X-Requested-With header is vital, but try to more (not ideal)
+	# mimic as browser to prevent fingerprinting
+err ${?} "Downloading AJAX data failed"
+
+IFS=$'\n'
+ID_LIST=($(echo "${AJAX_DATA}" | grep -oP '"id":\K[0-9]+(?=.+$)'))
+err ${?} "Cannot extract file IDs from AJAX data"
+NAME_LIST=($(echo "${AJAX_DATA}" | grep -oP '"name":"\K[^"]+(?=.+$)'))
+err ${?} "Cannot extract file names from AJAX data"
+[[ ${#ID_LIST[@]} -eq ${#NAME_LIST[@]} ]]
+err ${?} "Extracted file IDs and file names count not match"
+
+inf "Downloading ${#ID_LIST[@]} files..."
+for (( i=0; i<${#ID_LIST[@]}; i++ )); do
+	NAME_LIST[i]=$(echo -e "${NAME_LIST[i]}")
+	inf "Downloading ${NAME_LIST[i]}..."
+	curl -fo "${NAME_LIST[i]}" --retry 3 --user-agent "${USERAGENT}" --referer "${REFERER}" "${ORIGIN}/getFiles/${UP_URL}?chosen=${ID_LIST[i]}"
+	# only referer header is vital, but -- see previous comment
+	[[ ${?} -ne 0 ]] && {
+	   inf "Downloading ${NAME_LIST[i]} failed"
+	   ((errc++))
+	}
+done
+if [[ ${errc} -eq 0 ]]; then
+	inf "Download completed"
+else
+	inf "Download completed with errors, ${errc}/${#ID_LIST[@]} files failed"
+fi
