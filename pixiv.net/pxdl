@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# download images and collections from pixiv.net
+
+[[ ( ${1} =~ "-"[^x]+ ) || ( ${#} -ne 3 && ${1} = "-x" ) || ( ${1} != "-x" && ${#} -ne 1 ) ]] && {
+	echo "Usage: pxdl [-x <curl_proxy>] <illust_id>"
+	exit 1
+}
+
+CMD=(curl -fv --referer "https://www.pixiv.net/")
+if [[ ${1} = "-x" ]]; then
+	PROXY="${2}"
+	CMD+=(-x "${2}")
+	shift 2
+fi
+CMD+=("https://www.pixiv.net/touch/ajax/illust/details?illust_id=${1}")
+
+AJAX_DATA=$("${CMD[@]}")
+errno=${?}
+if [[ ${errno} -ne 0 ]]; then
+	case ${errno} in
+		22) echo "pxdl: Can't download metainformation: illustration not found";;
+		*) echo "pxdl: Can't download metainformation: connection failed"
+	esac
+	exit 1
+fi
+
+URL=$(echo "$AJAX_DATA" | json_pp | grep -oP '"url_big" : \"\K.+?(?=\"\,$)' | sort -u | uniq)
+if [[ -z ${URL} ]]; then
+	echo "pxdl: Can't download images: illustration not found"
+	exit 1
+fi
+
+echo "pxdl: Found $(echo "${URL}" | wc -l) images, downloading..."
+declare -a URL_ERR
+for i in ${URL}; do
+	CMD=(curl -fv --referer "https://www.pixiv.net/" --retry 3 -o "${i##*/}")
+	[[ -n $PROXY ]] && CMD+=(-x "${PROXY}")
+	CMD+=(-o "${i##*/}" "${i}")
+	"${CMD[@]}"
+
+	errno=${?}
+	if [[ ${errno} -ne 0 ]]; then
+		echo "pxdl: error downloading ${i}"
+		URL_ERR[${#URL_ERR[@]}]="${i}"
+	fi
+done
+
+if [[ ${#URL_ERR[@]} -ne 0 ]]; then
+	echo "pxdl: ${#URL_ERR[@]} of $(echo "${URL}" | wc -l) images failed to download"
+	echo "pxdl: Following URL's not downloaded:"
+	IFS=$'\n'
+	echo "${URL_ERR[*]}"
+	exit 1
+else
+	echo "pxdl: $(echo "${URL}" | wc -l) images succesfully downloaded"
+	exit 0
+fi
