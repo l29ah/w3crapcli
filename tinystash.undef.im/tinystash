@@ -1,3 +1,6 @@
 #!/bin/sh
-mime=$(file --mime-type "$1" | sed -e 's#.* \([^ ]*\)$#\1#')
-exec curl https://tinystash.undef.im/upload/file -H app-id:myapp -H content-type:"$mime" --data-binary @"$1"
+if ! mime=$(file -Eb --mime-type "$1"); then
+	echo "$mime"
+	exit 1
+fi
+exec curl https://tinystash.undef.im/upload/file -H app-id:"${W3CRAPCLI_TINYSTASH_APP_ID:-w3crapcli}" -H content-type:"$mime" --data-binary @"$1"
