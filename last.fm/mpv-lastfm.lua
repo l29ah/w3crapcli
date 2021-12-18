@@ -25,7 +25,6 @@ function mkmetatable()
 end
 
 function scrobble()
-	mp.resume_all()
 	-- Parameter escaping function. Works with POSIX shells; idk if there's a better way to call stuff portably in Lua.
 	function esc(s)
 		return string.gsub(s, "'", "'\\''")
@@ -48,7 +47,6 @@ function scrobble()
 end
 
 function enqueue()
-	mp.resume_all()
 	if artist and title then
 		if tim then tim.kill(tim) end
 		if length then
