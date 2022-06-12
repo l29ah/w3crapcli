@@ -4,7 +4,7 @@
 -- put this file in ~/.config/mpv/scripts
 -- put https://github.com/hauzer/scrobbler somewhere in your PATH
 -- run `scrobbler add-user` and follow the instructions
--- create a file ~/.mpv/script-opts/lastfm.conf with the following content:
+-- create a file ~/.config/mpv/script-opts/lastfm.conf with the following content:
 -- username=<your last.fm user name>
 
 local msg = require 'mp.msg'
