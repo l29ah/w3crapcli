@@ -1,0 +1,7 @@
+#!/bin/sh
+# https://github.com/yt-dlp/yt-dlp/issues/9165
+temp=$(mktemp -d)
+cd "$temp" &&
+yt-dlp --skip-download --write-subs --write-auto-subs --sub-langs '.*-orig' --sub-format ttml -o - "$@" &&
+cat -- -.*.ttml | sed -e 's#<[^>]*>##g;/^$/d' | sed -e 'N;s/\n/ /' | htmldecode
+rm -rf "$temp"
