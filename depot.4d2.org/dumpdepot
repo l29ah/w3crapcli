@@ -1,0 +1,10 @@
+#!/bin/sh
+if [ "$#" -eq 0 ]; then
+	# No arguments provided, read from stdin
+	curl -L -F "file=@-" https://depot.4d2.org/
+else
+	# Loop through all specified files
+	for f in "$@"; do
+		curl -L '-Ffile=@"'"$f"'"' https://depot.4d2.org/
+	done
+fi
