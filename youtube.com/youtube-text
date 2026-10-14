@@ -1,7 +1,110 @@
-#!/bin/sh
-# https://github.com/yt-dlp/yt-dlp/issues/9165
-temp=$(mktemp -d)
-cd "$temp" &&
-yt-dlp --skip-download --write-subs --write-auto-subs --sub-langs '.*-orig' --sub-format ttml -o - "$@" &&
-cat -- -.*.ttml | sed -e 's#<[^>]*>##g;/^$/d' | sed -e 'N;s/\n/ /' | htmldecode
-rm -rf "$temp"
+#!/usr/bin/env bash
+#
+# yt-transcript — print a YouTube video's captions in its NATIVE language
+# as TTML on stdout.
+#
+# Why: yt-dlp lists ~150 machine-translated caption tracks with no hint
+# which one is native — on multi-dub videos a plain language code
+# (--sub-langs en) can silently fetch a machine translation of a *dub*
+# instead of the original speech.  The native track carries the "-orig"
+# suffix; this script picks, in order:
+#
+#   1. manual subtitles in the video's declared language
+#   2. the "<lang>-orig" auto-caption track for the declared language
+#   3. otherwise: the single "-orig" track, else an English one, else the
+#      first available track (with a note on stderr)
+#
+# Usage:  yt-transcript.sh VIDEO_URL > transcript.ttml
+# Needs:  yt-dlp, jq
+# Env:    YTDLP_ARGS — extra yt-dlp args, e.g. YTDLP_ARGS='--cookies-from-browser firefox'
+#         Playlist URLs are rejected; pass a single video URL.
+
+set -u
+[[ $# -eq 1 ]] || { printf 'usage: %s VIDEO_URL\n' "${0##*/}" >&2; exit 2; }
+url=$1
+
+die() { printf '%s: %s\n' "${0##*/}" "$*" >&2; exit 1; }
+#for c in yt-dlp jq; do command -v "$c" >/dev/null || die "$c is required"; done
+
+tmp=$(mktemp -d "${TMPDIR:-/tmp}/ytx.XXXXXX") || die 'mktemp failed'
+trap 'rm -rf "$tmp"' EXIT
+info=$tmp/info.json
+
+yt-dlp -J --no-progress --no-playlist ${YTDLP_ARGS:-} "$url" >"$info" 2>"$tmp/log" ||
+  { cat "$tmp/log" >&2; die "could not extract: $url"; }
+[[ $(jq -r '._type // "video"' "$info") == playlist ]] &&
+  die 'playlist URL; pass a single video URL'
+
+# best_key POOL TARGET — best caption key of POOL (manual|auto) for TARGET:
+# exact language match first, then base language; "-orig" tracks (captions
+# of the actual audio) always beat machine translations.
+best_key() {
+  jq -r --arg pool "$1" --arg t "$2" '
+    def norm: ascii_downcase | sub("^iw$"; "he") | sub("^in$"; "id") | sub("^ji$"; "yi");
+    def sob:  sub("-orig$"; "");
+    def bas:  sub("[-_].*$"; "");
+    (if $pool == "manual" then (.subtitles // {}) else (.automatic_captions // {}) end
+      | keys | map(select(. != "live_chat"))) as $ks
+    | ($t | norm) as $t
+    | [$ks[] | select((sob | norm) == $t)]                as $ex
+    | [$ks[] | select((sob | norm | bas) == ($t | bas))]  as $bm
+    | ([$ex[] | select(endswith("-orig"))]         | first)
+      // ([$ex[] | select(endswith("-orig") | not)] | first)
+      // ([$bm[] | select(endswith("-orig"))]       | first)
+      // ([$bm[] | select(endswith("-orig") | not)] | first)
+      // empty' "$info"
+}
+
+# first_of — stdin: sorted keys; stdout: an English "-orig" key, else an
+# English key, else the first key
+first_of() {
+  local k orig='' en='' first=''
+  while IFS= read -r k; do
+    [[ -n $k ]] || continue
+    [[ -n $first ]] || first=$k
+    case $k in
+      en*-orig) [[ -z $orig ]] && orig=$k ;;
+      en|en-*)  [[ -z $en ]]   && en=$k ;;
+    esac
+  done
+  printf '%s\n' "${orig:-${en:-$first}}"
+}
+
+# 1 + 2: match the video's declared language
+pool='' key=''
+while IFS= read -r t; do
+  [[ -n $t ]] || continue
+  key=$(best_key manual "$t") && [[ -n $key ]] && { pool=manual; break; }
+  key=$(best_key auto "$t") && [[ -n $key ]] && { pool=auto; break; }
+done < <(jq -r '[.original_language, .language]
+                | map(select(. != null and . != "")) | .[]' "$info")
+
+# 3: no declared language or no match: "-orig" tracks, then manual, then any
+if [[ -z $key ]]; then
+  for cand in \
+    'auto|[(.automatic_captions // {}) | keys[] | select(endswith("-orig"))]' \
+    'manual|(.subtitles // {}) | keys | map(select(. != "live_chat"))' \
+    'auto|(.automatic_captions // {}) | keys | map(select(. != "live_chat"))'
+  do
+    pool=${cand%%|*}
+    keys=$(jq -r "${cand#*|} | sort | .[]" "$info")
+    [[ -n $keys ]] && { key=$(first_of <<<"$keys"); break; }
+  done
+  [[ -n $key ]] || die 'no captions available for this video'
+  printf '%s: note: video language unknown; using %s\n' "${0##*/}" "$key" >&2
+fi
+
+# fetch the chosen track as TTML
+flag=--write-auto-subs
+[[ $pool == manual ]] && flag=--write-subs
+yt-dlp --skip-download --no-progress --no-playlist --load-info-json "$info" \
+  $flag --sub-langs "$key" --sub-format ttml \
+  -o "$tmp/cap.%(ext)s" ${YTDLP_ARGS:-} >/dev/null 2>"$tmp/log" ||
+  { cat "$tmp/log" >&2; die "could not download captions '$key'"; }
+ttml=$(printf '%s\n' "$tmp"/cap.*)
+[[ -f $ttml ]] || die 'no TTML file was written'
+name=$(jq -r --arg k "$key" --arg p "$pool" '
+  (if $p == "manual" then (.subtitles // {}) else (.automatic_captions // {}) end)
+  | .[$k][0].name // $k' "$info")
+printf '%s: %s [%s]\n' "${0##*/}" "${name:-$key}" "$key" >&2
+cat "$ttml" | sed -e 's#<[^>]*>##g;/^$/d' | sed -e 'N;s/\n/ /' | htmldecode
